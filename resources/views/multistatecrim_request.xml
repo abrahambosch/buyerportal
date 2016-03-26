@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OrderXML>
+    <Method>SEND ORDER</Method>
+    <Authentication>
+        <Username>serenify1</Username>
+        <Password>garrett22</Password>
+    </Authentication>
+    <ReturnResultURL>http://www.google.com</ReturnResultURL>
+    <Order>
+        <Subject>
+            <Firstname>Abraham</Firstname>
+            <Middlename></Middlename>
+            <Lastname>Bosch</Lastname>
+            <Generation></Generation>
+            <DOB>08/04/1977</DOB>
+            <SSN>120-74-3046</SSN>
+            <Gender>M</Gender>
+            <Ethnicity>White</Ethnicity>
+            <CurrentAddress>
+                <StreetAddress>4200 Park Newport, Apt 213</StreetAddress>
+                <City>Newport Beach</City>
+                <State>CA</State>
+                <Zipcode>92660</Zipcode>
+            </CurrentAddress>
+        </Subject>
+        <OrderDetail ServiceCode="MultiState" orderID="10001">
+        </OrderDetail>
+    </Order>
+</OrderXML>
+

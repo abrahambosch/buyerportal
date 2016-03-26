@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OrderXML>
+    <Method>SEND ORDER</Method>
+    <Authentication>
+        <Username>serenify1</Username>
+        <Password>garrett22</Password>
+    </Authentication>
+    <TestMode>YES</TestMode>
+    <ReturnResultURL></ReturnResultURL>
+    <OrderingUser></OrderingUser>
+    <Order>
+        <BillingReferenceCode></BillingReferenceCode>
+        <Subject>
+            <FirstName>Abraham</FirstName>
+            <MiddleName>Jesse</MiddleName>
+            <LastName>Bosch</LastName>
+            <Generation></Generation>
+            <DOB>08/04/1977</DOB>
+            <SSN>120-74-3046</SSN>
+            <Gender>M</Gender>
+            <Ethnicity>W</Ethnicity>
+            <DLNumber>D4400019</DLNumber>
+            <ApplicantPosition></ApplicantPosition>
+            <CurrentAddress>
+                <StreetAddress>4200 Park Newport, Apt 213</StreetAddress>
+                <City>Newport Beach</City>
+                <State>CA</State>
+                <Zipcode>92660</Zipcode>
+            </CurrentAddress>
+            <Aliases>
+                <Alias>
+                    <FirstName></FirstName>
+                    <MiddleName></MiddleName>
+                    <LastName></LastName>
+                </Alias>
+            </Aliases>
+        </Subject><!--Present when ordering a package  -->
+        <PackageServiceCode OrderId=""></PackageServiceCode>
+
+        <!--Instant Criminal / Social Trace Request -->
+        <OrderDetail ServiceCode="" OrderId="">
+            <State></State><!--Only Present if ordering a state level search -->
+        </OrderDetail>
+
+
+        <!--Delayed Criminal / Delayed Civil Request -->
+        <OrderDetail ServiceCode="" OrderId="">
+            <County></County>
+            <State></State>
+            <YearsToSearch></YearsToSearch>
+            <CourtDocsRequested></CourtDocsRequested>
+            <RushRequested></RushRequested>
+            <SpecialInstructions></SpecialInstructions>
+        </OrderDetail>
+
+        <!--Education Verification-->
+        <OrderDetail ServiceCode="" OrderId="">
+            <SchoolName></SchoolName>
+            <CampusName></CampusName>
+            <NameUsed></NameUsed>
+            <City></City>
+            <State></State>
+            <Graduated></Graduated>
+            <GraduationDate></GraduationDate>
+            <Degree></Degree>
+            <CourseStudy></CourseStudy>
+            <GPA></GPA>
+            <AttendenceDates>
+                <StartDate></StartDate>
+                <EndDate></EndDate>
+            </AttendenceDates>
+            <RushRequested></RushRequested>
+        </OrderDetail>
+
+        <!--Employment Verification-->
+        <OrderDetail ServiceCode="" OrderId="">
+            <CompanyName CurrentEmployer=""></CompanyName>
+            <Position></Position>
+            <Salary period=" "></Salary>
+            <Manager></Manager>
+            <Telephone></Telephone>
+            <EmployerCity></EmployerCity>
+            <EmployerState></EmployerState>
+            <EmploymentDates>
+                <StartDate></StartDate>
+                <EndDate></EndDate>
+            </EmploymentDates>
+            <ReasonForLeaving></ReasonForLeaving>
+        </OrderDetail>
+
+        <!--Driving History-->
+        <OrderDetail ServiceCode="" OrderId="">
+            <JurisdictionCode>MO1Y</JurisdictionCode>
+            <State>MO</State>
+        </OrderDetail>
+    </Order>
+</OrderXML>

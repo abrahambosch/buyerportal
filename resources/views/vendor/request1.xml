@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OrderXML>
+    <Method>SEND ORDER</Method>
+    <Authentication>
+        <Username>serenify1</Username>
+        <Password>garrett22</Password>
+    </Authentication>
+    <TestMode>YES</TestMode>
+    <ReturnResultURL>http://www.google.com</ReturnResultURL>
+    <OrderingUser></OrderingUser>
+    <Order>
+        <BillingReferenceCode></BillingReferenceCode>
+        <Subject>
+            <FirstName>Abraham</FirstName>
+            <MiddleName>Jesse</MiddleName>
+            <LastName>Bosch</LastName>
+            <Generation></Generation>
+            <DOB>08/04/1977</DOB>
+            <SSN>120-73-3030</SSN>
+            <Gender>M</Gender>
+            <Ethnicity>W</Ethnicity>
+            <DLNumber>D4400019</DLNumber>
+            <ApplicantPosition></ApplicantPosition>
+            <CurrentAddress>
+                <StreetAddress>4200 Park Newport, Apt 213</StreetAddress>
+                <City>Newport Beach</City>
+                <State>CA</State>
+                <Zipcode>92660</Zipcode>
+            </CurrentAddress>
+        </Subject><!--Present when ordering a package  -->
+        <PackageServiceCode OrderId="1"></PackageServiceCode>
+        <OrderDetail ServiceCode="SSNTrace" OrderId="1">
+        </OrderDetail>
+    </Order>
+</OrderXML>
