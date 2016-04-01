@@ -2,114 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37cee531-e075-49c6-81d4-9cb7ead0b014" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/progressbar.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/20160228_125612.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/burgundy.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page1_black_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page1_burgundy_full (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page1_burgundy_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page1_orange_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page1_white_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page1_yellow_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page2_blackbluewhite_full (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page2_blackbluewhite_full (2).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page2_blackbluewhite_full (3).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page2_blackbluewhite_full (4).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page2_blackbluewhite_full (5).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page2_blackbluewhite_full (6).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page2_blackbluewhite_full (7).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page2_blackbluewhite_full (8).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page2_blackbluewhite_full (9).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page2_blackbluewhite_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page2_redbluepurple_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_gold_full (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_gold_full (2).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_gold_full (3).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_gold_full (4).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_gold_full (5).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_gold_full (6).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_gold_full (7).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_gold_full (8).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_gold_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_yellowcreamturquoise_full (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_yellowcreamturquoise_full (2).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_yellowcreamturquoise_full (3).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_yellowcreamturquoise_full (4).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_yellowcreamturquoise_full (5).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_yellowcreamturquoise_full (6).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/rose_page3_yellowcreamturquoise_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/sku_cheesypoofs (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/sku_cheesypoofs.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/sku_chocolatealmonds.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/sku_mounds.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/sku_skittles (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/sku_skittles.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/20160228_125612.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/burgundy.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page1_black_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page1_burgundy_full (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page1_burgundy_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page1_orange_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page1_white_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page1_yellow_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page2_blackbluewhite_full (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page2_blackbluewhite_full (2).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page2_blackbluewhite_full (3).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page2_blackbluewhite_full (4).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page2_blackbluewhite_full (5).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page2_blackbluewhite_full (6).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page2_blackbluewhite_full (7).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page2_blackbluewhite_full (8).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page2_blackbluewhite_full (9).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page2_blackbluewhite_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page2_redbluepurple_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_gold_full (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_gold_full (2).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_gold_full (3).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_gold_full (4).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_gold_full (5).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_gold_full (6).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_gold_full (7).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_gold_full (8).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_gold_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_yellowcreamturquoise_full (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_yellowcreamturquoise_full (2).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_yellowcreamturquoise_full (3).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_yellowcreamturquoise_full (4).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_yellowcreamturquoise_full (5).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_yellowcreamturquoise_full (6).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/rose_page3_yellowcreamturquoise_full.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/sku_cheesypoofs (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/sku_cheesypoofs.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/sku_chocolatealmonds.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/sku_mounds.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/sku_skittles (1).jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/products/2/thumbnail/sku_skittles.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Http/Controllers/MediaItemController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Libraries/UploadHandler.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/MediaItem.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2016_03_28_062218_media_item.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/partials/fileupload.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/seller_product/create.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/seller_product/edit.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/seller_product/import.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/seller_product/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/aws.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SellerProductController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SellerProductController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SellerProductListController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SellerProductListController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Product.php" afterPath="$PROJECT_DIR$/app/Product.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.php" afterPath="$PROJECT_DIR$/config/database.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/product/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/product/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/product/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/product/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/product_list/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/product_list/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/seller_product_list/edit.blade.php" afterPath="$PROJECT_DIR$/resources/views/seller_product_list/edit.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/seller_product_list/image_import.blade.php" afterPath="$PROJECT_DIR$/resources/views/seller_product_list/image_import.blade.php" />
     </list>
     <ignored path="buyerseller.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -141,33 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SellerProductController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SellerProductController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="97" selection-start-line="31" selection-start-column="97" selection-end-line="31" selection-end-column="97" />
-              <folding>
-                <element signature="e#40#56#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/seller_product/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="478">
               <caret line="74" column="21" selection-start-line="74" selection-start-column="21" selection-end-line="74" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/seller_product_list/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -197,17 +70,17 @@
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="16" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+              <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".env" pinned="false" current-in-tab="false">
+      <file leaf-file-name=".env" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+            <state relative-caret-position="150">
+              <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -223,11 +96,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="database.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="database.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/database.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="28" column="35" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="35" />
+            <state relative-caret-position="-135">
+              <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="aws.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/aws.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/app.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -248,7 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Http/Controllers/SellersController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/storage/framework/views/fc95fa43b6ee05e265ea76f1cefa0f379cd5a51e.php" />
         <option value="$PROJECT_DIR$/resources/views/welcome.blade.php" />
@@ -298,6 +190,7 @@
         <option value="$PROJECT_DIR$/resources/views/seller_product/create.blade.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/config/database.php" />
+        <option value="$PROJECT_DIR$/config/aws.php" />
         <option value="$PROJECT_DIR$/.env" />
       </list>
     </option>
@@ -517,12 +410,12 @@
       <workItem from="1458875623576" duration="40437000" />
       <workItem from="1459183416684" duration="483000" />
       <workItem from="1459397815879" duration="9624000" />
-      <workItem from="1459480848102" duration="6544000" />
+      <workItem from="1459480848102" duration="7357000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90969000" />
+    <option name="totallyTimeSpent" value="91782000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -591,20 +484,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_03_17_054113_buyer_seller_map.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_02_27_000153_add_socialite_to_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -935,7 +814,7 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="16" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -948,18 +827,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
+    <entry file="file://$PROJECT_DIR$/config/app.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/database.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="28" column="35" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="35" />
+        <state relative-caret-position="-135">
+          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/aws.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
           <folding />
         </state>
       </provider>
