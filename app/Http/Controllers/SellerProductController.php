@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Seller;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -28,7 +29,7 @@ class SellerProductController extends Controller
         
         $seller = Seller::find(Auth::id());     // make sure we have a seller object
         $products = Product::where('seller_id', $seller->id)->get();
-        return view('product/index', ['seller' => $seller, 'products' => $products, 'user_id' => $user_id]);
+        return view('seller_product/index', ['seller' => $seller, 'products' => $products, 'buyer_id' => $user_id]);
     }
     
     /**
@@ -39,7 +40,7 @@ class SellerProductController extends Controller
     public function productsbySeller(Request $request, $seller)
     {
         $products = Product::where(['user_id' => Auth::id(), 'seller_id' => $seller])->get();
-        return view('product/index', ['user' => Auth::user(), 'products' => $products, 'seller_id' => $seller]);
+        return view('seller_product/index', ['user' => Auth::user(), 'products' => $products, 'seller_id' => $seller]);
     }
 
 
@@ -50,7 +51,7 @@ class SellerProductController extends Controller
      */
     public function create()
     {
-        return view('product/create', ['user' => Auth::user()]);
+        return view('seller_product/create', ['user' => Auth::user()]);
     }
 
     /**
@@ -65,7 +66,7 @@ class SellerProductController extends Controller
         $request_arr['user_id'] = Auth::id();
         try {
             $user = Product::create($request_arr);
-            return redirect()->route('product.index')->with('status', 'Product created');
+            return redirect()->route('seller_product.index')->with('status', 'Product created');
         } catch (Exception $e) {
             return back()->withInput();
             //echo "failed to create buyer:" . $e->getMessage() . "<br>";
@@ -94,7 +95,7 @@ class SellerProductController extends Controller
     public function edit($id)
     {
         $product = Product::where('product_id',"=",$id)->firstOrFail();
-        return view('product/edit', ['product' => $product, 'edit' => true, 'user' => Auth::user()]);
+        return view('seller_product/edit', ['product' => $product, 'edit' => true, 'user' => Auth::user()]);
     }
 
     /**
@@ -118,7 +119,7 @@ class SellerProductController extends Controller
             $product->$field = $request->get($field);
         }
         $product->save();
-        return redirect()->route('product.index')->with('status', 'Product updated');
+        return redirect()->route('seller_product.index')->with('status', 'Product updated');
     }
 
     /**
@@ -131,7 +132,7 @@ class SellerProductController extends Controller
     {
         $product = Product::where('product_id',"=",$id)->firstOrFail();
         $product->delete();
-        return redirect()->route('product.index')->with('status', 'Product deleted');
+        return redirect()->route('seller_product.index')->with('status', 'Product deleted');
     }
 
     public function import(Request $request)
@@ -146,7 +147,7 @@ class SellerProductController extends Controller
 //            echo "Seller = " . print_r($seller, true) . "<br>";
 //        }
         
-        return view('product/import', ['sellers' => $user->sellers]);
+        return view('seller_product/import', ['sellers' => $user->sellers]);
     }
     
     public function importSave(Request $request)
@@ -170,7 +171,7 @@ class SellerProductController extends Controller
             Product::create($product);
         }
 
-        return redirect()->route('product.index')->with('status', 'Products Imported');
+        return redirect()->route('seller_product.index')->with('status', 'Products Imported');
     }
 
     protected function csv_to_array($filename='', $delimiter=',')

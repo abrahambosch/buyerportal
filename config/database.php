@@ -42,6 +42,13 @@ return [
     | so make sure you have the driver for your particular database of
     | choice installed on your machine before you begin development.
     |
+
+    RDS_HOSTNAME – The hostname of the DB instance.
+    RDS_DB_NAME – The database name, ebdb.
+    RDS_USERNAME – The username that you configured for your database.
+    RDS_PASSWORD – The password that you configured for your database.
+    RDS_PORT – The port on which the DB instance accepts connections. The default value varies between DB engines.
+
     */
 
     'connections' => [
@@ -51,13 +58,25 @@ return [
             'database' => database_path('database.sqlite'),
             'prefix'   => '',
         ],
-
+        'rds' => [
+            'driver'    => 'mysql',
+            'host'      => env('RDS_HOSTNAME', 'localhost'),
+            'database'  => env('RDS_DB_NAME', 'buyerseller'),
+            'username'  => env('RDS_USERNAME', 'homestead'),
+            'password'  => env('RDS_PASSWORD', 'secret'),
+            'port'      => env('RDS_PORT', '3306'),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+            'engine'    => null,
+        ],
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'forge'),
-            'username'  => env('DB_USERNAME', 'forge'),
-            'password'  => env('DB_PASSWORD', ''),
+            'database'  => env('DB_DATABASE', 'buyerseller'),
+            'username'  => env('DB_USERNAME', 'homestead'),
+            'password'  => env('DB_PASSWORD', 'secret'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',

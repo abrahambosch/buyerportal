@@ -58,6 +58,7 @@
                                     <thead>
                                     <tr>
                                         <th><a href="{{ route("product.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
+                                        <th><!-- image --></th>
                                         <th>Name</th>
                                         <th>Description</th>
                                         <th>UPC</th>
@@ -72,6 +73,7 @@
                                     @foreach ($product_list->items as $item)
                                         <tr>
                                             <td></td>
+                                            <td><img src="{{ $item->product->getThumbnail() }}"/></td>
                                             <td>{{ $item->product->product_name }}</td>
                                             <td>{{ $item->product->product_description }}</td>
                                             <td>{{ $item->product->upc }}</td>

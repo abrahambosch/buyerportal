@@ -4,9 +4,59 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "97fa80c4afa785fd2f90bd4f292359d7",
-    "content-hash": "a268bc2d0f59245cf4566e91a0369115",
+    "hash": "4a23190c5d39f013d5f53d42d517c891",
+    "content-hash": "2ecaf619a9260f2983d067f42d10936f",
     "packages": [
+        {
+            "name": "blueimp/jquery-file-upload",
+            "version": "9.12.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vkhramtsov/jQuery-File-Upload.git",
+                "reference": "c4d504ccbf7d5617b6c55e68fa1d084f254df873"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vkhramtsov/jQuery-File-Upload/zipball/c4d504ccbf7d5617b6c55e68fa1d084f254df873",
+                "reference": "c4d504ccbf7d5617b6c55e68fa1d084f254df873",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Tschan",
+                    "homepage": "https://blueimp.net"
+                }
+            ],
+            "description": "File Upload widget for jQuery.",
+            "homepage": "https://github.com/blueimp/jQuery-File-Upload",
+            "keywords": [
+                "bootstrap",
+                "chunk",
+                "cross-domain",
+                "cross-site",
+                "drag",
+                "drop",
+                "file",
+                "gae",
+                "go",
+                "jquery",
+                "multiple",
+                "php",
+                "preview",
+                "progress",
+                "python",
+                "resume",
+                "selection",
+                "upload",
+                "widget"
+            ],
+            "time": "2016-03-01 07:45:24"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",

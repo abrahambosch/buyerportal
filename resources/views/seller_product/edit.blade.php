@@ -14,7 +14,7 @@
                             <img src="{{ $product->getFeaturedImageUrl() }}" width="200"/>
                         </div>
                         <div class="col-md-9">
-                            <form action="{{ route("product.update", ['product' => $product->product_id]) }}" method="POST" class="form-horizontal">
+                            <form action="{{ route("seller_product.update", ['product' => $product->product_id]) }}" method="POST" class="form-horizontal">
                                 {{ method_field('PUT') }}
                                 {!! csrf_field() !!}
 

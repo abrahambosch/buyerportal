@@ -32,8 +32,28 @@ class Product extends Model
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
+    /**
+     * Get the items in the list
+     */
+    public function images()
+    {
+        return $this->hasMany('App\MediaItem');
+    }
 
+    public function getThumbnail()
+    {
+        return $this->getFeaturedImage()->thumbnail;
+    }
 
+    public function getFeaturedImageUrl()
+    {
+        return $this->getFeaturedImage()->url;
+    }
+
+    public function getFeaturedImage()
+    {
+        return $this->images()->first();    // todo: change this to check for the featured image.
+    }
 
 
 }

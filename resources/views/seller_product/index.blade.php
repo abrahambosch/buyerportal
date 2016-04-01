@@ -12,12 +12,12 @@
                 <div class="panel-body">
                     <div id="filters">
                         <div class="form-group{{ $errors->has('seller') ? ' has-error' : '' }} clearfix">
-                            <label class="col-md-4 control-label">Filter by Seller</label>
+                            <label class="col-md-4 control-label">Filter by Buyer</label>
                             <div class="col-md-6">
-                                <select name="seller" id="seller" class="form-control">
-                                    <option value="">Show all sellers</option>
-                                    @foreach ($user->sellers as $s)
-                                        <option value="{{ $s->id }}" @if ($s->id == $seller_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
+                                <select name="buyer" id="buyer" class="form-control">
+                                    <option value="">Show all buyers</option>
+                                    @foreach ($seller->users as $s)
+                                        <option value="{{ $s->id }}" @if ($s->id == $buyer_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('seller'))
@@ -47,7 +47,7 @@
 
                         @foreach ($products as $product)
                             <tr>
-                                <td><a href="{{ route("product.edit", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+                                <td><a href="{{ route("seller_product.edit", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
                                 <td><img src="{{ $product->getThumbnail() }}"/></td>
                                 <td>{{ $product->sku }}</td>
                                 <td>{{ $product->upc }}</td>
@@ -56,13 +56,13 @@
                                 <td>{{ $product->cost }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->seller->company }}</td>
-                                <td><a href="{{ route("product.delete", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                                <td><a href="{{ route("seller_product.delete", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                             </tr>
                         @endforeach
                         </table>
                     @else
                         No Products Found<br>
-                        <a href="{{ route("product.create") }}" class=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> click here to add new product. </a>
+                        <a href="{{ route("seller_product.create") }}" class=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> click here to add new product. </a>
                     @endif
 
                 </div>
@@ -72,14 +72,14 @@
 </div>
     <script>
         $(function(){
-            $("#seller").on("change", function(e) {
-                var seller = $(this).val();
-                var url = "/product/seller/" + seller;
-                if (seller != "") {
+            $("#buyer").on("change", function(e) {
+                var buyer = $(this).val();
+                var url = "/seller_product/buyer/" + buyer;
+                if (buyer != "") {
                     window.location.href = url;
                 }
                 else {
-                    window.location.href = "/product";
+                    window.location.href = "/seller_product";
                 }
 
             });

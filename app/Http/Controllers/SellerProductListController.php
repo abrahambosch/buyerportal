@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\ProductList;
 use App\ProductListItem;
 use App\Seller;
+use App\MediaItem;
 
 class SellerProductListController extends Controller
 {
@@ -100,35 +101,86 @@ class SellerProductListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function image_import_submit($id)
+    public function image_import_save($id)
     {
         $seller = Seller::find(Auth::id());     // make sure we have a seller object
         $product_list = ProductList::where('id',"=",$id)->firstOrFail();
+        //$product_list->user_id;
 
+        require base_path('app/Libraries/UploadHandler.php');
+        $uploadHandler = new \UploadHandler([
+            'script_url' => route('seller_product_list.image_import_save', ['id' => $product_list->id]),
+            'upload_dir' => $this->getUploadDir($seller->id),
+            'upload_url' => $this->getUploadUrl($seller->id)
+        ], true, null, function ($obj, $files) use ($seller){
+            /*
+Array
+(
+    [0] => stdClass Object
+        (
+            [name] => rose_page2_blackbluewhite_full (8).jpg
+            [size] => 33235
+            [type] => image/jpeg
+            [url] => http://local.buyerseller.com/products/2/rose_page2_blackbluewhite_full%20%288%29.jpg
+            [thumbnailUrl] => http://local.buyerseller.com/products/2/thumbnail/rose_page2_blackbluewhite_full%20%288%29.jpg
+            [deleteUrl] => http://local.buyerseller.com/seller_product_list/4/image_import_save?file=rose_page2_blackbluewhite_full%20%288%29.jpg
+            [deleteType] => DELETE
+        )
 
-        $product_list->user_id;
+)
 
-        if($_POST) {
-            $allowed = array('jpg', 'jpeg');
+             */
 
-            if(isset($_FILES['uploadctl']) && $_FILES['uploadctl']['error'] == 0){
+            $fh = fopen("/tmp/imageupload.log", "a");
+            //fwrite($fh, json_encode($files, true) . "\n");
 
-                $extension = pathinfo($_FILES['uploadctl']['name'], PATHINFO_EXTENSION);
-
-                if(!in_array(strtolower($extension), $allowed)){
-                    echo '{"status":"error"}';
-                    exit;
+            
+            if(is_array($files) && count($files)) {
+                foreach ($files as $f) {
+                    $item = MediaItem::create([
+                        'filename' => $f->name,
+                        'mime' => $f->type,
+                        'original_filename' => $f->name,
+                        'title' => '',
+                        'url' => $f->url,
+                        'thumbnail' => $f->thumbnailUrl,
+                        'order_num' => 0,
+                        'product_id' => $this->getProductIdFromFileName($f->name),
+                        'user_id' => $seller->users()->first()->id,
+                        'seller_id' => $seller->id
+                    ]);
+                    fwrite($fh, json_encode($item)."\n");
                 }
-
-                if(move_uploaded_file($_FILES['uploadctl']['tmp_name'], base_path() . "/public/products/".$_FILES['upl']['name'] . $extension)){
-                    echo '{"status":"success"}';
-                    exit;
-                }
-                echo '{"status":"error"}';
             }
-            exit();
-        }
+
+            fclose($fh);
+
+        });
+        
         die;
+    }
+
+    private function getProductIdFromFileName($name)
+    {
+        $name = trim($name);
+        if (preg_match('/^(\w+)\W+/', $name, $matches)) {
+            $sku = $matches[1];
+            $product = Product::where(['sku' => $sku])->first();
+            if (!$product) return null;
+            else return $product->product_id;
+        }
+
+       return null;
+    }
+
+    private function getUploadDir($seller_id)
+    {
+        return base_path('public/products/'.$seller_id) . "/";
+    }
+
+    private function getUploadUrl($seller_id)
+    {
+        return url('products/'.$seller_id) . "/";
     }
 
 
