@@ -60,8 +60,8 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::get('/seller_product/{product}/destroy', 'SellerProductController@destroy')->name("seller_product.delete");
         Route::get('/seller_product/buyer/{buyer}', 'SellerProductController@productsbyBuyer')->name("seller_product.bybuyer");
-        Route::get('/seller_product/import', 'SellerProductController@import')->name("product.import");
-        Route::post('/seller_product/importSave', 'SellerProductController@importSave')->name("product.importSave");
+        Route::get('/seller_product/import', 'SellerProductController@import')->name("seller_product.import");
+        Route::post('/seller_product/importSave', 'SellerProductController@importSave')->name("seller_product.importSave");
         Route::resource('seller_product', 'SellerProductController');
 
         Route::resource('seller_product_list', 'SellerProductListController');
