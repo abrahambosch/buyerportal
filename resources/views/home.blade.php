@@ -12,7 +12,7 @@
 
                     <ul>
                         <li>
-                            <a href="{{ route("seller.index") }}">Sellers</a>
+                            <a href="{{ route("seller.index") }}">Suppliers</a>
                         </li>
                         <li>
                             <a href="{{ route("product.index") }}">Products</a>

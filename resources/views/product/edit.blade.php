@@ -19,7 +19,7 @@
                                 {!! csrf_field() !!}
 
 
-                                @foreach (['product_name' => 'Name', 'product_description' => 'Description', 'sku' => 'SKU', 'upc'=>'UPC', 'cost' => 'Cost', 'price' => 'Price'] as $field => $label)
+                                @foreach (['product_name' => 'Name', 'product_description' => 'Description', 'sku' => 'SKU', 'upc'=>'UPC', 'style' => 'Vendor Style Number', 'gtin' => 'GTIN', 'cost' => 'Cost', 'price' => 'Price'] as $field => $label)
                                     <div class="form-group{{ $errors->has($field) ? ' has-error' : '' }}">
                                         <label class="col-md-4 control-label">{{ $label }}</label>
                                         <div class="col-md-6">
@@ -35,10 +35,10 @@
                                 @endforeach
 
                                 <div class="form-group{{ $errors->has('seller_id') ? ' has-error' : '' }} clearfix">
-                                    <label class="col-md-4 control-label">Seller</label>
+                                    <label class="col-md-4 control-label">Supplier</label>
                                     <div class="col-md-6">
                                         <select name="seller_id" id="seller_id" class="form-control">
-                                            <option value="">No Seller</option>
+                                            <option value="">No Supplier</option>
                                             @foreach ($user->sellers as $s)
                                                 <option value="{{ $s->id }}" @if ($s->id == $product->seller_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                             @endforeach
@@ -61,13 +61,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <h3>images</h3>
-                        <ul>
                         <!-- images -->
                         @foreach ($product->images as $i)
-                            <li><img src="{{ $i->url }}"/></li>
+                            <div class="col-md-3 col-sm-4 col-xs-6"><img class="img-responsive" src="{{ $i->url }}"/></div>
                         @endforeach
-                        </ul>
+
                     </div>
                 </div>
             </div>

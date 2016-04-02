@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Product List
                     <a href="{{ route("seller_product_list.image_import", ['id' => $product_list->id]) }}" class="pull-right"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
@@ -61,13 +61,15 @@
                                     <tr>
                                         <th></th>
                                         <th><!-- image column --></th>
-                                        <th>Name</th>
-                                        <th>Description</th>
                                         <th>UPC</th>
                                         <th>SKU</th>
+                                        <th>Vendor Style Number</th>
+                                        <th>GTIN</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
                                         <th>Cost</th>
                                         <th>Price</th>
-                                        <th>Seller</th>
+                                        <th>Supplier</th>
                                         <th></th>
                                     </tr>
                                     </thead>
@@ -76,10 +78,12 @@
                                         <tr>
                                             <td></td>
                                             <td><img src="{{ $item->product->getThumbnail() }}"/></td>
-                                            <td>{{ $item->product->product_name }}</td>
-                                            <td>{{ $item->product->product_description }}</td>
                                             <td>{{ $item->product->upc }}</td>
                                             <td>{{ $item->product->sku }}</td>
+                                            <td>{{ $item->product->style }}</td>
+                                            <td>{{ $item->product->gtin }}</td>
+                                            <td>{{ $item->product->product_name }}</td>
+                                            <td>{{ $item->product->product_description }}</td>
                                             <td>{{ $item->product->cost }}</td>
                                             <td>{{ $item->product->price }}</td>
                                             <td>{{ $item->product->seller->company }}</td>

@@ -56,7 +56,7 @@
                         <li><a href="{{ route('seller_product_list.index') }}">Product Lists</a></li>
                     @else
                         <li><a href="{{ url('/home') }}">Home</a></li>
-                        <li><a href="{{ route('seller.index') }}">Sellers</a></li>
+                        <li><a href="{{ route('seller.index') }}">Suppliers</a></li>
                         <li><a href="{{ route('product.index') }}">Products</a></li>
                         <li><a href="{{ route('product_list.index') }}">Product Lists</a></li>
                     @endif

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">Products
                     <a href="{{ route("product.import") }}" class="pull-right"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span></a>
@@ -36,11 +36,13 @@
                                 <td><!-- image --></td>
                                 <th>SKU</th>
                                 <th>UPC</th>
+                                <th>Vendor Style Number</th>
+                                <th>GTIN</th>
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Cost</th>
                                 <th>Price</th>
-                                <th>Seller</th>
+                                <th>Supplier</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -51,6 +53,8 @@
                                 <td><img src="{{ $product->getThumbnail() }}"/></td>
                                 <td>{{ $product->sku }}</td>
                                 <td>{{ $product->upc }}</td>
+                                <td>{{ $product->style }}</td>
+                                <td>{{ $product->gtin }}</td>
                                 <td>{{ $product->product_name }}</td>
                                 <td>{{ $product->product_description }}</td>
                                 <td>{{ $product->cost }}</td>

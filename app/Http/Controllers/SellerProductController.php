@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Seller;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -37,10 +38,12 @@ class SellerProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function productsbySeller(Request $request, $seller)
+    public function productsbyBuyer(Request $request, $buyer)
     {
-        $products = Product::where(['user_id' => Auth::id(), 'seller_id' => $seller])->get();
-        return view('seller_product/index', ['user' => Auth::user(), 'products' => $products, 'seller_id' => $seller]);
+        $user = User::find($buyer);
+        $seller = Seller::find(Auth::id());
+        $products = Product::where(['user_id' => $buyer, 'seller_id' => Auth::id()])->get();
+        return view('seller_product/index', ['seller' => $seller, 'products' => $products, 'buyer_id' => $user->id]);
     }
 
 
@@ -115,7 +118,7 @@ class SellerProductController extends Controller
             'product_name' => 'required',
         ]);
 
-        foreach (['product_name', 'product_description', 'upc', 'sku', 'cost', 'price'] as $field) {
+        foreach (['product_name', 'product_description', 'upc', 'sku', 'gtin', 'style', 'cost', 'price'] as $field) {
             $product->$field = $request->get($field);
         }
         $product->save();

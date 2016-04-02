@@ -5,13 +5,13 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Create a Seller</div>
+                <div class="panel-heading">Create a Supplier</div>
 
                 <div class="panel-body">
                     <form action="{{ route("seller.store") }}" method="POST" class="form-horizontal">
                         {!! csrf_field() !!}
 
-                        @foreach (['email' => 'Email', 'company' => 'Seller Company Name', 'first_name'=>'First Name', 'middle_name' => 'Middle Name', 'last_name' => 'Last Name'] as $field => $label)
+                        @foreach (['email' => 'Email', 'company' => 'Supplier Company Name', 'first_name'=>'First Name', 'middle_name' => 'Middle Name', 'last_name' => 'Last Name'] as $field => $label)
                             <div class="form-group{{ $errors->has($field) ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">{{ $label }}</label>
                                 <div class="col-md-6">

@@ -29,10 +29,10 @@
                         @endforeach
 
                         <div class="form-group{{ $errors->has('seller_id') ? ' has-error' : '' }} clearfix">
-                            <label class="col-md-4 control-label">Seller</label>
+                            <label class="col-md-4 control-label">Supplier</label>
                             <div class="col-md-6">
                                 <select name="seller_id" id="seller_id" class="form-control">
-                                    <option value="">No Seller</option>
+                                    <option value="">No Supplier</option>
                                     @foreach ($user->sellers as $s)
                                         <option value="{{ $s->id }}" @if ($s->id == $product_list->seller_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach
@@ -57,15 +57,17 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th><a href="{{ route("product.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
+                                        <th></th>
                                         <th><!-- image --></th>
-                                        <th>Name</th>
-                                        <th>Description</th>
                                         <th>UPC</th>
                                         <th>SKU</th>
+                                        <th>Vendor Style Number</th>
+                                        <th>GTIN</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
                                         <th>Cost</th>
                                         <th>Price</th>
-                                        <th>Seller</th>
+                                        <th>Supplier</th>
                                         <th></th>
                                     </tr>
                                     </thead>
@@ -74,10 +76,12 @@
                                         <tr>
                                             <td></td>
                                             <td><img src="{{ $item->product->getThumbnail() }}"/></td>
-                                            <td>{{ $item->product->product_name }}</td>
-                                            <td>{{ $item->product->product_description }}</td>
                                             <td>{{ $item->product->upc }}</td>
                                             <td>{{ $item->product->sku }}</td>
+                                            <td>{{ $item->product->style }}</td>
+                                            <td>{{ $item->product->gtin }}</td>
+                                            <td>{{ $item->product->product_name }}</td>
+                                            <td>{{ $item->product->product_description }}</td>
                                             <td>{{ $item->product->cost }}</td>
                                             <td>{{ $item->product->price }}</td>
                                             <td>{{ $item->product->seller->company }}</td>

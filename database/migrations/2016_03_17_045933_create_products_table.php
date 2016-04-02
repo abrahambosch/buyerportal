@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->integer('seller_id')->unsigned()->index();
             $table->string('upc', 40);  // usually 12 digits but we give extra just in case.
             $table->string('sku', 60);
+            $table->string('style', 60);    // vendor sku
+            $table->string('gtin', 60);
             $table->string('product_name', 60);
             $table->string('product_description', 255);
             $table->decimal('cost', 5, 2);

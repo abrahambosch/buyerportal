@@ -5,14 +5,12 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading clearfix">Product Lists
-                    <a href="{{ route("product.import") }}" class="pull-right"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span></a>
-                </div>
+                <div class="panel-heading clearfix">Product Lists</div>
 
                 <div class="panel-body">
                     <div id="filters">
                         <div class="form-group{{ $errors->has('seller') ? ' has-error' : '' }} clearfix">
-                            <label class="col-md-4 control-label">Filter by Seller</label>
+                            <label class="col-md-4 control-label">Filter by Supplier</label>
                             <div class="col-md-6">
                                 <select name="seller" id="seller" class="form-control">
                                     <option value="">Show all sellers</option>

@@ -104,7 +104,7 @@ class ProductController extends Controller
             'product_name' => 'required',
         ]);
 
-        foreach (['product_name', 'product_description', 'upc', 'sku', 'cost', 'price'] as $field) {
+        foreach (['product_name', 'product_description', 'upc', 'sku', 'gtin', 'style', 'cost', 'price'] as $field) {
             $product->$field = $request->get($field);
         }
         $product->save();

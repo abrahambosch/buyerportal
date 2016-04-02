@@ -28,7 +28,7 @@
                         @endforeach
 
                         <div class="form-group{{ $errors->has('seller_id') ? ' has-error' : '' }} clearfix">
-                            <label class="col-md-4 control-label">Seller</label>
+                            <label class="col-md-4 control-label">Supplier</label>
                             <div class="col-md-6">
                                 <select name="seller_id" id="seller_id" class="form-control">
                                     @foreach ($user->sellers as $s)

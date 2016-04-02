@@ -13,7 +13,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'product_name', 'product_description', 'sku', 'upc', 'cost', 'price', 'user_id', 'seller_id'
+        'product_name', 'product_description', 'sku', 'upc', 'gtin', 'style', 'cost', 'price', 'user_id', 'seller_id'
     ];
 
     /**
@@ -42,18 +42,24 @@ class Product extends Model
 
     public function getThumbnail()
     {
-        return $this->getFeaturedImage()->thumbnail;
+        $image = $this->getFeaturedImage();
+        if (!empty($image)) {
+            return $image->thumbnail;
+        }
+        return "";
     }
 
     public function getFeaturedImageUrl()
     {
-        return $this->getFeaturedImage()->url;
+        $image = $this->getFeaturedImage();
+        if (!empty($image)) {
+            return $image->url;
+        }
+        return "";
     }
 
     public function getFeaturedImage()
     {
         return $this->images()->first();    // todo: change this to check for the featured image.
     }
-
-
 }

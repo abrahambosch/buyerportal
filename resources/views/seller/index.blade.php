@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading clearfix">Sellers
+                <div class="panel-heading clearfix">Suppliers
                     <a href="{{ route("seller.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
                 </div>
 
@@ -38,7 +38,7 @@
                         @endforeach
                         </table>
                     @else
-                        No Sellers Found
+                        No Suppliers Found
                     @endif
 
                 </div>
