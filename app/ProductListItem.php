@@ -16,7 +16,7 @@ class ProductListItem extends Model
     ];
 
     /**
-     * Get the user that owns the phone.
+     * get the parent
      */
     public function product_list()
     {
@@ -24,7 +24,7 @@ class ProductListItem extends Model
     }
 
     /**
-     * Get the user that owns the phone.
+     * get the product
      */
     public function product()
     {

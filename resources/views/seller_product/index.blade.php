@@ -34,14 +34,9 @@
                             <tr>
                                 <th><a href="{{ route("product.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
                                 <td><!-- image --></td>
-                                <th>SKU</th>
-                                <th>UPC</th>
-                                <th>Vendor Style Number</th>
-                                <th>GTIN</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Cost</th>
-                                <th>Price</th>
+                                @foreach ($fields as $field=>$label)
+                                    <th>{{ $label }}</th>
+                                @endforeach
                                 <th>Supplier</th>
                                 <th></th>
                             </tr>
@@ -51,14 +46,9 @@
                             <tr>
                                 <td><a href="{{ route("seller_product.edit", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
                                 <td><img src="{{ $product->getThumbnail() }}"/></td>
-                                <td>{{ $product->sku }}</td>
-                                <td>{{ $product->upc }}</td>
-                                <td>{{ $product->style }}</td>
-                                <td>{{ $product->gtin }}</td>
-                                <td>{{ $product->product_name }}</td>
-                                <td>{{ $product->product_description }}</td>
-                                <td>{{ $product->cost }}</td>
-                                <td>{{ $product->price }}</td>
+                                @foreach ($fields as $field=>$label)
+                                    <td>{{ $product->$field }}</td>
+                                @endforeach
                                 <td>{{ $product->seller->company }}</td>
                                 <td><a href="{{ route("seller_product.delete", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                             </tr>

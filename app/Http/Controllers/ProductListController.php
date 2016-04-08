@@ -107,8 +107,9 @@ class ProductListController extends Controller
      */
     public function show($id)
     {
-        $product_list = ProductList::where('id',"=",$id)->firstOrFail();
-        return view('product_list/edit', ['product_list' => $product_list, 'edit' => false, 'user' => Auth::user()]);
+        $fields = $this->getFields();
+        $product_list = ProductList::where(['id' => $id])->firstOrFail();
+        return view('product_list/edit', ['product_list' => $product_list, 'edit' => false, 'user' => Auth::user(), 'fields' => $fields]);
     }
 
     /**
@@ -119,8 +120,9 @@ class ProductListController extends Controller
      */
     public function edit($id)
     {
-        $product_list = ProductList::where('id',"=",$id)->firstOrFail();
-        return view('product_list/edit', ['product_list' => $product_list, 'edit' => true, 'user' => Auth::user()]);
+        $fields = $this->getFields();
+        $product_list = ProductList::where(['id' => $id])->firstOrFail();
+        return view('product_list/edit', ['product_list' => $product_list, 'edit' => true, 'user' => Auth::user(), 'fields' => $fields]);
     }
 
     /**
@@ -238,6 +240,47 @@ class ProductListController extends Controller
         return $data;
     }
 
+
+    private function getFields()
+    {
+        $fields = [
+            "factory" => "Factory",
+            'style' => 'Item#',
+            'product_description' => 'Description',
+            'dimentions_json' => 'Dimentions',
+            "master_pack" => "Master Pack",
+            "cube" => "Cube (ft2)",
+            "packing" => "Packing",
+            "quantity" => "Qty",
+            "unit_cost" => "POE",    // unit cost
+            "fob" => "FOB",
+            "total" => "Total $",
+            "total_cft" => "Total CFT",
+            "total_cmb" => "Total CMB",
+            "unit_retail" => "Unit Retail",
+            "notes" => "Production Notes",
+            "fob_cost" => "FOB (Cost)",
+            "frt" => "FRT",
+            "duty" => "Duty",
+            "elc" => "ELC",
+            "poe_percent" => "POE%",
+            "fob_percent" => "FOB%",
+            "hts" => "HTS",
+            "duty_percent" => "Duty %",
+            "port" => "Port",
+            "weight" => "Weight (kg)",
+            'upc'=>'Cust UPC',
+            'sku' => 'Cust SKU',
+            'material' => 'Material',
+            'factory_item' => 'Factory Item #',
+            'samples_requested' => 'Samples Requested',
+            'carton_size_l' => 'Carton Size L(")',
+            'carton_size_w' => 'Carton Size W(")',
+            'carton_size_h' => 'Carton Size H(")',
+            'factory_lead_time' => 'Factory Lead Time',
+        ];
+        return $fields;
+    }
 
 
 }

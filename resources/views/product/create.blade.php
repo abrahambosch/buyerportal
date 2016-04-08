@@ -11,7 +11,7 @@
                     <form action="{{ route("product.store") }}" method="POST" class="form-horizontal">
                         {!! csrf_field() !!}
 
-                        @foreach (['product_name' => 'Name', 'product_description' => 'Description', 'sku' => 'SKU', 'upc'=>'UPC', 'style' => 'Vendor Style Number', 'gtin' => 'GTIN', 'cost' => 'Cost', 'price' => 'Price'] as $field => $label)
+                        @foreach ($fields as $field=>$label)
                             <div class="form-group{{ $errors->has($field) ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">{{ $label }}</label>
                                 <div class="col-md-6">

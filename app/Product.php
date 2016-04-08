@@ -6,15 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    public $primaryKey = 'product_id'; 
+    public $primaryKey = 'product_id';
     /**
-     * The attributes that are mass assignable.
+     * The attributes that aren't mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'product_name', 'product_description', 'sku', 'upc', 'gtin', 'style', 'cost', 'price', 'user_id', 'seller_id'
-    ];
+    protected $guarded = ['product_id'];
 
     /**
      * Get the seller of this item

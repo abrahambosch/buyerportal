@@ -3,11 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading clearfix">Products
-                    <a href="{{ route("product.import") }}" class="pull-right"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span></a>
-                </div>
+                <div class="panel-heading clearfix">Purchase Orders</div>
 
                 <div class="panel-body">
                     <div id="filters">
@@ -28,36 +26,29 @@
                             </div>
                         </div>
                     </div>
-                    @if (count($products))
+                    @if (count($results))
                         <table class="table">
                             <thead>
                             <tr>
-                                <th><a href="{{ route("product.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
-                                <td><!-- image --></td>
-                                @foreach ($fields as $field=>$label)
-                                    <th>{{ $label }}</th>
-                                @endforeach
-                                <th>Supplier</th>
-                                <th></th>
+                                <th><a href="{{ route("po.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Company</th>
                             </tr>
                             </thead>
 
-                        @foreach ($products as $product)
+                        @foreach ($results as $po)
                             <tr>
-                                <td><a href="{{ route("product.edit", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
-                                <td><img src="{{ $product->getThumbnail() }}"/></td>
-                                @foreach ($fields as $field=>$label)
-                                    <td>{{ $product->$field }}</td>
-                                @endforeach
-
-                                <td>{{ $product->seller->company }}</td>
-                                <td><a href="{{ route("product.delete", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                                <td><a href="{{ route("po.edit", ['po' => $po->id]) }}" class="pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+                                <td>{{ $po->id }}</td>
+                                <td>{{ $po->list_name }}</td>
+                                <td>{{ $po->seller->company }}</td>
                             </tr>
                         @endforeach
                         </table>
                     @else
-                        No Products Found<br>
-                        <a href="{{ route("product.create") }}" class=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> click here to add new product. </a>
+                        No Product Lists Found<br>
+                        <a href="{{ route("po.create") }}" class=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> click here to add new product list. </a>
                     @endif
 
                 </div>
@@ -69,12 +60,12 @@
         $(function(){
             $("#seller").on("change", function(e) {
                 var seller = $(this).val();
-                var url = "/product/seller/" + seller;
+                var url = "/po/seller/" + seller;
                 if (seller != "") {
                     window.location.href = url;
                 }
                 else {
-                    window.location.href = "/product";
+                    window.location.href = "/po";
                 }
 
             });

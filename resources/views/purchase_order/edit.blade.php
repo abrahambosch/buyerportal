@@ -8,7 +8,7 @@
                 <div class="panel-heading">Product List</div>
 
                 <div class="panel-body">
-                    <form action="{{ route("product_list.update", ['product_list' => $product_list->id]) }}" method="POST" class="form-horizontal">
+                    <form action="{{ route("product_list.update", ['id' => $product_list->id]) }}" method="POST" class="form-horizontal">
                         {{ method_field('PUT') }}
                         {!! csrf_field() !!}
 
@@ -59,9 +59,14 @@
                                     <tr>
                                         <th></th>
                                         <th><!-- image --></th>
-                                        @foreach ($fields as $field=>$label)
-                                            <th>{{ $label }}</th>
-                                        @endforeach
+                                        <th>UPC</th>
+                                        <th>SKU</th>
+                                        <th>Vendor Style Number</th>
+                                        <th>GTIN</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Cost</th>
+                                        <th>Price</th>
                                         <th>Supplier</th>
                                         <th></th>
                                     </tr>
@@ -71,9 +76,14 @@
                                         <tr>
                                             <td></td>
                                             <td><img src="{{ $item->product->getThumbnail() }}"/></td>
-                                            @foreach ($fields as $field=>$label)
-                                                <td>{{ $item->product->$field }}</td>
-                                            @endforeach
+                                            <td>{{ $item->product->upc }}</td>
+                                            <td>{{ $item->product->sku }}</td>
+                                            <td>{{ $item->product->style }}</td>
+                                            <td>{{ $item->product->gtin }}</td>
+                                            <td>{{ $item->product->product_name }}</td>
+                                            <td>{{ $item->product->product_description }}</td>
+                                            <td>{{ $item->product->cost }}</td>
+                                            <td>{{ $item->product->price }}</td>
                                             <td>{{ $item->product->seller->company }}</td>
                                             <td><a href="{{ route("product_list.destroyItem", ['id' => $item->id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                                         </tr>

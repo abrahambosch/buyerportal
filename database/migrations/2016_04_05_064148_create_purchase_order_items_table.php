@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductsTable extends Migration
+class CreatePurchaseOrderItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,57 +12,17 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        $fields = [
-            "factory" => "Factory",
-            'style' => 'Item#',
-            'product_description' => 'Description',
-            'dimentions_json' => 'Dimentions',
-            "master_pack" => "Master Pack",
-            "cube" => "Cube (ft2)",
-            "packing" => "Packing",
-            "quantity" => "Qty",
-            "unit_cost" => "POE",    // unit cost
-            "fob" => "FOB",
-            "total" => "Total $",
-            "total_cft" => "Total CFT",
-            "total_cmb" => "Total CMB",
-            "unit_retail" => "Unit Retail",
-            "notes" => "Production Notes",
-            "fob_cost" => "FOB (Cost)",
-            "frt" => "FRT",
-            "duty" => "Duty",
-            "elc" => "ELC",
-            "poe_percent" => "POE%",
-            "fob_percent" => "FOB%",
-            "hts" => "HTS",
-            "duty_percent" => "Duty %",
-            "port" => "Port",
-            "weight" => "Weight (kg)",
-            'upc'=>'Cust UPC',
-            'sku' => 'Cust SKU',
-            'material' => 'Material',
-            'factory_item' => 'Factory Item #',
-            'samples_requested' => 'Samples Requested',
-            'carton_size_l' => 'Carton Size L(")',
-            'carton_size_w' => 'Carton Size W(")',
-            'carton_size_h' => 'Carton Size H(")',
-            'factory_lead_time' => 'Factory Lead Time',
-        ];
+        Schema::create('purchase_order_items', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('purchase_order_id')->unsigned()->index();
+            $table->integer('product_id')->unsigned()->index();
 
-
-
-        Schema::create('products', function (Blueprint $table) {
-            $table->increments('product_id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->integer('seller_id')->unsigned()->index();
-            
+            // duplicate product values. 
             $table->string('factory', 60)->nullable();
             $table->string('style', 60);    // vendor sku
             $table->string('product_description', 255)->nullable();
             $table->string('dimentions_json', 255)->nullable();
             $table->integer('master_pack')->default(0);
-            $table->decimal('cube', 5, 2)->default(0);
-            $table->string('packing', 60)->nullable();
             $table->integer('quantity')->default(1);
             $table->decimal('unit_cost', 5, 2)->default(0);  // poe
             $table->decimal('fob', 5, 2)->default(0);
@@ -91,15 +51,12 @@ class CreateProductsTable extends Migration
             $table->decimal('carton_size_h', 5, 2)->default(0);
             $table->string('factory_lead_time', 255)->nullable();
 
-            $table->string('gtin', 60)->nullable();
-            $table->string('product_name', 60)->nullable();
-
             $table->timestamps();
         });
 
-        Schema::table('products', function ($table) {
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('seller_id')->references('id')->on('users');
+        Schema::table('purchase_order_items', function ($table) {
+            $table->foreign('purchase_order_id')->references('id')->on('purchase_orders');
+            $table->foreign('product_id')->references('product_id')->on('products');
         });
     }
 
@@ -110,6 +67,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('products');
+        Schema::drop('purchase_order_items');
     }
 }

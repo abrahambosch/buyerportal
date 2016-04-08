@@ -49,9 +49,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="task" class="col-sm-3 control-label"></label>
+                        <label for="task" class="col-sm-3 control-label">
+                            <a class="btn btn-default" href="{{ route("seller_product_list.edit", ['id' => $product_list->id]) }}">Back</a>
+                        </label>
                         <div class="col-sm-6">
                             {{-- <input type="submit" value="Save"/> --}}
+
                         </div>
                     </div>
                 </div>

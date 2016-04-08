@@ -11,8 +11,6 @@
                     <form action="{{ route("product.importSave") }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                         {!! csrf_field() !!}
 
-
-
                         <div class="form-group{{ $errors->has('seller') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Supplier</label>
                             <div class="col-md-6">

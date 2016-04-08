@@ -61,14 +61,9 @@
                                     <tr>
                                         <th></th>
                                         <th><!-- image column --></th>
-                                        <th>UPC</th>
-                                        <th>SKU</th>
-                                        <th>Vendor Style Number</th>
-                                        <th>GTIN</th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Cost</th>
-                                        <th>Price</th>
+                                        @foreach ($fields as $field=>$label)
+                                            <th>{{ $label }}</th>
+                                        @endforeach
                                         <th>Supplier</th>
                                         <th></th>
                                     </tr>
@@ -78,14 +73,9 @@
                                         <tr>
                                             <td></td>
                                             <td><img src="{{ $item->product->getThumbnail() }}"/></td>
-                                            <td>{{ $item->product->upc }}</td>
-                                            <td>{{ $item->product->sku }}</td>
-                                            <td>{{ $item->product->style }}</td>
-                                            <td>{{ $item->product->gtin }}</td>
-                                            <td>{{ $item->product->product_name }}</td>
-                                            <td>{{ $item->product->product_description }}</td>
-                                            <td>{{ $item->product->cost }}</td>
-                                            <td>{{ $item->product->price }}</td>
+                                            @foreach ($fields as $field=>$label)
+                                                <td>{{ $item->product->$field }}</td>
+                                            @endforeach
                                             <td>{{ $item->product->seller->company }}</td>
                                             <td>{{--<a href="{{ route("product_list.destroyItem", ['id' => $item->id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>--}}</td>
                                         </tr>
