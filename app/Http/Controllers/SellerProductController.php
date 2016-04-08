@@ -11,6 +11,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
 use App\Services\ProductService;
+use App\Services\ImportService;
 
 // todo: finish this controller
 class SellerProductController extends Controller
@@ -56,9 +57,9 @@ class SellerProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(ProductService $productService)
     {
-        $fields = $this->getFields();
+        $fields = $productService->getFields();
         return view('seller_product/create', ['user' => Auth::user(), 'fields' => $fields]);
     }
 
@@ -154,14 +155,15 @@ class SellerProductController extends Controller
 //            ->where('buyer_seller_map.buyer_id', '=', Auth::id())
 //            ->get();
         $user = Auth::user();
+        $seller = Seller::find(Auth::id());
 //        foreach ($user->sellers as $seller) {
 //            echo "Seller = " . print_r($seller, true) . "<br>";
 //        }
         
-        return view('seller_product/import', ['sellers' => $user->sellers]);
+        return view('seller_product/import', ['seller' => $seller]);
     }
     
-    public function importSave(Request $request)
+    public function importSave(Request $request, ImportService $importService)
     {
         if (!$request->hasFile('importFile')) {
             dd("no file submitted");
@@ -172,14 +174,18 @@ class SellerProductController extends Controller
         }
         $fileObj = $request->file('importFile');
         //var_export($fileObj);
-        $seller = $request->get('seller');
+        $seller = Seller::find(Auth::id());
+        $seller_id = $seller->id;
+        $buyer_id = $request->get('buyer');
         $filename = $fileObj->getRealPath();
-        $products = $this->csv_to_array($filename);
-        foreach ($products as $product) {
-            $product['user_id'] = Auth::id();
-            $product['seller_id'] = $seller;
-            print_r($product); echo "<br>";
-            Product::create($product);
+
+
+        $import_type = $request->get('import_type');
+        if ($import_type == 'berlington') {
+            $importService->csvImportSave($filename, $buyer_id, $seller_id);
+        }
+        else {
+            $importService->csvImportSave($filename, $buyer_id, $seller_id);
         }
 
         return redirect()->route('seller_product.index')->with('status', 'Products Imported');
@@ -210,45 +216,4 @@ class SellerProductController extends Controller
         return $data;
     }
 
-
-    private function getFields()
-    {
-        $fields = [
-            "factory" => "Factory",
-            'style' => 'Item#',
-            'product_description' => 'Description',
-            'dimentions_json' => 'Dimentions',
-            "master_pack" => "Master Pack",
-            "cube" => "Cube (ft2)",
-            "packing" => "Packing",
-            "quantity" => "Qty",
-            "unit_cost" => "POE",    // unit cost
-            "fob" => "FOB",
-            "total" => "Total $",
-            "total_cft" => "Total CFT",
-            "total_cmb" => "Total CMB",
-            "unit_retail" => "Unit Retail",
-            "notes" => "Production Notes",
-            "fob_cost" => "FOB (Cost)",
-            "frt" => "FRT",
-            "duty" => "Duty",
-            "elc" => "ELC",
-            "poe_percent" => "POE%",
-            "fob_percent" => "FOB%",
-            "hts" => "HTS",
-            "duty_percent" => "Duty %",
-            "port" => "Port",
-            "weight" => "Weight (kg)",
-            'upc'=>'Cust UPC',
-            'sku' => 'Cust SKU',
-            'material' => 'Material',
-            'factory_item' => 'Factory Item #',
-            'samples_requested' => 'Samples Requested',
-            'carton_size_l' => 'Carton Size L(")',
-            'carton_size_w' => 'Carton Size W(")',
-            'carton_size_h' => 'Carton Size H(")',
-            'factory_lead_time' => 'Factory Lead Time',
-        ];
-        return $fields;
-    }
 }

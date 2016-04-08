@@ -30,10 +30,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function productsbySeller(Request $request, $seller)
+    public function productsbySeller(Request $request, ProductService $productService, $seller)
     {
+        $fields = $productService->getBuyerListingFields();
         $products = Product::where(['user_id' => Auth::id(), 'seller_id' => $seller])->get();
-        return view('product/index', ['user' => Auth::user(), 'products' => $products, 'seller_id' => $seller]);
+        return view('product/index', ['user' => Auth::user(), 'products' => $products, 'seller_id' => $seller, 'fields' => $fields]);
     }
 
 
@@ -132,16 +133,7 @@ class ProductController extends Controller
 
     public function import(Request $request)
     {
-//        $sellers = DB::table('users')
-//            ->join('buyer_seller_map', 'users.id', '=', 'buyer_seller_map.user_id')
-//            ->select('users.*')
-//            ->where('buyer_seller_map.buyer_id', '=', Auth::id())
-//            ->get();
         $user = Auth::user();
-//        foreach ($user->sellers as $seller) {
-//            echo "Seller = " . print_r($seller, true) . "<br>";
-//        }
-        
         return view('product/import', ['sellers' => $user->sellers]);
     }
     

@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">Products
-                    <a href="{{ route("product.import") }}" class="pull-right"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span></a>
+                    <a href="{{ route("seller_product.import") }}" class="pull-right"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span></a>
                 </div>
 
                 <div class="panel-body">
@@ -32,7 +32,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th><a href="{{ route("product.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
+                                <th><a href="{{ route("seller_product.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
                                 <td><!-- image --></td>
                                 @foreach ($fields as $field=>$label)
                                     <th>{{ $label }}</th>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\ProductList;
 use App\ProductListItem;
 use App\Seller;
+use App\Services\ProductService;
 
 class ProductListController extends Controller
 {
@@ -105,9 +106,9 @@ class ProductListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ProductService $productService, $id)
     {
-        $fields = $this->getFields();
+        $fields = $productService->getBuyerListingFields();
         $product_list = ProductList::where(['id' => $id])->firstOrFail();
         return view('product_list/edit', ['product_list' => $product_list, 'edit' => false, 'user' => Auth::user(), 'fields' => $fields]);
     }
@@ -118,9 +119,9 @@ class ProductListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ProductService $productService, $id)
     {
-        $fields = $this->getFields();
+        $fields = $productService->getBuyerListingFields();
         $product_list = ProductList::where(['id' => $id])->firstOrFail();
         return view('product_list/edit', ['product_list' => $product_list, 'edit' => true, 'user' => Auth::user(), 'fields' => $fields]);
     }
@@ -134,19 +135,19 @@ class ProductListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::where('product_id',"=",$id)->firstOrFail();
+        $product_list = ProductList::findOrFail($id);
 
         $this->validate($request, [
             //'email' => 'required|email|unique:users',
             //'title' => 'required|unique:posts|max:255',
-            'product_name' => 'required',
+            'list_name' => 'required',
         ]);
 
-        foreach (['product_name', 'product_description', 'upc', 'sku', 'cost', 'price'] as $field) {
-            $product->$field = $request->get($field);
+        foreach (['list_name'] as $field) {
+            $product_list->$field = $request->get($field);
         }
-        $product->save();
-        return redirect()->route('product.index')->with('status', 'Product updated');
+        $product_list->save();
+        return redirect()->route('product_list.index')->with('status', 'Product updated');
     }
 
     /**
@@ -157,9 +158,9 @@ class ProductListController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::where('product_id',"=",$id)->firstOrFail();
-        $product->delete();
-        return redirect()->route('product.index')->with('status', 'Product deleted');
+        $product_list = ProductList::findOrFail($id);
+        $product_list->delete();
+        return redirect()->route('product_list.index')->with('status', 'Product List deleted');
     }
 
     /**
@@ -239,48 +240,5 @@ class ProductListController extends Controller
         }
         return $data;
     }
-
-
-    private function getFields()
-    {
-        $fields = [
-            "factory" => "Factory",
-            'style' => 'Item#',
-            'product_description' => 'Description',
-            'dimentions_json' => 'Dimentions',
-            "master_pack" => "Master Pack",
-            "cube" => "Cube (ft2)",
-            "packing" => "Packing",
-            "quantity" => "Qty",
-            "unit_cost" => "POE",    // unit cost
-            "fob" => "FOB",
-            "total" => "Total $",
-            "total_cft" => "Total CFT",
-            "total_cmb" => "Total CMB",
-            "unit_retail" => "Unit Retail",
-            "notes" => "Production Notes",
-            "fob_cost" => "FOB (Cost)",
-            "frt" => "FRT",
-            "duty" => "Duty",
-            "elc" => "ELC",
-            "poe_percent" => "POE%",
-            "fob_percent" => "FOB%",
-            "hts" => "HTS",
-            "duty_percent" => "Duty %",
-            "port" => "Port",
-            "weight" => "Weight (kg)",
-            'upc'=>'Cust UPC',
-            'sku' => 'Cust SKU',
-            'material' => 'Material',
-            'factory_item' => 'Factory Item #',
-            'samples_requested' => 'Samples Requested',
-            'carton_size_l' => 'Carton Size L(")',
-            'carton_size_w' => 'Carton Size W(")',
-            'carton_size_h' => 'Carton Size H(")',
-            'factory_lead_time' => 'Factory Lead Time',
-        ];
-        return $fields;
-    }
-
 
 }

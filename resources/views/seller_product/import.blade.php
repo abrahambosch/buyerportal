@@ -13,17 +13,17 @@
 
 
 
-                        <div class="form-group{{ $errors->has('seller') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Supplier</label>
+                        <div class="form-group{{ $errors->has('buyer') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Buyer</label>
                             <div class="col-md-6">
-                                <select name="seller" class="form-control">
-                                    @foreach ($sellers as $seller)
-                                        <option value="{{ $seller->id }}">{{ $seller->company }} - {{ $seller->first_name }} {{ $seller->last_name }}</option>
+                                <select name="buyer" class="form-control">
+                                    @foreach ($seller->users as $buyer)
+                                        <option value="{{ $buyer->id }}">{{ $buyer->company }} - {{ $buyer->first_name }} {{ $buyer->last_name }}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('seller'))
+                                @if ($errors->has('buyer'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('seller') }}</strong>
+                                        <strong>{{ $errors->first('buyer') }}</strong>
                                     </span>
                                 @endif
                             </div>

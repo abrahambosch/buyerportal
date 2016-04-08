@@ -11,6 +11,7 @@ use App\ProductList;
 use App\ProductListItem;
 use App\Seller;
 use App\MediaItem;
+use App\Services\ProductService;
 
 class SellerProductListController extends Controller
 {
@@ -190,9 +191,9 @@ Array
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ProductService $productService, $id)
     {
-        $fields = $this->getFields();
+        $fields = $productService->getListingFields();
         $seller = Seller::find(Auth::id());     // make sure we have a seller object
         $product_list = ProductList::where('id',"=",$id)->firstOrFail();
         return view('seller_product_list/edit', ['product_list' => $product_list, 'edit' => false, 'seller' => $seller, 'fields' => $fields]);
@@ -204,9 +205,9 @@ Array
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ProductService $productService, $id)
     {
-        $fields = $this->getFields();
+        $fields = $productService->getListingFields();
         $seller = Seller::find(Auth::id());     // make sure we have a seller object
         $product_list = ProductList::where('id',"=",$id)->firstOrFail();
         return view('seller_product_list/edit', ['product_list' => $product_list, 'edit' => true, 'seller' => $seller, 'fields' => $fields]);
@@ -325,47 +326,6 @@ Array
             fclose($handle);
         }
         return $data;
-    }
-
-    private function getFields()
-    {
-        $fields = [
-            "factory" => "Factory",
-            'style' => 'Item#',
-            'product_description' => 'Description',
-            'dimentions_json' => 'Dimentions',
-            "master_pack" => "Master Pack",
-            "cube" => "Cube (ft2)",
-            "packing" => "Packing",
-            "quantity" => "Qty",
-            "unit_cost" => "POE",    // unit cost
-            "fob" => "FOB",
-            "total" => "Total $",
-            "total_cft" => "Total CFT",
-            "total_cmb" => "Total CMB",
-            "unit_retail" => "Unit Retail",
-            "notes" => "Production Notes",
-            "fob_cost" => "FOB (Cost)",
-            "frt" => "FRT",
-            "duty" => "Duty",
-            "elc" => "ELC",
-            "poe_percent" => "POE%",
-            "fob_percent" => "FOB%",
-            "hts" => "HTS",
-            "duty_percent" => "Duty %",
-            "port" => "Port",
-            "weight" => "Weight (kg)",
-            'upc'=>'Cust UPC',
-            'sku' => 'Cust SKU',
-            'material' => 'Material',
-            'factory_item' => 'Factory Item #',
-            'samples_requested' => 'Samples Requested',
-            'carton_size_l' => 'Carton Size L(")',
-            'carton_size_w' => 'Carton Size W(")',
-            'carton_size_h' => 'Carton Size H(")',
-            'factory_lead_time' => 'Factory Lead Time',
-        ];
-        return $fields;
     }
 
 }
