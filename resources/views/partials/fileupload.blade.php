@@ -13,10 +13,6 @@
 <noscript><link rel="stylesheet" href="/css/jquery.fileupload-noscript.css"></noscript>
 <noscript><link rel="stylesheet" href="/css/jquery.fileupload-ui-noscript.css"></noscript>
 
-<script>
-    window.product_list_id = {{ $product_list->id }};
-</script>
-
 
 <div class="container">
     <div class="row">
@@ -31,7 +27,7 @@
                     </blockquote>
                     <br>
                     <!-- The file upload form used as target for the file upload widget -->
-                    <form id="fileupload" action="{{ route("seller_product_list.image_import_save", ['id' => $product_list->id]) }}" method="POST" enctype="multipart/form-data">
+                    <form id="fileupload" action="{{ route("seller_product.image_import_save") }}" method="POST" enctype="multipart/form-data">
                         {!! csrf_field() !!}
                                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
                         <div class="row fileupload-buttonbar">
@@ -205,30 +201,8 @@
                             $('#fileupload').fileupload({
                                 // Uncomment the following to send cross-domain cookies:
                                 //xhrFields: {withCredentials: true},
-                                url: "{{ route("seller_product_list.image_import_save", ['id' => $product_list->id]) }}"
+                                url: "{{ route("seller_product.image_import_save") }}"
                             });
-
-
-
-
-                            // Load existing files:
-                            //$('#fileupload').addClass('fileupload-processing');
-
-                            /*
-                             $.ajax({
-                             // Uncomment the following to send cross-domain cookies:
-                             //xhrFields: {withCredentials: true},
-                             url: $('#fileupload').fileupload('option', 'url'),
-                             dataType: 'json',
-                             context: $('#fileupload')[0]
-                             }).always(function () {
-                             $(this).removeClass('fileupload-processing');
-                             }).done(function (result) {
-                             $(this).fileupload('option', 'done')
-                             .call(this, $.Event('done'), {result: result});
-                             });
-                             */
-
                         });
                     </script>
 

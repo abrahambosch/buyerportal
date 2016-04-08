@@ -6,7 +6,8 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">Products
-                    <a href="{{ route("seller_product.import") }}" class="pull-right"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span></a>
+                    <a title="Product Import" href="{{ route("seller_product.import") }}" class="pull-right"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span></a>
+                    <a title="Image Import" href="{{ route("seller_product.image_import") }}" class="pull-right"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
                 </div>
 
                 <div class="panel-body">

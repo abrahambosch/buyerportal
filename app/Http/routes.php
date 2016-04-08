@@ -72,6 +72,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/seller_product/buyer/{buyer}', 'SellerProductController@productsbyBuyer')->name("seller_product.bybuyer");
         Route::get('/seller_product/import', 'SellerProductController@import')->name("seller_product.import");
         Route::post('/seller_product/importSave', 'SellerProductController@importSave')->name("seller_product.importSave");
+        Route::get('/seller_product/image_import', 'SellerProductController@image_import')->name("seller_product.image_import");
+        Route::any('/seller_product/image_import_save', 'SellerProductController@image_import_save')->name("seller_product.image_import_save");
         Route::resource('seller_product', 'SellerProductController');
 
         // Supplier Product List
