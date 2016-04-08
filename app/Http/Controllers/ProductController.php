@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
+use App\Services\ImportService;
+use App\Services\ProductService;
+
 class ProductController extends Controller
 {
     /**
@@ -15,9 +18,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, ProductService $productService)
     {
-        $fields = $this->getFields();
+        $fields = $productService->getBuyerListingFields();
         $products = Product::where('user_id', Auth::id())->get();
         return view('product/index', ['user' => Auth::user() , 'products' => $products, 'seller_id' => '', 'fields' => $fields]);
     }
@@ -70,9 +73,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ProductService $productService, $id)
     {
-        $fields = $this->getFields();
+        $fields = $productService->getBuyerFields();
         $product = Product::where('product_id',"=",$id)->firstOrFail();
         return view('product/edit', ['product' => $product, 'edit' => false, 'user' => Auth::user(), 'fields' => $fields]);
     }
@@ -83,9 +86,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ProductService $productService, $id)
     {
-        $fields = $this->getFields();
+        $fields = $productService->getBuyerFields();
         $product = Product::where('product_id',"=",$id)->firstOrFail();
         return view('product/edit', ['product' => $product, 'edit' => true, 'user' => Auth::user(), 'fields' => $fields]);
     }
@@ -97,7 +100,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductService $productService, Request $request, $id)
     {
         $product = Product::where('product_id',"=",$id)->firstOrFail();
 
@@ -106,7 +109,7 @@ class ProductController extends Controller
             //'title' => 'required|unique:posts|max:255',
             'style' => 'required',
         ]);
-        $fields = $this->getFields();
+        $fields = $productService->getBuyerFields();
         foreach ($fields as $field=>$label) {
             $product->$field = $request->get($field);
         }
@@ -142,8 +145,9 @@ class ProductController extends Controller
         return view('product/import', ['sellers' => $user->sellers]);
     }
     
-    public function importSave(Request $request)
+    public function importSave(Request $request, ImportService $importService)
     {
+        $importService->setController($this);
         if (!$request->hasFile('importFile')) {
             dd("no file submitted");
         }
@@ -155,81 +159,16 @@ class ProductController extends Controller
         //var_export($fileObj);
         $seller = $request->get('seller');
         $filename = $fileObj->getRealPath();
-        $products = $this->csv_to_array($filename);
-        foreach ($products as $product) {
-            $product['user_id'] = Auth::id();
-            $product['seller_id'] = $seller;
-            print_r($product); echo "<br>";
-            Product::create($product);
-        }
 
+        $import_type = $request->get('import_type');
+        if ($import_type == 'berlington') {
+            $importService->csvImportSave($filename, Auth::id(), $seller);
+        }
+        else {
+            $importService->csvImportSave($filename, Auth::id(), $seller);
+        }
+        
         return redirect()->route('product.index')->with('status', 'Products Imported');
     }
 
-    protected function csv_to_array($filename='', $delimiter=',')
-    {
-        if(!file_exists($filename) || !is_readable($filename))
-            return FALSE;
-
-        $header = NULL;
-        $data = array();
-        if (($handle = fopen($filename, 'r')) !== FALSE)
-        {
-            while (($row = fgetcsv($handle, 1000, $delimiter, '"')) !== FALSE)
-            {
-                if(!$header)
-                    $header = $row;
-                else if (count($row) == count($header)){
-                    print_r($header) . "<br>";
-                    print_r($row) . "<br>";
-                    $data[] = array_combine($header, $row);
-                }
-
-            }
-            fclose($handle);
-        }
-        return $data;
-    }
-
-
-    private function getFields()
-    {
-        $fields = [
-            "factory" => "Factory",
-            'style' => 'Item#',
-            'product_description' => 'Description',
-            'dimentions_json' => 'Dimentions',
-            "master_pack" => "Master Pack",
-            "cube" => "Cube (ft2)",
-            "packing" => "Packing",
-            "quantity" => "Qty",
-            "unit_cost" => "POE",    // unit cost
-            "fob" => "FOB",
-            "total" => "Total $",
-            "total_cft" => "Total CFT",
-            "total_cmb" => "Total CMB",
-            "unit_retail" => "Unit Retail",
-            "notes" => "Production Notes",
-            "fob_cost" => "FOB (Cost)",
-            "frt" => "FRT",
-            "duty" => "Duty",
-            "elc" => "ELC",
-            "poe_percent" => "POE%",
-            "fob_percent" => "FOB%",
-            "hts" => "HTS",
-            "duty_percent" => "Duty %",
-            "port" => "Port",
-            "weight" => "Weight (kg)",
-            'upc'=>'Cust UPC',
-            'sku' => 'Cust SKU',
-            'material' => 'Material',
-            'factory_item' => 'Factory Item #',
-            'samples_requested' => 'Samples Requested',
-            'carton_size_l' => 'Carton Size L(")',
-            'carton_size_w' => 'Carton Size W(")',
-            'carton_size_h' => 'Carton Size H(")',
-            'factory_lead_time' => 'Factory Lead Time',
-        ];
-        return $fields;
-    }
 }

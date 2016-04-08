@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+
+use App\Services\ProductService;
+
 // todo: finish this controller
 class SellerProductController extends Controller
 {
@@ -22,12 +25,12 @@ class SellerProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $user_id="")
+    public function index(ProductService $productService, Request $request, $user_id="")
     {
         if (Auth::user()->user_type != 'seller') {
             throw new \Exception("can not be on this page unless you are logged in as a seller");
         }
-        $fields = $this->getFields();
+        $fields = $productService->getListingFields();
         $seller = Seller::find(Auth::id());     // make sure we have a seller object
         $products = Product::where('seller_id', $seller->id)->get();
         return view('seller_product/index', ['seller' => $seller, 'products' => $products, 'buyer_id' => $user_id, 'fields' => $fields]);
@@ -38,9 +41,9 @@ class SellerProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function productsbyBuyer(Request $request, $buyer)
+    public function productsbyBuyer(ProductService $productService, Request $request, $buyer)
     {
-        $fields = $this->getFields();
+        $fields = $productService->getListingFields();
         $user = User::find($buyer);
         $seller = Seller::find(Auth::id());
         $products = Product::where(['user_id' => $buyer, 'seller_id' => Auth::id()])->get();
@@ -85,9 +88,9 @@ class SellerProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ProductService $productService, $id)
     {
-        $fields = $this->getFields();
+        $fields = $productService->getFields();
         $product = Product::where('product_id',"=",$id)->firstOrFail();
         return view('product/edit', ['product' => $product, 'edit' => false, 'user' => Auth::user(), 'fields' => $fields]);
     }
@@ -98,9 +101,9 @@ class SellerProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ProductService $productService, $id)
     {
-        $fields = $this->getFields();
+        $fields = $productService->getFields();
         $product = Product::where('product_id',"=",$id)->firstOrFail();
         return view('seller_product/edit', ['product' => $product, 'edit' => true, 'user' => Auth::user(), 'fields' => $fields]);
     }
@@ -112,7 +115,7 @@ class SellerProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductService $productService, Request $request, $id)
     {
         $product = Product::where('product_id',"=",$id)->firstOrFail();
 
@@ -122,7 +125,7 @@ class SellerProductController extends Controller
             'style' => 'required',
         ]);
 
-        $fields = $this->getFields();
+        $fields = $productService->getFields();
         foreach ($fields as $field=>$label) {
             $product->$field = $request->get($field);
         }
