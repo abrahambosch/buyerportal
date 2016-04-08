@@ -8,7 +8,7 @@
                 <div class="panel-heading">Import Products</div>
 
                 <div class="panel-body">
-                    <form action="{{ route("product.importSave") }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                    <form action="{{ route("seller_product.importSave") }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                         {!! csrf_field() !!}
 
 

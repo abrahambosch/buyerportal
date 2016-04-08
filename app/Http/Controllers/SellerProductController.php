@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Seller;
 use App\User;
+use App\MediaItem;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -178,8 +179,6 @@ class SellerProductController extends Controller
         $seller_id = $seller->id;
         $buyer_id = $request->get('buyer');
         $filename = $fileObj->getRealPath();
-
-
         $import_type = $request->get('import_type');
         if ($import_type == 'berlington') {
             $importService->csvImportSave($filename, $buyer_id, $seller_id);
@@ -191,29 +190,106 @@ class SellerProductController extends Controller
         return redirect()->route('seller_product.index')->with('status', 'Products Imported');
     }
 
-    protected function csv_to_array($filename='', $delimiter=',')
+
+
+    ///////////////////////////////////////////////////////////////////////////////
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function image_import()
     {
-        if(!file_exists($filename) || !is_readable($filename))
-            return FALSE;
+        $seller = Seller::find(Auth::id());     // make sure we have a seller object
+        $buyer_id = $seller->users()->first()->id;
+        return view('seller_product/image_import', ['edit' => false, 'seller' => $seller, 'buyer_id' => $buyer_id]);
+    }
 
-        $header = NULL;
-        $data = array();
-        if (($handle = fopen($filename, 'r')) !== FALSE)
-        {
-            while (($row = fgetcsv($handle, 1000, $delimiter, '"')) !== FALSE)
-            {
-                if(!$header)
-                    $header = $row;
-                else if (count($row) == count($header)){
-                    print_r($header) . "<br>";
-                    print_r($row) . "<br>";
-                    $data[] = array_combine($header, $row);
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function image_import_save()
+    {
+        $seller = Seller::find(Auth::id());     // make sure we have a seller object
+
+        require base_path('app/Libraries/UploadHandler.php');
+        $uploadHandler = new \UploadHandler([
+            'script_url' => route('seller_product.image_import_save'),
+            'upload_dir' => $this->getUploadDir($seller->id),
+            'upload_url' => $this->getUploadUrl($seller->id)
+        ], true, null, function ($obj, $files) use ($seller){
+            /*
+Array
+(
+    [0] => stdClass Object
+        (
+            [name] => rose_page2_blackbluewhite_full (8).jpg
+            [size] => 33235
+            [type] => image/jpeg
+            [url] => http://local.buyerseller.com/products/2/rose_page2_blackbluewhite_full%20%288%29.jpg
+            [thumbnailUrl] => http://local.buyerseller.com/products/2/thumbnail/rose_page2_blackbluewhite_full%20%288%29.jpg
+            [deleteUrl] => http://local.buyerseller.com/seller_product_list/4/image_import_save?file=rose_page2_blackbluewhite_full%20%288%29.jpg
+            [deleteType] => DELETE
+        )
+
+)
+
+             */
+
+            $fh = fopen("/tmp/imageupload.log", "a");
+            //fwrite($fh, json_encode($files, true) . "\n");
+
+
+            if(is_array($files) && count($files)) {
+                foreach ($files as $f) {
+                    $item = MediaItem::create([
+                        'filename' => $f->name,
+                        'mime' => $f->type,
+                        'original_filename' => $f->name,
+                        'title' => '',
+                        'url' => $f->url,
+                        'thumbnail' => $f->thumbnailUrl,
+                        'order_num' => 0,
+                        'product_id' => $this->getProductIdFromFileName($f->name),
+                        'user_id' => $seller->users()->first()->id,
+                        'seller_id' => $seller->id
+                    ]);
+                    fwrite($fh, json_encode($item)."\n");
                 }
-
             }
-            fclose($handle);
+
+            fclose($fh);
+
+        });
+
+        die;
+    }
+
+    private function getProductIdFromFileName($name)
+    {
+        $name = trim($name);
+        if (preg_match('/^(\w+)\W+/', $name, $matches)) {
+            $style = $matches[1];
+            $product = Product::where(['style' => $style])->first();
+            if (!$product) return null;
+            else return $product->product_id;
         }
-        return $data;
+
+        return null;
+    }
+
+    private function getUploadDir($seller_id)
+    {
+        return base_path('public/products/'.$seller_id) . "/";
+    }
+
+    private function getUploadUrl($seller_id)
+    {
+        return url('products/'.$seller_id) . "/";
     }
 
 }
