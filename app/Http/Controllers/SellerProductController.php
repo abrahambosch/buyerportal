@@ -229,7 +229,7 @@ class SellerProductController extends Controller
             },
             'upload_dir' => $this->getUploadDir($seller->id),
             'upload_url' => $this->getUploadUrl($seller->id)
-        ], true, null, function ($obj, $files) use ($seller){
+        ], true, null, function ($obj, $files) use ($seller, $productService){
             /*
 Array
 (
@@ -254,7 +254,7 @@ Array
 
             if(is_array($files) && count($files)) {
                 foreach ($files as $f) {
-                    $product_id = $this->getProductIdFromFileName($f->name);
+                    $product_id = $productService->getProductIdFromFileName($f->name);
                     if (!empty($product_id)) {  // only create if the product is found.
                         $item = MediaItem::create([
                             'filename' => $f->name,
@@ -296,5 +296,4 @@ Array
     {
         return url('products/'.$seller_id) . "/";
     }
-
 }
