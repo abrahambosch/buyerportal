@@ -187,7 +187,7 @@ class SellerProductController extends Controller
             $importService->csvImportSave($filename, $buyer_id, $seller_id);
         }
 
-        //return redirect()->route('seller_product.index')->with('status', 'Products Imported');
+        return redirect()->route('seller_product.index')->with('status', 'Products Imported');
     }
 
 

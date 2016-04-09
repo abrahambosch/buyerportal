@@ -86,13 +86,13 @@ class ImportService
         $productArr['user_id'] = $user_id;
         $productArr['seller_id'] = $seller_id;
         $productArr = $this->productService->sanatizeProductArr($productArr);
-        print "read product: " . print_r($productArr, true ) . "<br>";
+        //print "read product: " . print_r($productArr, true ) . "<br>";
         if ($this->isValidProductArray($productArr)) {
-            print "creating product: <br>";
+            //print "creating product: <br>";
             return $this->createProductIfNotExists($productArr);
         }
         else {
-            echo "invalid product<br>";
+            //echo "invalid product<br>";
         }
 
         return null;
