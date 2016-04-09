@@ -200,7 +200,6 @@ class SellerProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function image_import()
-<<<<<<< HEAD
     {
         $seller = Seller::find(Auth::id());     // make sure we have a seller object
         $buyer_id = $seller->users()->first()->id;
@@ -216,28 +215,11 @@ class SellerProductController extends Controller
     public function image_import_save(ProductService $productService)
     {
 
-=======
-    {
-        $seller = Seller::find(Auth::id());     // make sure we have a seller object
-        $buyer_id = $seller->users()->first()->id;
-        return view('seller_product/image_import', ['edit' => false, 'seller' => $seller, 'buyer_id' => $buyer_id]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function image_import_save()
-    {
->>>>>>> 02573854f0995e3ad6ed2b458e15302ae3df35f8
         $seller = Seller::find(Auth::id());     // make sure we have a seller object
 
         require base_path('app/Libraries/UploadHandler.php');
         $uploadHandler = new \UploadHandler([
             'script_url' => route('seller_product.image_import_save'),
-<<<<<<< HEAD
             'isImageOkFunction' => function($filename) use($productService) {
                 $product_id = $productService->getProductIdFromFileName($filename);
                 if (!empty($product_id)) {
@@ -247,12 +229,7 @@ class SellerProductController extends Controller
             },
             'upload_dir' => $this->getUploadDir($seller->id),
             'upload_url' => $this->getUploadUrl($seller->id)
-        ], true, null, function ($obj, $files) use ($seller, $productService){
-=======
-            'upload_dir' => $this->getUploadDir($seller->id),
-            'upload_url' => $this->getUploadUrl($seller->id)
         ], true, null, function ($obj, $files) use ($seller){
->>>>>>> 02573854f0995e3ad6ed2b458e15302ae3df35f8
             /*
 Array
 (
@@ -270,7 +247,6 @@ Array
 )
 
              */
-<<<<<<< HEAD
 
             $fh = fopen("/tmp/imageupload.log", "a");
             //fwrite($fh, json_encode($files, true) . "\n");
@@ -278,7 +254,7 @@ Array
 
             if(is_array($files) && count($files)) {
                 foreach ($files as $f) {
-                    $product_id = $productService->getProductIdFromFileName($f->name);
+                    $product_id = $this->getProductIdFromFileName($f->name);
                     if (!empty($product_id)) {  // only create if the product is found.
                         $item = MediaItem::create([
                             'filename' => $f->name,
@@ -299,28 +275,6 @@ Array
                             unlink($f->name);
                         }
                     }
-=======
-
-            $fh = fopen("/tmp/imageupload.log", "a");
-            //fwrite($fh, json_encode($files, true) . "\n");
-
-
-            if(is_array($files) && count($files)) {
-                foreach ($files as $f) {
-                    $item = MediaItem::create([
-                        'filename' => $f->name,
-                        'mime' => $f->type,
-                        'original_filename' => $f->name,
-                        'title' => '',
-                        'url' => $f->url,
-                        'thumbnail' => $f->thumbnailUrl,
-                        'order_num' => 0,
-                        'product_id' => $this->getProductIdFromFileName($f->name),
-                        'user_id' => $seller->users()->first()->id,
-                        'seller_id' => $seller->id
-                    ]);
-                    fwrite($fh, json_encode($item)."\n");
->>>>>>> 02573854f0995e3ad6ed2b458e15302ae3df35f8
                 }
             }
 
@@ -331,22 +285,7 @@ Array
         die;
     }
 
-<<<<<<< HEAD
 
-=======
-    private function getProductIdFromFileName($name)
-    {
-        $name = trim($name);
-        if (preg_match('/^(\w+)\W+/', $name, $matches)) {
-            $style = $matches[1];
-            $product = Product::where(['style' => $style])->first();
-            if (!$product) return null;
-            else return $product->product_id;
-        }
-
-        return null;
-    }
->>>>>>> 02573854f0995e3ad6ed2b458e15302ae3df35f8
 
     private function getUploadDir($seller_id)
     {
