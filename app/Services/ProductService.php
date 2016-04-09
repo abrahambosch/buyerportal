@@ -179,7 +179,7 @@ class ProductService
     public function getProductIdFromFileName($name)
     {
         $name = trim($name);
-        if (preg_match('/^(\w+)\W+/', $name, $matches)) {
+        if (preg_match('/^([-\w]+)[^-\w]+/', $name, $matches)) {
             $style = $matches[1];
             $product = Product::where(['style' => $style])->first();
             if (!$product) return null;

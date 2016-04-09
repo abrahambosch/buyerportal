@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37cee531-e075-49c6-81d4-9cb7ead0b014" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SellerProductController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SellerProductController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Libraries/UploadHandler.php" afterPath="$PROJECT_DIR$/app/Libraries/UploadHandler.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/ImportService.php" afterPath="$PROJECT_DIR$/app/Services/ImportService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Services/ProductService.php" afterPath="$PROJECT_DIR$/app/Services/ProductService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_03_17_045933_create_products_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_03_17_045933_create_products_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_04_05_064148_create_purchase_order_items_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_04_05_064148_create_purchase_order_items_table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/seller_product/import.blade.php" afterPath="$PROJECT_DIR$/resources/views/seller_product/import.blade.php" />
     </list>
     <ignored path="buyerseller.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,11 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SellerProductController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SellerProductController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SellerProductController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="223" column="71" selection-start-line="223" selection-start-column="47" selection-end-line="223" selection-end-column="71" />
+            <state relative-caret-position="335">
+              <caret line="232" column="14" selection-start-line="232" selection-start-column="14" selection-end-line="232" selection-end-column="14" />
               <folding>
                 <element signature="e#40#56#0#PHP" expanded="true" />
               </folding>
@@ -93,11 +86,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProductService.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ProductService.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Services/ProductService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="178" column="44" selection-start-line="178" selection-start-column="20" selection-end-line="178" selection-end-column="44" />
+            <state relative-caret-position="490">
+              <caret line="181" column="40" selection-start-line="181" selection-start-column="40" selection-end-line="181" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -197,8 +190,8 @@
         <option value="$PROJECT_DIR$/app/Services/ImportService.php" />
         <option value="$PROJECT_DIR$/database/migrations/2016_03_17_045933_create_products_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2016_04_05_064148_create_purchase_order_items_table.php" />
-        <option value="$PROJECT_DIR$/app/Services/ProductService.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/SellerProductController.php" />
+        <option value="$PROJECT_DIR$/app/Services/ProductService.php" />
       </list>
     </option>
   </component>
@@ -514,12 +507,12 @@
       <workItem from="1459922287944" duration="4270000" />
       <workItem from="1460005386142" duration="10552000" />
       <workItem from="1460091756031" duration="14866000" />
-      <workItem from="1460181197792" duration="12400000" />
+      <workItem from="1460181197792" duration="12639000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146453000" />
+    <option name="totallyTimeSpent" value="146692000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="25" width="1440" height="808" extended-state="0" />
@@ -944,14 +937,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Services/ProductService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="178" column="44" selection-start-line="178" selection-start-column="20" selection-end-line="178" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Libraries/UploadHandler.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="499">
@@ -962,11 +947,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SellerProductController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="223" column="71" selection-start-line="223" selection-start-column="47" selection-end-line="223" selection-end-column="71" />
+        <state relative-caret-position="335">
+          <caret line="232" column="14" selection-start-line="232" selection-start-column="14" selection-end-line="232" selection-end-column="14" />
           <folding>
             <element signature="e#40#56#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Services/ProductService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="181" column="40" selection-start-line="181" selection-start-column="40" selection-end-line="181" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
