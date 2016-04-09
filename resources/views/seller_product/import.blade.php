@@ -29,6 +29,21 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('import_type') ? ' has-error' : '' }} clearfix">
+                            <label class="col-md-4 control-label">Import Type</label>
+                            <div class="col-md-6">
+                                <select name="import_type" id="import_type" class="form-control">
+                                    <option value="">Simple CSV</option>
+                                    <option value="berlington" @if ($import_type=="berlington") selected @endif>Berlington CSV</option>
+                                </select>
+                                @if ($errors->has('import_type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('import_type') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('importFile') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">CSV File</label>
                             <div class="col-md-6">

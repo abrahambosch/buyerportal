@@ -9,13 +9,14 @@ class ProductService
     protected $controller = null;
     protected $fields = [];
     protected $buyer_fields = [];
+    protected $field_types = [];
 
     public function __construct()
     {
         $this->buyer_fields = [
             'style' => 'Item#',
             'product_description' => 'Description',
-            'dimentions_json' => 'Dimentions',
+            //'dimentions_json' => 'Dimentions',
             "master_pack" => "Master Pack",
             "cube" => "Cube (ft2)",
             "packing" => "Packing",
@@ -60,6 +61,43 @@ class ProductService
             'carton_size_h' => 'Carton Size H(")',
             'factory_lead_time' => 'Factory Lead Time',
         ];
+
+        $this->field_types = [ // used by the importer to filter fields.
+            "factory" => "string",
+            'style' => "string",
+            'product_description' => "string",
+            'dimentions_json' => "string",
+            "master_pack" => "integer",
+            "cube" => "float",
+            "packing" => "string",
+            "quantity" => "integer",
+            "unit_cost" => "float",    // unit cost
+            "fob" => "float",
+            "total" => "float",
+            "total_cft" => "float",
+            "total_cmb" => "float",
+            "unit_retail" => "float",
+            "notes" => "string",
+            "fob_cost" => "float",
+            "frt" => "float",
+            "duty" => "float",
+            "elc" => "float",
+            "poe_percent" => "float",
+            "fob_percent" => "float",
+            "hts" => "string",
+            "duty_percent" => "float",
+            "port" => "string",
+            "weight" => "float",
+            'upc'=>'integer',
+            'sku' => 'string',
+            'material' => 'string',
+            'factory_item' => 'string',
+            'samples_requested' => 'string',
+            'carton_size_l' => 'float',
+            'carton_size_w' => 'float',
+            'carton_size_h' => 'float',
+            'factory_lead_time' => 'string',
+        ];
     }
 
     public function setController($c)
@@ -101,6 +139,54 @@ class ProductService
     public function getBuyerListingFields()
     {
         return $this->buyer_fields;
+    }
+
+    public function getFieldType($field)
+    {
+        return isset($this->field_types[$field])?$this->field_types[$field]:"";
+    }
+
+    public function sanatizeProductArr($productArr)
+    {
+        foreach ($productArr as $field=>$value) {
+            $field_type = $this->getFieldType($field);
+            $productArr[$field] = $this->sanatize($field_type, $value);
+        }
+        return $productArr;
+    }
+
+    protected function sanatize($field_type, $value)
+    {
+        $field_type = strtolower(trim($field_type));
+        $value = trim($value);
+        switch ($field_type)
+        {
+            case "email":
+                return filter_var($value, FILTER_SANITIZE_EMAIL);
+                break;
+            case "float":
+                return filter_var($value, FILTER_SANITIZE_NUMBER_FLOAT);
+                break;
+            case "integer":case "int":
+            return filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+            break;
+            default:
+                return $value;
+        }
+        return $value;
+    }
+
+    public function getProductIdFromFileName($name)
+    {
+        $name = trim($name);
+        if (preg_match('/^(\w+)\W+/', $name, $matches)) {
+            $style = $matches[1];
+            $product = Product::where(['style' => $style])->first();
+            if (!$product) return null;
+            else return $product->product_id;
+        }
+
+        return null;
     }
 
 }

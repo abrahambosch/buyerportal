@@ -161,7 +161,8 @@ class UploadHandler
                     'max_height' => 80
                 )
             ),
-            'print_response' => true
+            'print_response' => true,
+            'isImageOkFunction' => null
         );
         if ($options) {
             $this->options = $options + $this->options;
@@ -443,6 +444,14 @@ class UploadHandler
             }
             if ($min_height && $img_height < $min_height) {
                 $file->error = $this->get_error_message('min_height');
+                return false;
+            }
+        }
+        if (!empty($this->options['isImageOkFunction'] && is_callable($this->options['isImageOkFunction']))) {
+            $fun = $this->options['isImageOkFunction'];
+            $isOk = $fun($file->name);
+            if (!$isOk) {
+                $file->error = "No product exist with a matching style number for filename: " . $file->name;
                 return false;
             }
         }
