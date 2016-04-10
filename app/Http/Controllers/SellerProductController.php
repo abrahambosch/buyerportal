@@ -35,7 +35,7 @@ class SellerProductController extends Controller
         $fields = $productService->getListingFields();
         $seller = Seller::find(Auth::id());     // make sure we have a seller object
         $products = Product::where('seller_id', $seller->id)->get();
-        return view('seller_product/index', ['seller' => $seller, 'products' => $products, 'buyer_id' => $user_id, 'fields' => $fields]);
+        return view('seller_product/index', ['productService' => $productService, 'seller' => $seller, 'products' => $products, 'buyer_id' => $user_id, 'fields' => $fields]);
     }
     
     /**
@@ -49,7 +49,7 @@ class SellerProductController extends Controller
         $user = User::find($buyer);
         $seller = Seller::find(Auth::id());
         $products = Product::where(['user_id' => $buyer, 'seller_id' => Auth::id()])->get();
-        return view('seller_product/index', ['seller' => $seller, 'products' => $products, 'buyer_id' => $user->id, 'fields' => $fields]);
+        return view('seller_product/index', ['productService' => $productService, 'seller' => $seller, 'products' => $products, 'buyer_id' => $user->id, 'fields' => $fields]);
     }
 
 

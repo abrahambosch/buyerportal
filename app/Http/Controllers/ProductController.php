@@ -22,7 +22,7 @@ class ProductController extends Controller
     {
         $fields = $productService->getBuyerListingFields();
         $products = Product::where('user_id', Auth::id())->get();
-        return view('product/index', ['user' => Auth::user() , 'products' => $products, 'seller_id' => '', 'fields' => $fields]);
+        return view('product/index', ['productService' => $productService, 'user' => Auth::user() , 'products' => $products, 'seller_id' => '', 'fields' => $fields]);
     }
     
     /**
@@ -34,7 +34,7 @@ class ProductController extends Controller
     {
         $fields = $productService->getBuyerListingFields();
         $products = Product::where(['user_id' => Auth::id(), 'seller_id' => $seller])->get();
-        return view('product/index', ['user' => Auth::user(), 'products' => $products, 'seller_id' => $seller, 'fields' => $fields]);
+        return view('product/index', ['productService' => $productService, 'user' => Auth::user(), 'products' => $products, 'seller_id' => $seller, 'fields' => $fields]);
     }
 
 

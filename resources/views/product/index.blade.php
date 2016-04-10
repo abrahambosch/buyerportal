@@ -47,7 +47,11 @@
                                 <td><a href="{{ route("product.edit", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
                                 <td><img src="{{ $product->getThumbnail() }}"/></td>
                                 @foreach ($fields as $field=>$label)
-                                    <td>{{ $product->$field }}</td>
+                                    @if (in_array($productService->getFieldType($field), ['float', 'integer']))
+                                        <td>{{ number_format($product->$field, 2) }}</td>
+                                    @else
+                                        <td>{{ $product->$field }}</td>
+                                    @endif
                                 @endforeach
 
                                 <td>{{ $product->seller->company }}</td>
