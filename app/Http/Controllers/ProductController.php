@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
-
-use App\Services\ImportService;
+use App\Services\Import\ImportServiceFactory;
 use App\Services\ProductService;
 
 class ProductController extends Controller
@@ -137,9 +136,8 @@ class ProductController extends Controller
         return view('product/import', ['sellers' => $user->sellers]);
     }
     
-    public function importSave(Request $request, ImportService $importService)
+    public function importSave(Request $request)
     {
-        $importService->setController($this);
         if (!$request->hasFile('importFile')) {
             dd("no file submitted");
         }
@@ -153,12 +151,9 @@ class ProductController extends Controller
         $filename = $fileObj->getRealPath();
 
         $import_type = $request->get('import_type');
-        if ($import_type == 'berlington') {
-            $importService->csvImportSave($filename, Auth::id(), $seller);
-        }
-        else {
-            $importService->csvImportSave($filename, Auth::id(), $seller);
-        }
+        $importService = ImportServiceFactory::create($import_type);
+        $importService->importSave($filename, Auth::id(), $seller);
+
         
         return redirect()->route('product.index')->with('status', 'Products Imported');
     }

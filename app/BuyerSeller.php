@@ -4,8 +4,10 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class BuyerSellerMap extends Authenticatable
+class BuyerSeller extends Authenticatable
 {
+    protected $table = 'buyer_seller';
+
     /**
      * The attributes that are mass assignable.
      *

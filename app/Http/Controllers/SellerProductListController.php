@@ -267,9 +267,9 @@ Array
     public function import(Request $request)
     {
 //        $sellers = DB::table('users')
-//            ->join('buyer_seller_map', 'users.id', '=', 'buyer_seller_map.user_id')
+//            ->join('buyer_seller', 'users.id', '=', 'buyer_seller.user_id')
 //            ->select('users.*')
-//            ->where('buyer_seller_map.buyer_id', '=', Auth::id())
+//            ->where('buyer_seller.buyer_id', '=', Auth::id())
 //            ->get();
         $user = Auth::user();
 //        foreach ($user->sellers as $seller) {

@@ -8,13 +8,11 @@ class PurchaseOrder extends Model
 {
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that aren't mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'order_date', 'notes', 'user_id', 'seller_id'
-    ];
+    protected $guarded = ['id'];
 
     /**
      * Get the items in the list
@@ -35,8 +33,8 @@ class PurchaseOrder extends Model
     /**
      * Get the user that owns the product list.
      */
-    public function user()
+    public function buyer()
     {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo('App\User', 'buyer_id', 'id');
     }
 }

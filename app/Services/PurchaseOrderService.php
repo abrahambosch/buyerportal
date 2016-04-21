@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use App\Product;
-use App\PurchaseOrderItem;
+use App\PurchaseOrder;
 
-class ProductService
+class PurchaseOrderService
 {
     protected $controller = null;
     protected $fields = [];
@@ -156,32 +156,24 @@ class ProductService
         return $productArr;
     }
 
-    function createProductIfNotExists($productArr)
+    function createPurchaseOrderIfNotExists($purchaseOrderArr)
     {
-        $product = Product::where(['user_id' => $productArr['user_id'],'seller_id' => $productArr['seller_id'], 'style' => $productArr['style']])->first();
+        $product = PurchaseOrder::where(['buyer_id' => $purchaseOrderArr['buyer_id'],'seller_id' => $purchaseOrderArr['seller_id'], 'style' => $purchaseOrderArr['style']])->first();
         if (!$product) {
-            $product = Product::create($productArr);
+            $product = Product::create($purchaseOrderArr);
             return $product;
         }
         return $product;
     }
 
-    function updateOrCreateProduct($productArr)
+    function createProductIfNotExists($productArr)
     {
-        $product = Product::updateOrCreate(['user_id' => $productArr['user_id'],'seller_id' => $productArr['seller_id'], 'style' => $productArr['style']], $productArr);
+        $product = Product::where(['buyer_id' => $productArr['buyer_id'],'seller_id' => $productArr['seller_id'], 'style' => $productArr['style']])->first();
+        if (!$product) {
+            $product = Product::create($productArr);
+            return $product;
+        }
         return $product;
-    }
-
-    function updateOrCreatePurchaseOrderItem($itemArr)
-    {
-        $po_item = PurchaseOrderItem::updateOrCreate(['user_id' => $itemArr['user_id'],'seller_id' => $itemArr['seller_id'], 'style' => $itemArr['style'], 'product_id' => $itemArr['product_id']], $itemArr);
-        return $po_item;
-    }
-
-    function updateOrCreatePurchaseOrder($poArr)
-    {
-        $po = PurchaseOrder::updateOrCreate(['buyer_id' => $poArr['buyer_id'],'seller_id' => $poArr['seller_id'], 'po_num' => $poArr['po_num']], $poArr);
-        return $po;
     }
 
     protected function sanatize($field_type, $value)

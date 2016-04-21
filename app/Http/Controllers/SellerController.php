@@ -57,7 +57,7 @@ class SellerController extends Controller
         try {
             $seller = User::create($credentials);
             Auth::user()->sellers()->attach($seller->id);
-            //BuyerSellerMap::create(['buyer_id' => Auth::id(), 'seller_id' => $seller->id]); // add record in buyer_seller_map
+            //BuyerSellerMap::create(['buyer_id' => Auth::id(), 'seller_id' => $seller->id]); // add record in buyer_seller
             return redirect()->route('seller.index')->with('status', 'Seller created');
         } catch (Exception $e) {
             return back()->withInput();

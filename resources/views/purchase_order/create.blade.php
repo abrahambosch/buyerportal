@@ -5,11 +5,11 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Create Purchase Order</div>
-                <p>To create a product list, first choose a seller. </p>
+                <div class="panel-heading">Create Offer</div>
+                <p>To create an offer, first choose a seller. </p>
 
                 <div class="panel-body">
-                    <form action="{{ route("product_list.store") }}" method="POST" class="form-horizontal">
+                    <form action="{{ route("purchase_order.store") }}" method="POST" class="form-horizontal">
                         {!! csrf_field() !!}
 
                         @foreach (['list_name' => 'List Name'] as $field => $label)

@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Product List</div>
+                <div class="panel-heading">Offer</div>
 
                 <div class="panel-body">
-                    <form action="{{ route("product_list.update", ['id' => $product_list->id]) }}" method="POST" class="form-horizontal">
+                    <form action="{{ route("purchase_order.update", ['id' => $product_list->id]) }}" method="POST" class="form-horizontal">
                         {{ method_field('PUT') }}
                         {!! csrf_field() !!}
 
@@ -85,13 +85,13 @@
                                             <td>{{ $item->product->cost }}</td>
                                             <td>{{ $item->product->price }}</td>
                                             <td>{{ $item->product->seller->company }}</td>
-                                            <td><a href="{{ route("product_list.destroyItem", ['id' => $item->id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                                            <td><a href="{{ route("purchase_order.destroyItem", ['id' => $item->id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                                         </tr>
                                     @endforeach
                                 </table>
                             @else
                                 No Items Found<br>
-                                <a href="{{ route("product_list.create") }}" class=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> click here to add new product. </a>
+                                <a href="{{ route("purchase_order.create") }}" class=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> click here to add new product. </a>
                             @endif
 
 

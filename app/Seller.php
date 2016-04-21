@@ -39,7 +39,7 @@ class Seller extends Authenticatable
      */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'buyer_seller_map', 'seller_id', 'buyer_id');
+        return $this->belongsToMany('App\User', 'buyer_seller', 'seller_id', 'buyer_id');
     }
 
     /**

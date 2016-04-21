@@ -12,7 +12,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 
 use App\Services\ProductService;
-use App\Services\ImportService;
+use App\Services\Import\ImportServiceFactory;
 
 // todo: finish this controller
 class SellerProductController extends Controller
@@ -151,9 +151,9 @@ class SellerProductController extends Controller
     public function import(Request $request)
     {
 //        $sellers = DB::table('users')
-//            ->join('buyer_seller_map', 'users.id', '=', 'buyer_seller_map.user_id')
+//            ->join('buyer_seller', 'users.id', '=', 'buyer_seller.user_id')
 //            ->select('users.*')
-//            ->where('buyer_seller_map.buyer_id', '=', Auth::id())
+//            ->where('buyer_seller.buyer_id', '=', Auth::id())
 //            ->get();
         $user = Auth::user();
         $seller = Seller::find(Auth::id());
@@ -164,7 +164,7 @@ class SellerProductController extends Controller
         return view('seller_product/import', ['seller' => $seller, 'import_type' => $import_type]);
     }
     
-    public function importSave(Request $request, ImportService $importService)
+    public function importSave(Request $request)
     {
         if (!$request->hasFile('importFile')) {
             dd("no file submitted");
@@ -180,12 +180,8 @@ class SellerProductController extends Controller
         $buyer_id = $request->get('buyer');
         $filename = $fileObj->getRealPath();
         $import_type = $request->get('import_type');
-        if ($import_type == 'berlington') {
-            $importService->berlingtonImportSave($filename, $buyer_id, $seller_id);
-        }
-        else {
-            $importService->csvImportSave($filename, $buyer_id, $seller_id);
-        }
+        $importService = ImportServiceFactory::create($import_type);
+        $importService->importSave($filename, Auth::id(), $seller);
 
         return redirect()->route('seller_product.index')->with('status', 'Products Imported');
     }

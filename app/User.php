@@ -30,7 +30,7 @@ class User extends Authenticatable
      */
     public function sellers()
     {
-        return $this->belongsToMany('App\Seller', 'buyer_seller_map', 'buyer_id', 'seller_id');
+        return $this->belongsToMany('App\Seller', 'buyer_seller', 'buyer_id', 'seller_id');
     }
 
     /**
