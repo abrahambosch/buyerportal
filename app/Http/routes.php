@@ -64,6 +64,8 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/purchase_order/item/{id}/destroy', 'PurchaseOrderController@destroyItem')->name("purchase_order.destroyItem");
         Route::get('/purchase_order/chooseProducts/{id}', 'PurchaseOrderController@chooseProducts')->name("purchase_order.chooseProducts");
         Route::put('/purchase_order/chooseProductsStore/{id}', 'PurchaseOrderController@chooseProductsStore')->name("purchase_order.chooseProductsStore");
+        Route::get('/purchase_order/worksheet', 'PurchaseOrderController@worksheet')->name("purchase_order.worksheet");
+        Route::get('/purchase_order/getNewRoom/{purchase_order_id}', 'PurchaseOrderController@getNewRoom')->name("purchase_order.getNewRoom");
         Route::resource('purchase_order', 'PurchaseOrderController');
 
         // Supplier

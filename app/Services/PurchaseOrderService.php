@@ -221,4 +221,36 @@ class PurchaseOrderService
         return null;
     }
 
+    public function getNewRoom()
+    {
+        $url = "http://ec2-52-37-114-239.us-west-2.compute.amazonaws.com:8000/_";
+        $json = ['snapshot' => "..."];
+
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('POST', $url, [
+            'json' => $json
+            //'body' => '{"snapshot":"..."}'
+        ]);
+
+//        $res = $client->request('POST', 'https://api.github.com/user', [
+//            'auth' => ['user', 'pass']
+//        ]);
+        if ($res->getStatusCode() == 201) {
+            $uri = $res->getBody();
+            return $uri;
+        }
+        else {
+            throw new \Exception("Failed to fetch new ethercalc room");
+        }
+
+        //echo $res->getHeaderLine('content-type');
+
+
+    }
+
+    public function createTemplate($roomID, $templateID=0)
+    {
+
+    }
+
 }

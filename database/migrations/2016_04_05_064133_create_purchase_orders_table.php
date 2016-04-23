@@ -16,6 +16,7 @@ class CreatePurchaseOrdersTable extends Migration
             $table->increments('id');
             $table->date('order_date');
             $table->string('po_num', 60);
+            $table->string('ethercalc_id', 60);
             $table->string('po_type', 10)->default("po");   // po or quote
             $table->string('buyer_notes')->nullable();
             $table->string('seller_notes')->nullable();

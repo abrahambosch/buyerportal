@@ -266,5 +266,27 @@ class PurchaseOrderController extends Controller
         return redirect()->route('purchase_order.index')->with('status', 'Offer/Purchase Order Imported');
     }
 
+
+    public function getNewRoom(PurchaseOrderService $purchaseOrderService, $purchase_order_id)
+    {
+        try {
+            $ethercalc_id = $purchaseOrderService->getNewRoom();
+            $purchaseOrder = PurchaseOrder::findOrFail($purchase_order_id);
+            $purchaseOrder->ethercalc_id = $ethercalc_id;
+            $purchaseOrder->save(); 
+            return response()->json(['status' => 1, 'ethercalc_id' => $ethercalc_id]);
+        }
+        catch (\Exception $e) {
+            return response()->json(['status' => 0, 'error' => $e->getMessage()]);
+        }
+    }
+
+
+
+    public function worksheet(Request $request)
+    {
+        $iframeurl = "http://ec2-52-37-114-239.us-west-2.compute.amazonaws.com:8000/0rujm8k4sp4m";
+        return view('purchase_order/worksheet', ['iframeurl' => $iframeurl, 'user' => Auth::user()]);
+    }
     
 }
