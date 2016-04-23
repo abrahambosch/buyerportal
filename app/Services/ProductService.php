@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Product;
+use App\PurchaseOrder;
 use App\PurchaseOrderItem;
 
 class ProductService
@@ -174,8 +175,19 @@ class ProductService
 
     function updateOrCreatePurchaseOrderItem($itemArr)
     {
-        $po_item = PurchaseOrderItem::updateOrCreate(['user_id' => $itemArr['user_id'],'seller_id' => $itemArr['seller_id'], 'style' => $itemArr['style'], 'product_id' => $itemArr['product_id']], $itemArr);
+        $po_item = PurchaseOrderItem::updateOrCreate(['purchase_order_id' => $itemArr['purchase_order_id'], 'style' => $itemArr['style'], 'product_id' => $itemArr['product_id']], $itemArr);
         return $po_item;
+    }
+
+    function addOrUpdateItem($purchase_order_id, $product_id)
+    {
+        $product = Product::findOrFail($product_id);
+        $fields = $this->getFields();
+        $itemArr = ['purchase_order_id' => $purchase_order_id, 'product_id' => $product_id];
+        foreach ($fields as $field=>$label) {
+            $itemArr[$field] = $product->$field;
+        }
+        return $this->updateOrCreatePurchaseOrderItem($itemArr);
     }
 
     function updateOrCreatePurchaseOrder($poArr)

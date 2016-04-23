@@ -17,12 +17,13 @@ class CreatePurchaseOrderItemsTable extends Migration
             $table->integer('purchase_order_id')->unsigned()->index();
             $table->integer('product_id')->unsigned()->index();
 
-            // duplicate product values. 
             $table->string('factory', 60)->nullable();
             $table->string('style', 60);    // vendor sku
             $table->string('product_description', 255)->nullable();
             $table->string('dimentions_json', 255)->nullable();
             $table->integer('master_pack')->default(0);
+            $table->decimal('cube', 12, 2)->default(0);
+            $table->string('packing', 60)->nullable();
             $table->integer('quantity')->default(1);
             $table->decimal('unit_cost', 12, 2)->default(0);  // poe
             $table->decimal('fob', 12, 2)->default(0);
@@ -50,6 +51,9 @@ class CreatePurchaseOrderItemsTable extends Migration
             $table->decimal('carton_size_w', 12, 2)->default(0);
             $table->decimal('carton_size_h', 12, 2)->default(0);
             $table->string('factory_lead_time', 255)->nullable();
+
+            $table->string('gtin', 60)->nullable();
+            $table->string('product_name', 60)->nullable();
 
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ class CreatePurchaseOrdersTable extends Migration
     {
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->dateTime('order_date');
+            $table->date('order_date');
             $table->string('po_num', 60);
             $table->string('po_type', 10)->default("po");   // po or quote
             $table->string('buyer_notes')->nullable();

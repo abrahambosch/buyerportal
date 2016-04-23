@@ -24,6 +24,7 @@ class ProductController extends Controller
         return view('product/index', ['productService' => $productService, 'user' => Auth::user() , 'products' => $products, 'seller_id' => '', 'fields' => $fields]);
     }
     
+    
     /**
      * Display a listing of the resource.
      *
@@ -42,9 +43,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(ProductService $productService )
     {
-        return view('product/create', ['user' => Auth::user()]);
+        $fields = $productService->getBuyerFields();
+        return view('product/create', ['user' => Auth::user(), 'fields' => $fields]);
     }
 
     /**

@@ -12,42 +12,41 @@
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('buyer') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">
+
                                 @if ($user->user_type == 'buyer')
-                                    Supplier
-                                @endif
-                                @if ($user->user_type == 'seller')
-                                    Buyer
-                                @endif
-                            </label>
-                            <div class="col-md-6">
-                                @if ($user->user_type == 'buyer')
-                                    <select name="seller" id="seller" class="form-control">
-                                        <option value="">Show all suppliers</option>
-                                        @foreach ($user->sellers as $s)
-                                            <option value="{{ $s->id }}" @if ($s->id == $seller_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
-                                        @endforeach
-                                    </select>
-                                @endif
-                                @if ($errors->has('buyer'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('buyer') }}</strong>
-                                    </span>
-                                @endif
-                                @if ($user->user_type == 'seller')
-                                    <select name="buyer" id="buyer" class="form-control">
-                                        <option value="">Show all buyers</option>
-                                        @foreach ($seller->users as $s)
-                                            <option value="{{ $s->id }}" @if ($s->id == $buyer_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @if ($errors->has('seller'))
+                                    <label class="col-md-4 control-label">Supplier</label>
+                                    <div class="col-md-6">
+                                        <select name="seller" id="seller" class="form-control">
+                                            <option value="">Show all suppliers</option>
+                                            @foreach ($user->sellers as $s)
+                                                <option value="{{ $s->id }}" @if ($s->id == $seller_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('buyer'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('seller') }}</strong>
-                                    </span>
-                                    @endif
+                                            <strong>{{ $errors->first('buyer') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
                                 @endif
-                            </div>
+
+                                @if ($user->user_type == 'seller')
+                                    <label class="col-md-4 control-label">Buyer</label>
+                                    <div class="col-md-6">
+                                        <select name="buyer" id="buyer" class="form-control">
+                                            <option value="">Show all buyers</option>
+                                            @foreach ($seller->users as $s)
+                                                <option value="{{ $s->id }}" @if ($s->id == $buyer_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if ($errors->has('seller'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('seller') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                @endif
+
                         </div>
 
                         <div class="form-group{{ $errors->has('import_type') ? ' has-error' : '' }} clearfix">

@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Seller;
+use App\Product;
+use App\PurchaseOrderItem;
 use App\Services\Import\ImportServiceFactory;
+use App\Services\ProductService;
+use App\Services\PurchaseOrderService;
 
 class PurchaseOrderController extends Controller
 {
@@ -25,15 +29,46 @@ class PurchaseOrderController extends Controller
             } else {
                 $results = PurchaseOrder::where(['buyer_id' => Auth::id()])->get();
             }
+            return view('purchase_order/index', ['user' => Auth::user(), 'results' => $results, 'seller_id' => $seller]);
         }
         else {
-            $seller = Auth::id();
-            $results = PurchaseOrder::where(['seller_id' => $seller])->get();
+            $seller = Seller::find(Auth::id());
+            $buyer = $seller->users()->first();
+            //dd($buyer);
+            $results = PurchaseOrder::where(['seller_id' => $seller->id])->get();
+            return view('purchase_order/index', ['user' => Auth::user(), 'seller' => $seller, 'results' => $results, 'buyer_id' => $buyer->id]);
         }
-        
-        return view('purchase_order/index', ['user' => Auth::user(), 'results' => $results, 'seller_id' => $seller]);
     }
 
+    /**
+     * Choose
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function chooseProducts(Request $request, ProductService $productService, $id)
+    {
+        $purchase_order = PurchaseOrder::where(['id' => $id])->firstOrFail();
+        $fields = $productService->getBuyerListingFields();
+        $products = Product::where(['user_id' => $purchase_order->buyer_id, 'seller_id' => $purchase_order->seller_id])->get();
+        return view('purchase_order/choose', ['purchase_order' => $purchase_order, 'productService' => $productService, 'user' => Auth::user() , 'products' => $products, 'seller_id' => '', 'fields' => $fields]);
+    }
+
+    /**
+     * Choose
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function chooseProductsStore(Request $request, ProductService $productService, $id)
+    {
+        $newProducts = $request->get("newproducts");
+        if (is_array($newProducts) && !empty($newProducts)) {
+            foreach ($newProducts as $product_id=>$junk) {
+                $productService->addOrUpdateItem($id, $product_id);
+            }
+            return redirect()->route('purchase_order.edit', ['id' => $id])->with('status', 'Products added');
+        }
+        return redirect()->route('purchase_order.edit', ['id' => $id])->with('status', "You didn't choose any products. ");
+    }
 
 
     /**
@@ -81,11 +116,11 @@ class PurchaseOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductService $productService, $id)
+    public function show(PurchaseOrderService $purchaseOrderService, $id)
     {
-        $fields = $productService->getBuyerListingFields();
+        $fields = $purchaseOrderService->getPoFields();
         $purchase_order = PurchaseOrder::where(['id' => $id])->firstOrFail();
-        return view('purchase_order/edit', ['purchase_order' => $purchase_order, 'edit' => false, 'user' => Auth::user(), 'fields' => $fields]);
+        return view('purchase_order/edit', ['purchase_order' => $purchase_order, 'edit' => true, 'user' => Auth::user(), 'fields' => $fields]);
     }
 
     /**
@@ -94,11 +129,21 @@ class PurchaseOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductService $productService, $id)
+    public function edit(PurchaseOrderService $purchaseOrderService, $id)
     {
-        $fields = $productService->getBuyerListingFields();
-        $purchase_order = PurchaseOrder::where(['id' => $id])->firstOrFail();
-        return view('purchase_order/edit', ['purchase_order' => $purchase_order, 'edit' => true, 'user' => Auth::user(), 'fields' => $fields]);
+        $params = [];
+        $params['edit'] = true;
+        $params['user'] = Auth::user();
+        $params['fields'] = $purchaseOrderService->getPoFields();
+        $params['purchase_order'] = PurchaseOrder::where(['id' => $id])->firstOrFail();
+        if (Auth::user()->user_type == 'seller') {
+            $params['seller'] = Seller::find(Auth::id());
+        }
+        else {
+            $params['seller'] = null;
+        }
+
+        return view('purchase_order/edit', $params);
     }
 
     /**
@@ -108,21 +153,36 @@ class PurchaseOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PurchaseOrderService $purchaseOrderService, Request $request, $id)
     {
         $purchase_order = PurchaseOrder::findOrFail($id);
-
-        $this->validate($request, [
+        $fields = $purchaseOrderService->getPoFields();
+        $validateArr = [
             //'email' => 'required|email|unique:users',
             //'title' => 'required|unique:posts|max:255',
-            'list_name' => 'required',
-        ]);
+            'po_num' => 'required',
+            'order_date' => 'required',
+        ];
 
-        foreach (['list_name'] as $field) {
+        if (Auth::user()->user_type == 'seller') {
+            $validateArr['buyer_id'] = 'required';
+            $fields['seller_notes'] = "Seller Notes";
+        }
+        else {
+            $validateArr['seller_id'] = 'required';
+            $fields['buyer_notes'] = "Buyer Notes";
+        }
+
+        $this->validate($request, $validateArr);
+
+        foreach ($fields as $field=>$label) {
             $purchase_order->$field = $request->get($field);
         }
         $purchase_order->save();
-        return redirect()->route('purchase_order.index')->with('status', 'Product updated');
+
+        // todo: add updating of line items here.
+
+        return redirect()->route('purchase_order.index')->with('status', 'Offer/PO updated');
     }
 
     /**
@@ -135,7 +195,7 @@ class PurchaseOrderController extends Controller
     {
         $purchase_order = PurchaseOrder::findOrFail($id);
         $purchase_order->delete();
-        return redirect()->route('purchase_order.index')->with('status', 'Product List deleted');
+        return redirect()->route('purchase_order.index')->with('status', 'Offer/PO deleted');
     }
 
     /**
@@ -149,22 +209,20 @@ class PurchaseOrderController extends Controller
         $item = PurchaseOrderItem::where('id',"=",$id)->firstOrFail();
         $purchase_order_id = $item->purchase_order->id;
         $item->delete();
-        return redirect()->route('purchase_order.edit', ['id' => $purchase_order_id])->with('status', 'Product deleted');
+        return redirect()->route('purchase_order.edit', ['id' => $purchase_order_id])->with('status', 'Item deleted');
     }
 
 
     public function import(Request $request)
     {
-        $user = Auth::user();
-        if (Auth::user()->user_type == 'buyer') {
-            $seller = Seller::find(Auth::id());
-        }
-        else {
-            $seller = Auth::user();
-            $results = PurchaseOrder::where(['seller_id' => $seller])->get();
-        }
         $import_type = "berlington";
-        return view('purchase_order/import', ['user' => Auth::user(), 'seller_id' => $seller->id, 'import_type' => $import_type]);
+        if (Auth::user()->user_type == 'buyer') {   // if a buyer, allow them to select a supplier.
+            return view('purchase_order/import', ['user' => Auth::user(), 'import_type' => $import_type, 'seller_id' => $request->get('seller')]);
+        }
+        else {  // if a supplier .. allow them to select a buyer.
+            $seller = Seller::find(Auth::id());
+            return view('purchase_order/import', ['user' => Auth::user(), 'seller' => $seller, 'import_type' => $import_type, 'buyer_id' => $request->get('buyer')]);
+        }
     }
 
     public function importSave(Request $request)
@@ -182,11 +240,10 @@ class PurchaseOrderController extends Controller
             ]);
         }
 
-
         if (!$request->hasFile('importFile')) {
             return back()->withInput()->withErrors(['inputFile' => 'inputFile is required']);
         }
-        if (!$request->hasFile('importFile') || !$request->file('importFile')->isValid()) {
+        if (!$request->file('importFile')->isValid()) {
             return back()->withInput()->withErrors(['inputFile' => 'inputFile is invalid']);
         }
 
@@ -204,7 +261,7 @@ class PurchaseOrderController extends Controller
         $filename = $fileObj->getRealPath();
         $import_type = $request->get('import_type');
         $importService = ImportServiceFactory::create($import_type);
-        $importService->importSave($filename, $buyer_id, $seller_id);
+        $importService->importSave($filename, $buyer_id, $seller_id, true);
 
         return redirect()->route('purchase_order.index')->with('status', 'Offer/Purchase Order Imported');
     }

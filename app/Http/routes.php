@@ -54,12 +54,16 @@ Route::group(['middleware' => 'web'], function () {
         Route::get('/product/import', 'ProductController@import')->name("product.import");
         Route::post('/product/importSave', 'ProductController@importSave')->name("product.importSave");
         Route::resource('product', 'ProductController');
+        
 
         // Purchase Orders
         Route::get('/purchase_order/{purchase_order}/destroy', 'PurchaseOrderController@destroy')->name("purchase_order.delete");
         Route::get('/purchase_order/seller/{seller}', 'PurchaseOrderController@index')->name("purchase_order.byseller");
         Route::get('/purchase_order/import', 'PurchaseOrderController@import')->name("purchase_order.import");
         Route::post('/purchase_order/importSave', 'PurchaseOrderController@importSave')->name("purchase_order.importSave");
+        Route::get('/purchase_order/item/{id}/destroy', 'PurchaseOrderController@destroyItem')->name("purchase_order.destroyItem");
+        Route::get('/purchase_order/chooseProducts/{id}', 'PurchaseOrderController@chooseProducts')->name("purchase_order.chooseProducts");
+        Route::put('/purchase_order/chooseProductsStore/{id}', 'PurchaseOrderController@chooseProductsStore')->name("purchase_order.chooseProductsStore");
         Route::resource('purchase_order', 'PurchaseOrderController');
 
         // Supplier

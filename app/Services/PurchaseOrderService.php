@@ -9,11 +9,17 @@ class PurchaseOrderService
 {
     protected $controller = null;
     protected $fields = [];
+    protected $po_fields = [];
     protected $buyer_fields = [];
     protected $field_types = [];
 
     public function __construct()
     {
+        $this->po_fields = [
+            'po_num' => 'Purchase Order #',
+            'order_date' => 'Order Date',
+        ];
+
         $this->buyer_fields = [
             'style' => 'Item#',
             'product_description' => 'Description',
@@ -104,6 +110,11 @@ class PurchaseOrderService
     public function setController($c)
     {
         $this->controller = $c;
+    }
+
+    public function getPoFields()
+    {
+        return $this->po_fields;
     }
 
     /**

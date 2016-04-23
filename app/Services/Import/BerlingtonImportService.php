@@ -44,16 +44,32 @@ class BerlingtonImportService implements ImportServiceInterface
             if ($this->create_offer) {
                 if (preg_match('/#\s*(\d+)\s*$/', $po_num_line[1], $matches)) {
                     $po_num = $matches[1];
+                    $time = false;
+                    if (preg_match('|(\d+/\d+/\d+)|', $po_date_line[1], $matches)) {
+                        $time = strtotime($matches[1]);
+                    }
+                    if ($time === false) {
+                        $time = time();
+                    }
+                    $order_date = date("Y-m-d", $time);
+
                     $poArr = [
                         'po_num' => $po_num,
+                        'order_date' => $order_date,
                         'buyer_id' => $user_id,
                         'seller_id' => $seller_id
                     ];
+                        echo "here1<br>";
                     $this->purchaseOrder = $this->productService->updateOrCreatePurchaseOrder($poArr);
+                    echo "here2<br>";
+                    if (empty($this->purchaseOrder)) {
+                        dd("failed to create purchase order. ");
+                    }
                 }
-
+                else {
+                    dd("didn't find the po num");
+                }
             }
-
 
             while (($row = fgetcsv($handle, 0, $delimiter, '"')) !== FALSE) {
                 if (!empty($row[$field_map['style']]) && !empty($row[$field_map['quantity']])) {
@@ -90,7 +106,11 @@ class BerlingtonImportService implements ImportServiceInterface
             $product = $this->productService->createProductIfNotExists($productArr);
             if ($this->create_offer && !empty($this->purchaseOrder) && !empty($product)) {
                 $productArr['purchase_order_id'] = $this->purchaseOrder->id;
-                $this->productService->updateOrCreatePurchaseOrderItem($productArr);
+                $productArr['product_id'] = $product->product_id;
+                unset($productArr['user_id']);
+                unset($productArr['seller_id']);
+                $purchaseOrderItem = $this->productService->updateOrCreatePurchaseOrderItem($productArr);
+                if (!$purchaseOrderItem) dd("failed to create item from product", $productArr);
             }
             return $product;
         }
