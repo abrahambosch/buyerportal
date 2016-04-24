@@ -221,21 +221,46 @@ class PurchaseOrderService
         return null;
     }
 
-    public function getNewRoom()
+    public function createRoom()
     {
         $url = "http://ec2-52-37-114-239.us-west-2.compute.amazonaws.com:8000/_";
         $json = ['snapshot' => "..."];
 
         $client = new \GuzzleHttp\Client();
         $res = $client->request('POST', $url, [
-            'json' => $json
-            //'body' => '{"snapshot":"..."}'
+            'json' => $json,
         ]);
 
 //        $res = $client->request('POST', 'https://api.github.com/user', [
 //            'auth' => ['user', 'pass']
 //        ]);
         if ($res->getStatusCode() == 201) {
+
+            $uri = (string) $res->getBody();
+            $uri = ltrim($uri, '/');
+            return $uri;
+        }
+        else {
+            throw new \Exception("Failed to fetch new ethercalc room");
+        }
+    }
+
+    public function createTemplate($ethercalc_id, $templateID=0)
+    {
+        $url = "http://ec2-52-37-114-239.us-west-2.compute.amazonaws.com:8000/_/". $ethercalc_id;
+        $json = $this->getCreateTemplateJsonBody();
+        //dd(json_decode($json));
+        $client = new \GuzzleHttp\Client();
+        $res = $client->request('POST', $url, [
+            'json' => json_decode($json),
+        ]);
+
+        $uri = $res->getBody();
+        return $uri;
+        
+        if ($res->getStatusCode() == 200) {
+
+            //$uri = (string) $res->getBody();
             $uri = $res->getBody();
             return $uri;
         }
@@ -243,14 +268,11 @@ class PurchaseOrderService
             throw new \Exception("Failed to fetch new ethercalc room");
         }
 
-        //echo $res->getHeaderLine('content-type');
-
-
     }
 
-    public function createTemplate($roomID, $templateID=0)
+    private function getCreateTemplateJsonBody()
     {
-
+        return file_get_contents(base_path('storage/app/ethercalc_template.json'));
     }
 
 }

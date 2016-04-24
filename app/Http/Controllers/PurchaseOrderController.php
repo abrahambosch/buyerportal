@@ -270,7 +270,7 @@ class PurchaseOrderController extends Controller
     public function getNewRoom(PurchaseOrderService $purchaseOrderService, $purchase_order_id)
     {
         try {
-            $ethercalc_id = $purchaseOrderService->getNewRoom();
+            $ethercalc_id = $purchaseOrderService->createRoom();
             $purchaseOrder = PurchaseOrder::findOrFail($purchase_order_id);
             $purchaseOrder->ethercalc_id = $ethercalc_id;
             $purchaseOrder->save(); 
@@ -281,12 +281,52 @@ class PurchaseOrderController extends Controller
         }
     }
 
-
-
-    public function worksheet(Request $request)
+    public function getNewWorksheet(PurchaseOrderService $purchaseOrderService, $purchase_order_id)
     {
-        $iframeurl = "http://ec2-52-37-114-239.us-west-2.compute.amazonaws.com:8000/0rujm8k4sp4m";
-        return view('purchase_order/worksheet', ['iframeurl' => $iframeurl, 'user' => Auth::user()]);
+        try {
+            $purchaseOrder = PurchaseOrder::findOrFail($purchase_order_id);
+            $ethercalc_id = $purchaseOrder->ethercalc_id;
+            if (empty($ethercalc_id)) {
+                $ethercalc_id = $purchaseOrderService->createRoom();
+                $purchaseOrder = PurchaseOrder::findOrFail($purchase_order_id);
+                $purchaseOrder->ethercalc_id = $ethercalc_id;
+                $purchaseOrder->save();
+            }
+echo "ethercalc_id = $ethercalc_id";
+            $res = $purchaseOrderService->createTemplate($ethercalc_id);
+                
+            return response()->json(['status' => 1, 'ethercalc_id' => $ethercalc_id, 'res' => $res]);
+        }
+        catch (\Exception $e) {
+            return response()->json(['status' => 0, 'error' => $e->getMessage()]);
+        }
+    }
+
+
+
+//    public function worksheet(Request $request)
+//    {
+//        $iframeurl = "http://ec2-52-37-114-239.us-west-2.compute.amazonaws.com:8000/0rujm8k4sp4m";
+//        return view('purchase_order/worksheet', ['iframeurl' => $iframeurl, 'user' => Auth::user()]);
+//    }
+
+    public function worksheet(Request $request, PurchaseOrderService $purchaseOrderService, $purchase_order_id)
+    {
+        try {
+            $purchaseOrder = PurchaseOrder::findOrFail($purchase_order_id);
+            if ($purchaseOrder->ethercalc_id==null) {
+                $ethercalc_id = $purchaseOrderService->createRoom();
+                $res = $purchaseOrderService->createTemplate($ethercalc_id);
+                $purchaseOrder->ethercalc_id = $ethercalc_id;
+                $purchaseOrder->save();
+            }
+            //res = $purchaseOrderService->createTemplate($purchaseOrder->ethercalc_id);
+            $iframeurl = "http://ec2-52-37-114-239.us-west-2.compute.amazonaws.com:8000/".$purchaseOrder->ethercalc_id;
+            return view('purchase_order/worksheet', ['iframeurl' => $iframeurl, 'user' => Auth::user()]);
+        }
+        catch (\Exception $e) {
+            return response()->json(['status' => 0, 'error' => $e->getMessage()]);
+        }
     }
     
 }
