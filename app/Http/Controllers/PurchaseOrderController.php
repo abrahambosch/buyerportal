@@ -291,17 +291,17 @@ class PurchaseOrderController extends Controller
                 $purchaseOrder = PurchaseOrder::findOrFail($purchase_order_id);
                 $purchaseOrder->ethercalc_id = $ethercalc_id;
                 $purchaseOrder->save();
+
             }
-echo "ethercalc_id = $ethercalc_id";
             $res = $purchaseOrderService->createTemplate($ethercalc_id);
-                
             return response()->json(['status' => 1, 'ethercalc_id' => $ethercalc_id, 'res' => $res]);
         }
         catch (\Exception $e) {
             return response()->json(['status' => 0, 'error' => $e->getMessage()]);
         }
     }
-
+    
+    
 
 
 //    public function worksheet(Request $request)
@@ -314,15 +314,22 @@ echo "ethercalc_id = $ethercalc_id";
     {
         try {
             $purchaseOrder = PurchaseOrder::findOrFail($purchase_order_id);
-            if ($purchaseOrder->ethercalc_id==null) {
+            $ethercalc_id = $purchaseOrder->ethercalc_id;
+            if ($request->get("reset")) {
+                $ethercalc_id = "";
+            }
+            if (empty($ethercalc_id)) {
                 $ethercalc_id = $purchaseOrderService->createRoom();
-                $res = $purchaseOrderService->createTemplate($ethercalc_id);
                 $purchaseOrder->ethercalc_id = $ethercalc_id;
                 $purchaseOrder->save();
+                sleep(2);
+                $res = $purchaseOrderService->createTemplate($ethercalc_id);
+                sleep(2);
+                //dd($res);
             }
             //res = $purchaseOrderService->createTemplate($purchaseOrder->ethercalc_id);
-            $iframeurl = "http://ec2-52-37-114-239.us-west-2.compute.amazonaws.com:8000/".$purchaseOrder->ethercalc_id;
-            return view('purchase_order/worksheet', ['iframeurl' => $iframeurl, 'user' => Auth::user()]);
+            $iframeurl = "http://ec2-52-37-114-239.us-west-2.compute.amazonaws.com:8000/".$ethercalc_id;
+            return view('purchase_order/worksheet', ['purchase_order' => $purchaseOrder, 'iframeurl' => $iframeurl, 'user' => Auth::user(), 'ethercalc_id' => $ethercalc_id]);
         }
         catch (\Exception $e) {
             return response()->json(['status' => 0, 'error' => $e->getMessage()]);

@@ -84,7 +84,8 @@
                         <div class="form-group">
                             <label for="task" class="col-sm-3 control-label"></label>
                             <div class="col-sm-6">
-                                <input type="submit" value="Save"/>
+                                <input class="btn btn-primary" type="submit" value="Save"/>
+                                <a class="btn btn-default" href="{{ route('purchase_order.worksheet', ['purchase_order_id' => $purchase_order->id]) }}">Open Worksheet</a>
                             </div>
                         </div>
 

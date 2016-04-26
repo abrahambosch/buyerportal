@@ -255,13 +255,12 @@ class PurchaseOrderService
             'json' => json_decode($json),
         ]);
 
-        $uri = $res->getBody();
-        return $uri;
+//        $uri = (string) $res->getBody();
+//        return $uri;
         
-        if ($res->getStatusCode() == 200) {
-
-            //$uri = (string) $res->getBody();
-            $uri = $res->getBody();
+        if ($res->getStatusCode() == 202) {
+            $uri = (string) $res->getBody();
+            //$uri = $res->getBody();
             return $uri;
         }
         else {
@@ -270,9 +269,25 @@ class PurchaseOrderService
 
     }
 
+    public function getNewWorksheet($purchase_order_id)
+    {
+        $purchaseOrder = PurchaseOrder::findOrFail($purchase_order_id);
+        $ethercalc_id = $purchaseOrder->ethercalc_id;
+        if (empty($ethercalc_id)) {
+            $ethercalc_id = $this->createRoom();
+            $purchaseOrder = PurchaseOrder::findOrFail($purchase_order_id);
+            $purchaseOrder->ethercalc_id = $ethercalc_id;
+            $purchaseOrder->save();
+            $res = $this->createTemplate($ethercalc_id);
+        }
+
+        return $res;
+    }
+
+
     private function getCreateTemplateJsonBody()
     {
-        return file_get_contents(base_path('storage/app/ethercalc_template.json'));
+        return file_get_contents(base_path('config/ethercalc_template.json'));
     }
 
 }
