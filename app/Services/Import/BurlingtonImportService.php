@@ -6,7 +6,7 @@ use App\PurchaseOrder;
 use App\Product;
 use App\Services\ProductService;
 
-class BerlingtonImportService implements ImportServiceInterface
+class BurlingtonImportService implements ImportServiceInterface
 {
     protected $controller = null;
     protected $create_offer = false;
@@ -27,7 +27,7 @@ class BerlingtonImportService implements ImportServiceInterface
         if(!file_exists($filename) || !is_readable($filename))
             return FALSE;
 
-        $field_map = $this->getBerlingtonCsvFieldMap();
+        $field_map = $this->getBurlingtonCsvFieldMap();
         $header = NULL;
         $data = array();
         $delimiter = ",";
@@ -90,7 +90,7 @@ class BerlingtonImportService implements ImportServiceInterface
 
     protected function makeProductFromRow($row, $user_id, $seller_id)
     {
-        $field_map = $this->getBerlingtonCsvFieldMap();
+        $field_map = $this->getBurlingtonCsvFieldMap();
         $productArr = [];
         foreach ($field_map as $field=>$i) {
             if (!empty($row[$i])) {
@@ -129,7 +129,7 @@ class BerlingtonImportService implements ImportServiceInterface
         return true;
     }
 
-    protected function getBerlingtonCsvFieldMap()
+    protected function getBurlingtonCsvFieldMap()
     {
         $field_map = [
             "factory" => 0,

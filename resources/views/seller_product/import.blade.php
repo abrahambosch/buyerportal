@@ -34,7 +34,7 @@
                             <div class="col-md-6">
                                 <select name="import_type" id="import_type" class="form-control">
                                     <option value="">Simple CSV</option>
-                                    <option value="berlington" @if ($import_type=="berlington") selected @endif>Berlington CSV</option>
+                                    <option value="berlington" @if ($import_type=="berlington") selected @endif>Burlington CSV</option>
                                 </select>
                                 @if ($errors->has('import_type'))
                                     <span class="help-block">

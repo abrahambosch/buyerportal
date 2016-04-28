@@ -13,7 +13,7 @@
                             <label class="col-md-4 control-label">Filter by Supplier</label>
                             <div class="col-md-6">
                                 <select name="seller" id="seller" class="form-control">
-                                    <option value="">Show all sellers</option>
+                                    <option value="">Show all suppliers</option>
                                     @foreach ($user->sellers as $s)
                                         <option value="{{ $s->id }}" @if ($s->id == $seller_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach

@@ -2,7 +2,7 @@
 
 namespace App\Services\Import;
 
-use App\Services\Import\BerlingtonImportService;
+use App\Services\Import\BurlingtonImportService;
 use App\Services\Import\SimpleImportService;
 use App\Services\Import\InvalidArgumentException;
 
@@ -15,7 +15,7 @@ class ImportServiceFactory
         $type = strtolower(trim($type));
         switch ($type) {
             case 'berlington':
-                return new BerlingtonImportService();
+                return new BurlingtonImportService();
             case 'csv': case 'simple':
                 return new SimpleImportService(); 
         }

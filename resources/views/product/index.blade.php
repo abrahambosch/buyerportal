@@ -15,7 +15,7 @@
                             <label class="col-md-4 control-label">Filter by Supplier</label>
                             <div class="col-md-6">
                                 <select name="seller" id="seller" class="form-control">
-                                    <option value="">Show all sellers</option>
+                                    <option value="">Show all suppliers</option>
                                     @foreach ($user->sellers as $s)
                                         <option value="{{ $s->id }}" @if ($s->id == $seller_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach
@@ -32,7 +32,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th><a href="{{ route("product.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
+                                <th>{{--<a href="{{ route("product.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>--}}</th>
                                 <td><!-- image --></td>
                                 @foreach ($fields as $field=>$label)
                                     <th>{{ $label }}</th>
@@ -61,7 +61,7 @@
                         </table>
                     @else
                         No Products Found<br>
-                        <a href="{{ route("product.create") }}" class=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> click here to add new product. </a>
+                        <a href="{{ route("product.import") }}" class=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> click here to add new product. </a>
                     @endif
 
                 </div>

@@ -15,20 +15,20 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UserTableSeeder::class);
         $buyer = User::create([
-            'first_name' => 'Abraham',
-            'last_name' => 'Bosch',
-            'email' => 'abrahambosch@hotmail.com',
+            'first_name' => 'Bob',
+            'last_name' => 'Boxter',
+            'email' => 'Bob@Burlington.com',
             'password' => bcrypt('welcome'),
-            'company' => 'Clothing Boutique',
+            'company' => 'Burlington',
             'user_type' => 'buyer'
         ]);
 
         $seller = User::create([
-            'first_name' => 'Dr',
-            'last_name' => 'B',
-            'email' => 'sales@burlington.com',
+            'first_name' => 'Brittany',
+            'last_name' => '',
+            'email' => 'Brittany@Jiahome.us',
             'password' => bcrypt('welcome'),
-            'company' => 'Burlington',
+            'company' => 'Jiahome',
             'user_type' => 'seller'
         ]);
 

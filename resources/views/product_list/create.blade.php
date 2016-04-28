@@ -6,7 +6,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Create Product List</div>
-                <p>To create a product list, first choose a seller. </p>
+                <p>To create a product list, first choose a supplier. </p>
 
                 <div class="panel-body">
                     <form action="{{ route("product_list.store") }}" method="POST" class="form-horizontal">

@@ -32,7 +32,7 @@
                                 <td>{{ $user->first_name }}</td>
                                 <td>{{ $user->middle_name }}</td>
                                 <td>{{ $user->last_name }}</td>
-                                <td><a href="{{ route("seller.delete", ['seller' => $user->id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                                <td>{{--<a href="{{ route("seller.delete", ['seller' => $user->id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>--}}</td>
 
                             </tr>
                         @endforeach
