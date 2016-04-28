@@ -135,7 +135,8 @@ class ProductController extends Controller
     public function import(Request $request)
     {
         $user = Auth::user();
-        return view('product/import', ['sellers' => $user->sellers]);
+        $import_type = "berlington";
+        return view('product/import', ['user' => $user, 'import_type' => $import_type]);
     }
     
     public function importSave(Request $request)
@@ -149,12 +150,12 @@ class ProductController extends Controller
         }
         $fileObj = $request->file('importFile');
         //var_export($fileObj);
-        $seller = $request->get('seller');
+        $seller_id = $request->get('seller');
         $filename = $fileObj->getRealPath();
 
         $import_type = $request->get('import_type');
         $importService = ImportServiceFactory::create($import_type);
-        $importService->importSave($filename, Auth::id(), $seller);
+        $importService->importSave($filename, Auth::id(), $seller_id);
 
         
         return redirect()->route('product.index')->with('status', 'Products Imported');

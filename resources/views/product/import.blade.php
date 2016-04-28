@@ -15,13 +15,28 @@
                             <label class="col-md-4 control-label">Supplier</label>
                             <div class="col-md-6">
                                 <select name="seller" class="form-control">
-                                    @foreach ($sellers as $seller)
+                                    @foreach ($user->sellers as $seller)
                                         <option value="{{ $seller->id }}">{{ $seller->company }} - {{ $seller->first_name }} {{ $seller->last_name }}</option>
                                     @endforeach
                                 </select>
                                 @if ($errors->has('seller'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('seller') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('import_type') ? ' has-error' : '' }} clearfix">
+                            <label class="col-md-4 control-label">Import Type</label>
+                            <div class="col-md-6">
+                                <select name="import_type" id="import_type" class="form-control">
+                                    <option value="">Simple CSV</option>
+                                    <option value="berlington" @if ($import_type=="berlington") selected @endif>Burlington CSV</option>
+                                </select>
+                                @if ($errors->has('import_type'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('import_type') }}</strong>
                                     </span>
                                 @endif
                             </div>
