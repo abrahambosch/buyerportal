@@ -181,7 +181,7 @@ class SellerProductController extends Controller
         $filename = $fileObj->getRealPath();
         $import_type = $request->get('import_type');
         $importService = ImportServiceFactory::create($import_type);
-        $importService->importSave($filename, Auth::id(), $seller);
+        $importService->importSave($filename, $buyer_id, $seller_id);
 
         return redirect()->route('seller_product.index')->with('status', 'Products Imported');
     }
