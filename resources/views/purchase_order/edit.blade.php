@@ -6,7 +6,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Offer
-                    <a title="Offer Import" href="{{ route("purchase_order.import") }}?seller={{ $purchase_order->seller_id }}&buyer={{ $purchase_order->buyer_id }}" class="pull-right"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span></a>
+                    <a title="Offer Import" href="{{ route("purchase_order.import") }}?supplier={{ $purchase_order->supplier_id }}&buyer={{ $purchase_order->buyer_id }}" class="pull-right"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span></a>
                 </div>
 
                 <div class="panel-body">
@@ -31,18 +31,18 @@
                         @endforeach
 
                         @if ($user->user_type == 'buyer')
-                        <div class="form-group{{ $errors->has('seller_id') ? ' has-error' : '' }} clearfix">
+                        <div class="form-group{{ $errors->has('supplier_id') ? ' has-error' : '' }} clearfix">
                             <label class="col-md-4 control-label">Supplier</label>
                             <div class="col-md-6">
-                                <select name="seller_id" id="seller_id" class="form-control">
+                                <select name="supplier_id" id="supplier_id" class="form-control">
                                     <option value="">No Supplier</option>
-                                    @foreach ($user->sellers as $s)
-                                        <option value="{{ $s->id }}" @if ($s->id == $purchase_order->seller_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
+                                    @foreach ($user->suppliers as $s)
+                                        <option value="{{ $s->id }}" @if ($s->id == $purchase_order->supplier_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('seller_id'))
+                                @if ($errors->has('supplier_id'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('seller_id') }}</strong>
+                                            <strong>{{ $errors->first('supplier_id') }}</strong>
                                         </span>
                                 @endif
                             </div>
@@ -55,28 +55,28 @@
                         </div>
                         @endif
 
-                        @if ($user->user_type == 'seller')
+                        @if ($user->user_type == 'supplier')
                             <div class="form-group{{ $errors->has('buyer_id') ? ' has-error' : '' }} clearfix">
                                 <label class="col-md-4 control-label">Filter by Buyer</label>
                                 <div class="col-md-6">
                                     <select name="buyer_id" id="buyer_id" class="form-control">
                                         <option value="">Show all buyers</option>
-                                        @foreach ($seller->users as $s)
+                                        @foreach ($supplier->users as $s)
                                             <option value="{{ $s->id }}" @if ($s->id == $purchase_order->buyer_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                         @endforeach
                                     </select>
 
-                                    @if ($errors->has('seller'))
+                                    @if ($errors->has('supplier'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('seller') }}</strong>
+                                            <strong>{{ $errors->first('supplier') }}</strong>
                                         </span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group{{ $errors->has('seller_notes') ? ' has-error' : '' }} clearfix">
+                            <div class="form-group{{ $errors->has('supplier_notes') ? ' has-error' : '' }} clearfix">
                                 <label class="col-md-4 control-label">Supplier Notes</label>
                                 <div class="col-md-6">
-                                    <textarea name="seller_notes" rows="5" class="form-control">{{ $purchase_order->seller_notes }}</textarea>
+                                    <textarea name="supplier_notes" rows="5" class="form-control">{{ $purchase_order->supplier_notes }}</textarea>
                                 </div>
                             </div>
                         @endif
@@ -119,7 +119,7 @@
                                             <td>{{ $item->product->product_description }}</td>
                                             <td>{{ $item->product->unit_cost }}</td>
                                             <td>{{ $item->product->quantity }}</td>
-                                            <td>{{ $item->product->seller->company }}</td>
+                                            <td>{{ $item->product->supplier->company }}</td>
                                             <td><a href="{{ route("purchase_order.destroyItem", ['id' => $item->id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                                         </tr>
                                     @endforeach

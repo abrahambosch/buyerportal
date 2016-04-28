@@ -16,7 +16,7 @@
                         <div class="col-md-6">
                             <select name="user_id" id="user_id" class="form-control">
                                 <option value="">No Buyer</option>
-                                @foreach ($seller->users as $s)
+                                @foreach ($supplier->users as $s)
                                     <option value="{{ $s->id }}" @if ($s->id == $buyer_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                 @endforeach
                             </select>

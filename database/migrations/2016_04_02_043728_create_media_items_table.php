@@ -23,14 +23,14 @@ class CreateMediaItemsTable extends Migration
             $table->integer('order_num')->default(0);
             $table->integer('product_id')->unsigned()->nullable()->index();
             $table->integer('user_id')->unsigned()->nullable()->index();
-            $table->integer('seller_id')->unsigned()->nullable()->index();
+            $table->integer('supplier_id')->unsigned()->nullable()->index();
             $table->rememberToken();
             $table->timestamps();
         });
 
         Schema::table('media_items', function ($table) {
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('seller_id')->references('id')->on('users');
+            $table->foreign('supplier_id')->references('id')->on('users');
             $table->foreign('product_id')->references('product_id')->on('products');
         });
     }

@@ -8,7 +8,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SellerController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,8 +27,8 @@ class SellerController extends Controller
      */
     public function index()
     {
-        $sellers = \App\User::where('user_type', 'seller')->get();
-        return view('seller/index', ['sellers' => $sellers]);
+        $suppliers = \App\User::where('user_type', 'supplier')->get();
+        return view('supplier/index', ['suppliers' => $suppliers]);
     }
 
     /**
@@ -38,7 +38,7 @@ class SellerController extends Controller
      */
     public function create()
     {
-        return view('seller/create');
+        return view('supplier/create');
     }
 
 
@@ -53,12 +53,12 @@ class SellerController extends Controller
         $password = "welcome";
         $credentials = $request->only('email', 'password', 'first_name', 'middle_name', 'last_name', 'company');
         $credentials['password'] = Hash::make($password);
-        $credentials['user_type'] = "seller";
+        $credentials['user_type'] = "supplier";
         try {
-            $seller = User::create($credentials);
-            Auth::user()->sellers()->attach($seller->id);
-            //BuyerSellerMap::create(['buyer_id' => Auth::id(), 'seller_id' => $seller->id]); // add record in buyer_seller
-            return redirect()->route('seller.index')->with('status', 'Seller created');
+            $supplier = User::create($credentials);
+            Auth::user()->suppliers()->attach($supplier->id);
+            //BuyerSupplierMap::create(['buyer_id' => Auth::id(), 'supplier_id' => $supplier->id]); // add record in buyer_supplier
+            return redirect()->route('supplier.index')->with('status', 'Supplier created');
         } catch (Exception $e) {
             return back()->withInput();
             //echo "failed to create buyer:" . $e->getMessage() . "<br>";
@@ -71,13 +71,13 @@ class SellerController extends Controller
     public function show(Request $request, $id)
     {
         $user = \App\User::findOrFail($id);
-        return view('seller/show', ['user' => $user]);
+        return view('supplier/show', ['user' => $user]);
     }
 
     public function edit(Request $request, $id)
     {
         $user = \App\User::findOrFail($id);
-        return view('seller/edit', ['user' => $user]);
+        return view('supplier/edit', ['user' => $user]);
     }
 
     /**
@@ -97,17 +97,17 @@ class SellerController extends Controller
         $user->middle_name = $request->get("middle_name");
         $user->last_name = $request->get("last_name");
         $user->company = $request->get("company");
-        $user->user_type = $request->get("user_type", 'seller');
+        $user->user_type = $request->get("user_type", 'supplier');
         $user->save();
 
-        return redirect()->route('seller.index')->with('status', 'Seller updated');
+        return redirect()->route('supplier.index')->with('status', 'Supplier updated');
     }
 
     public function destroy(Request $request, $id)
     {
         $user = \App\User::findOrFail($id);
         $user->delete();
-        return redirect()->route('seller.index')->with('status', 'Seller deleted');
+        return redirect()->route('supplier.index')->with('status', 'Supplier deleted');
     }
 
 }

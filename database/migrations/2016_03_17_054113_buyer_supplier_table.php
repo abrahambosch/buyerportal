@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class BuyerSellerTable extends Migration
+class BuyerSupplierTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,16 @@ class BuyerSellerTable extends Migration
      */
     public function up()
     {
-        Schema::create('buyer_seller', function (Blueprint $table) {
-            $table->increments('buyer_seller_id');
+        Schema::create('buyer_supplier', function (Blueprint $table) {
+            $table->increments('buyer_supplier_id');
             $table->integer('buyer_id')->unsigned()->index();;
-            $table->integer('seller_id')->unsigned()->index();;
+            $table->integer('supplier_id')->unsigned()->index();;
             $table->timestamps();
         });
 
-        Schema::table('buyer_seller', function ($table) {
+        Schema::table('buyer_supplier', function ($table) {
             $table->foreign('buyer_id')->references('id')->on('users');
-            $table->foreign('seller_id')->references('id')->on('users');
+            $table->foreign('supplier_id')->references('id')->on('users');
         });
     }
 
@@ -32,6 +32,6 @@ class BuyerSellerTable extends Migration
      */
     public function down()
     {
-        Schema::drop('buyer_seller');
+        Schema::drop('buyer_supplier');
     }
 }

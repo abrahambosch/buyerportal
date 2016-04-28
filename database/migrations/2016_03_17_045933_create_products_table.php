@@ -54,7 +54,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('product_id');
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('seller_id')->unsigned()->index();
+            $table->integer('supplier_id')->unsigned()->index();
             
             $table->string('factory', 60)->nullable();
             $table->string('style', 60);    // vendor sku
@@ -99,7 +99,7 @@ class CreateProductsTable extends Migration
 
         Schema::table('products', function ($table) {
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('seller_id')->references('id')->on('users');
+            $table->foreign('supplier_id')->references('id')->on('users');
         });
     }
 

@@ -9,11 +9,11 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use App\ProductList;
 use App\ProductListItem;
-use App\Seller;
+use App\Supplier;
 use App\MediaItem;
 use App\Services\ProductService;
 
-class SellerProductListController extends Controller
+class SupplierProductListController extends Controller
 {
     public function __construct()
     {
@@ -27,19 +27,19 @@ class SellerProductListController extends Controller
      */
     public function index(Request $request, $user="")
     {
-        if (Auth::user()->user_type != 'seller') {
-            throw new \Exception("can not be on this page unless you are logged in as a seller");
+        if (Auth::user()->user_type != 'supplier') {
+            throw new \Exception("can not be on this page unless you are logged in as a supplier");
         }
         
-        $seller = Seller::find(Auth::id());     // make sure we have a seller object
+        $supplier = Supplier::find(Auth::id());     // make sure we have a supplier object
         
-        $params = ['seller_id' => $seller->id];
+        $params = ['supplier_id' => $supplier->id];
         if (!empty($user)) {
             $params['user_id'] = $user; 
         }
         $lists = ProductList::where($params)->get();
         
-        return view('seller_product_list/index', ['seller' => $seller, 'lists' => $lists, 'buyer_id' => $user]);
+        return view('supplier_product_list/index', ['supplier' => $supplier, 'lists' => $lists, 'buyer_id' => $user]);
     }
 
 
@@ -51,7 +51,7 @@ class SellerProductListController extends Controller
      */
     public function create()
     {
-        return view('seller_product_list/create', ['user' => Auth::user()]);
+        return view('supplier_product_list/create', ['user' => Auth::user()]);
     }
 
     /**
@@ -66,16 +66,16 @@ class SellerProductListController extends Controller
         $request_arr['user_id'] = Auth::id();
         try {
             $product_list = ProductList::create($request_arr);
-            $products = Product::where(['user_id' => Auth::id(), 'seller_id' => $product_list->seller_id])->get();
+            $products = Product::where(['user_id' => Auth::id(), 'supplier_id' => $product_list->supplier_id])->get();
             foreach($products as $product) {
                 ProductListItem::create([
                     'product_list_id' => $product_list->id,
                     'user_id' => Auth::id(),
-                    'seller_id' => $product_list->seller_id,
+                    'supplier_id' => $product_list->supplier_id,
                     'product_id' => $product->product_id
                 ]);
             }
-            return redirect()->route('seller_product_list.index')->with('status', 'Product List created');
+            return redirect()->route('supplier_product_list.index')->with('status', 'Product List created');
         } catch (Exception $e) {
             return back()->withInput();
             //echo "failed to create buyer:" . $e->getMessage() . "<br>";
@@ -91,9 +91,9 @@ class SellerProductListController extends Controller
      */
     public function image_import($id)
     {
-        $seller = Seller::find(Auth::id());     // make sure we have a seller object
+        $supplier = Supplier::find(Auth::id());     // make sure we have a supplier object
         $product_list = ProductList::where('id',"=",$id)->firstOrFail();
-        return view('seller_product_list/image_import', ['product_list' => $product_list, 'edit' => false, 'seller' => $seller]);
+        return view('supplier_product_list/image_import', ['product_list' => $product_list, 'edit' => false, 'supplier' => $supplier]);
     }
 
     /**
@@ -104,16 +104,16 @@ class SellerProductListController extends Controller
      */
     public function image_import_save($id)
     {
-        $seller = Seller::find(Auth::id());     // make sure we have a seller object
+        $supplier = Supplier::find(Auth::id());     // make sure we have a supplier object
         $product_list = ProductList::where('id',"=",$id)->firstOrFail();
         //$product_list->user_id;
 
         require base_path('app/Libraries/UploadHandler.php');
         $uploadHandler = new \UploadHandler([
-            'script_url' => route('seller_product_list.image_import_save', ['id' => $product_list->id]),
-            'upload_dir' => $this->getUploadDir($seller->id),
-            'upload_url' => $this->getUploadUrl($seller->id)
-        ], true, null, function ($obj, $files) use ($seller){
+            'script_url' => route('supplier_product_list.image_import_save', ['id' => $product_list->id]),
+            'upload_dir' => $this->getUploadDir($supplier->id),
+            'upload_url' => $this->getUploadUrl($supplier->id)
+        ], true, null, function ($obj, $files) use ($supplier){
             /*
 Array
 (
@@ -122,9 +122,9 @@ Array
             [name] => rose_page2_blackbluewhite_full (8).jpg
             [size] => 33235
             [type] => image/jpeg
-            [url] => http://local.buyerseller.com/products/2/rose_page2_blackbluewhite_full%20%288%29.jpg
-            [thumbnailUrl] => http://local.buyerseller.com/products/2/thumbnail/rose_page2_blackbluewhite_full%20%288%29.jpg
-            [deleteUrl] => http://local.buyerseller.com/seller_product_list/4/image_import_save?file=rose_page2_blackbluewhite_full%20%288%29.jpg
+            [url] => http://local.buyersupplier.com/products/2/rose_page2_blackbluewhite_full%20%288%29.jpg
+            [thumbnailUrl] => http://local.buyersupplier.com/products/2/thumbnail/rose_page2_blackbluewhite_full%20%288%29.jpg
+            [deleteUrl] => http://local.buyersupplier.com/supplier_product_list/4/image_import_save?file=rose_page2_blackbluewhite_full%20%288%29.jpg
             [deleteType] => DELETE
         )
 
@@ -147,8 +147,8 @@ Array
                         'thumbnail' => $f->thumbnailUrl,
                         'order_num' => 0,
                         'product_id' => $this->getProductIdFromFileName($f->name),
-                        'user_id' => $seller->users()->first()->id,
-                        'seller_id' => $seller->id
+                        'user_id' => $supplier->users()->first()->id,
+                        'supplier_id' => $supplier->id
                     ]);
                     fwrite($fh, json_encode($item)."\n");
                 }
@@ -174,14 +174,14 @@ Array
        return null;
     }
 
-    private function getUploadDir($seller_id)
+    private function getUploadDir($supplier_id)
     {
-        return base_path('public/products/'.$seller_id) . "/";
+        return base_path('public/products/'.$supplier_id) . "/";
     }
 
-    private function getUploadUrl($seller_id)
+    private function getUploadUrl($supplier_id)
     {
-        return url('products/'.$seller_id) . "/";
+        return url('products/'.$supplier_id) . "/";
     }
 
 
@@ -194,9 +194,9 @@ Array
     public function show(ProductService $productService, $id)
     {
         $fields = $productService->getListingFields();
-        $seller = Seller::find(Auth::id());     // make sure we have a seller object
+        $supplier = Supplier::find(Auth::id());     // make sure we have a supplier object
         $product_list = ProductList::where('id',"=",$id)->firstOrFail();
-        return view('seller_product_list/edit', ['product_list' => $product_list, 'edit' => false, 'seller' => $seller, 'fields' => $fields]);
+        return view('supplier_product_list/edit', ['product_list' => $product_list, 'edit' => false, 'supplier' => $supplier, 'fields' => $fields]);
     }
 
     /**
@@ -208,9 +208,9 @@ Array
     public function edit(ProductService $productService, $id)
     {
         $fields = $productService->getListingFields();
-        $seller = Seller::find(Auth::id());     // make sure we have a seller object
+        $supplier = Supplier::find(Auth::id());     // make sure we have a supplier object
         $product_list = ProductList::where('id',"=",$id)->firstOrFail();
-        return view('seller_product_list/edit', ['product_list' => $product_list, 'edit' => true, 'seller' => $seller, 'fields' => $fields]);
+        return view('supplier_product_list/edit', ['product_list' => $product_list, 'edit' => true, 'supplier' => $supplier, 'fields' => $fields]);
     }
 
     /**
@@ -261,22 +261,22 @@ Array
         $item = ProductListItem::where('id',"=",$id)->firstOrFail();
         $product_list_id = $item->product_list->id;
         $item->delete();
-        return redirect()->route('seller_product_list.edit', ['id' => $product_list_id])->with('status', 'Product deleted');
+        return redirect()->route('supplier_product_list.edit', ['id' => $product_list_id])->with('status', 'Product deleted');
     }
 
     public function import(Request $request)
     {
-//        $sellers = DB::table('users')
-//            ->join('buyer_seller', 'users.id', '=', 'buyer_seller.user_id')
+//        $suppliers = DB::table('users')
+//            ->join('buyer_supplier', 'users.id', '=', 'buyer_supplier.user_id')
 //            ->select('users.*')
-//            ->where('buyer_seller.buyer_id', '=', Auth::id())
+//            ->where('buyer_supplier.buyer_id', '=', Auth::id())
 //            ->get();
         $user = Auth::user();
-//        foreach ($user->sellers as $seller) {
-//            echo "Seller = " . print_r($seller, true) . "<br>";
+//        foreach ($user->suppliers as $supplier) {
+//            echo "Supplier = " . print_r($supplier, true) . "<br>";
 //        }
         
-        return view('product/import', ['sellers' => $user->sellers]);
+        return view('product/import', ['suppliers' => $user->suppliers]);
     }
     
     public function importSave(Request $request)
@@ -290,12 +290,12 @@ Array
         }
         $fileObj = $request->file('importFile');
         //var_export($fileObj);
-        $seller = $request->get('seller');
+        $supplier = $request->get('supplier');
         $filename = $fileObj->getRealPath();
         $products = $this->csv_to_array($filename);
         foreach ($products as $product) {
             $product['user_id'] = Auth::id();
-            $product['seller_id'] = $seller;
+            $product['supplier_id'] = $supplier;
             print_r($product); echo "<br>";
             Product::create($product);
         }

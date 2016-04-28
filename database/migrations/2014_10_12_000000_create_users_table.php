@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('company')->nullable();
             $table->string('email')->unique();
             $table->string('password', 60);
-            $table->string('user_type', 30)->default("buyer");    // seller, buyer
+            $table->string('user_type', 30)->default("buyer");    // supplier, buyer
             $table->rememberToken();
             $table->timestamps();
         });

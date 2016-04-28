@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Product List
-                    <a href="{{ route("seller_product_list.image_import", ['id' => $product_list->id]) }}" class="pull-right"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
+                    <a href="{{ route("supplier_product_list.image_import", ['id' => $product_list->id]) }}" class="pull-right"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
                 </div>
 
                 <div class="panel-body">
@@ -35,7 +35,7 @@
                             <div class="col-md-6">
                                 <select name="user_id" id="user_id" class="form-control">
                                     <option value="">No Buyer</option>
-                                    @foreach ($seller->users as $s)
+                                    @foreach ($supplier->users as $s)
                                         <option value="{{ $s->id }}" @if ($s->id == $product_list->user_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach
                                 </select>
@@ -76,7 +76,7 @@
                                             @foreach ($fields as $field=>$label)
                                                 <td>{{ $item->product->$field }}</td>
                                             @endforeach
-                                            <td>{{ $item->product->seller->company }}</td>
+                                            <td>{{ $item->product->supplier->company }}</td>
                                             <td>{{--<a href="{{ route("product_list.destroyItem", ['id' => $item->id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>--}}</td>
                                         </tr>
                                     @endforeach

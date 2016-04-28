@@ -23,11 +23,11 @@ class PurchaseOrder extends Model
     }
 
     /**
-     * Get the seller of the products in the list
+     * Get the supplier of the products in the list
      */
-    public function seller()
+    public function supplier()
     {
-        return $this->belongsTo('App\Seller', 'seller_id', 'id');
+        return $this->belongsTo('App\Supplier', 'supplier_id', 'id');
     }
 
     /**

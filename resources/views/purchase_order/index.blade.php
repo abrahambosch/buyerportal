@@ -10,15 +10,15 @@
                 </div>
                 <div class="panel-body">
                     <div id="filters">
-                        <div class="form-group{{ $errors->has('seller') ? ' has-error' : '' }} clearfix">
+                        <div class="form-group{{ $errors->has('supplier') ? ' has-error' : '' }} clearfix">
                             @if ($user->user_type == 'buyer')
                             <label class="col-md-4 control-label">Filter by Supplier</label>
                             <div class="col-md-6">
 
-                                <select name="seller" id="seller" class="form-control">
+                                <select name="supplier" id="supplier" class="form-control">
                                     <option value="">Show all suppliers</option>
-                                    @foreach ($user->sellers as $s)
-                                        <option value="{{ $s->id }}" @if ($s->id == $seller_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
+                                    @foreach ($user->suppliers as $s)
+                                        <option value="{{ $s->id }}" @if ($s->id == $supplier_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach
                                 </select>
 
@@ -29,19 +29,19 @@
                                 @endif
                             </div>
                             @endif
-                            @if ($user->user_type == 'seller')
+                            @if ($user->user_type == 'supplier')
                             <label class="col-md-4 control-label">Filter by Buyer</label>
                             <div class="col-md-6">
                                 <select name="buyer" id="buyer" class="form-control">
                                     <option value="">Show all buyers</option>
-                                    @foreach ($seller->users as $s)
+                                    @foreach ($supplier->users as $s)
                                         <option value="{{ $s->id }}" @if ($s->id == $buyer_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach
                                 </select>
 
-                                @if ($errors->has('seller'))
+                                @if ($errors->has('supplier'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('seller') }}</strong>
+                                        <strong>{{ $errors->first('supplier') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -66,7 +66,7 @@
                                 <td>{{ $po->id }}</td>
                                 <td>{{ $po->po_num }}</td>
                                 <td>{{ $po->order_date }}</td>
-                                <td>{{ $po->seller->company }}</td>
+                                <td>{{ $po->supplier->company }}</td>
                             </tr>
                         @endforeach
                         </table>
@@ -82,10 +82,10 @@
 </div>
     <script>
         $(function(){
-            $("#seller").on("change", function(e) {
-                var seller = $(this).val();
-                var url = "/purchase_order/seller/" + seller;
-                if (seller != "") {
+            $("#supplier").on("change", function(e) {
+                var supplier = $(this).val();
+                var url = "/purchase_order/supplier/" + supplier;
+                if (supplier != "") {
                     window.location.href = url;
                 }
                 else {

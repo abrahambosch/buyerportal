@@ -11,18 +11,18 @@
 
                 <div class="panel-body">
                     <div id="filters">
-                        <div class="form-group{{ $errors->has('seller') ? ' has-error' : '' }} clearfix">
+                        <div class="form-group{{ $errors->has('supplier') ? ' has-error' : '' }} clearfix">
                             <label class="col-md-4 control-label">Filter by Supplier</label>
                             <div class="col-md-6">
-                                <select name="seller" id="seller" class="form-control">
+                                <select name="supplier" id="supplier" class="form-control">
                                     <option value="">Show all suppliers</option>
-                                    @foreach ($user->sellers as $s)
-                                        <option value="{{ $s->id }}" @if ($s->id == $seller_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
+                                    @foreach ($user->suppliers as $s)
+                                        <option value="{{ $s->id }}" @if ($s->id == $supplier_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('seller'))
+                                @if ($errors->has('supplier'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('seller') }}</strong>
+                                            <strong>{{ $errors->first('supplier') }}</strong>
                                         </span>
                                 @endif
                             </div>
@@ -54,7 +54,7 @@
                                     @endif
                                 @endforeach
 
-                                <td>{{ $product->seller->company }}</td>
+                                <td>{{ $product->supplier->company }}</td>
                                 <td><a href="{{ route("product.delete", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                             </tr>
                         @endforeach
@@ -71,10 +71,10 @@
 </div>
     <script>
         $(function(){
-            $("#seller").on("change", function(e) {
-                var seller = $(this).val();
-                var url = "/product/seller/" + seller;
-                if (seller != "") {
+            $("#supplier").on("change", function(e) {
+                var supplier = $(this).val();
+                var url = "/product/supplier/" + supplier;
+                if (supplier != "") {
                     window.location.href = url;
                 }
                 else {

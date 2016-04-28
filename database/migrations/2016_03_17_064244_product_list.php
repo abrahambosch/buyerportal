@@ -16,14 +16,14 @@ class ProductList extends Migration
             $table->increments('id');
             $table->string('list_name');
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('seller_id')->unsigned()->index();
+            $table->integer('supplier_id')->unsigned()->index();
             $table->rememberToken();
             $table->timestamps();
         });
 
         Schema::table('product_lists', function ($table) {
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('seller_id')->references('id')->on('users');
+            $table->foreign('supplier_id')->references('id')->on('users');
         });
     }
 

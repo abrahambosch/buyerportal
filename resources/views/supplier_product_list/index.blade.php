@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading clearfix">{{ $seller->company }} Product Lists
+                <div class="panel-heading clearfix">{{ $supplier->company }} Product Lists
                     </div>
 
                 <div class="panel-body">
@@ -15,7 +15,7 @@
                             <div class="col-md-6">
                                 <select name="buyer" id="buyer" class="form-control">
                                     <option value="">Show all buyers</option>
-                                    @foreach ($seller->users as $s)
+                                    @foreach ($supplier->users as $s)
                                         <option value="{{ $s->id }}" @if ($s->id == $buyer_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach
                                 </select>
@@ -40,7 +40,7 @@
 
                         @foreach ($lists as $product_list)
                             <tr>
-                                <td><a href="{{ route("seller_product_list.show", ['product_list' => $product_list->id]) }}" class="pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+                                <td><a href="{{ route("supplier_product_list.show", ['product_list' => $product_list->id]) }}" class="pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
                                 <td>{{ $product_list->id }}</td>
                                 <td>{{ $product_list->list_name }}</td>
                                 <td>{{ $product_list->user->company }}</td>
@@ -59,10 +59,10 @@
 </div>
     <script>
         $(function(){
-            $("#seller").on("change", function(e) {
-                var seller = $(this).val();
-                var url = "/product/seller/" + seller;
-                if (seller != "") {
+            $("#supplier").on("change", function(e) {
+                var supplier = $(this).val();
+                var url = "/product/supplier/" + supplier;
+                if (supplier != "") {
                     window.location.href = url;
                 }
                 else {

@@ -6,24 +6,24 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">Products
-                    <a title="Product Import" href="{{ route("seller_product.import") }}" class="pull-right"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span></a>
-                    <a title="Image Import" href="{{ route("seller_product.image_import") }}" class="pull-right"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
+                    <a title="Product Import" href="{{ route("supplier_product.import") }}" class="pull-right"><span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span></a>
+                    <a title="Image Import" href="{{ route("supplier_product.image_import") }}" class="pull-right"><span class="glyphicon glyphicon-import" aria-hidden="true"></span></a>
                 </div>
 
                 <div class="panel-body">
                     <div id="filters">
-                        <div class="form-group{{ $errors->has('seller') ? ' has-error' : '' }} clearfix">
+                        <div class="form-group{{ $errors->has('supplier') ? ' has-error' : '' }} clearfix">
                             <label class="col-md-4 control-label">Filter by Buyer</label>
                             <div class="col-md-6">
                                 <select name="buyer" id="buyer" class="form-control">
                                     <option value="">Show all buyers</option>
-                                    @foreach ($seller->users as $s)
+                                    @foreach ($supplier->users as $s)
                                         <option value="{{ $s->id }}" @if ($s->id == $buyer_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('seller'))
+                                @if ($errors->has('supplier'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('seller') }}</strong>
+                                            <strong>{{ $errors->first('supplier') }}</strong>
                                         </span>
                                 @endif
                             </div>
@@ -33,7 +33,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th><a href="{{ route("seller_product.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
+                                <th><a href="{{ route("supplier_product.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></th>
                                 <td><!-- image --></td>
                                 @foreach ($fields as $field=>$label)
                                     <th>{{ $label }}</th>
@@ -45,7 +45,7 @@
 
                         @foreach ($products as $product)
                             <tr>
-                                <td><a href="{{ route("seller_product.edit", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+                                <td><a href="{{ route("supplier_product.edit", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
                                 <td><img src="{{ $product->getThumbnail() }}"/></td>
                                 @foreach ($fields as $field=>$label)
                                     @if (in_array($productService->getFieldType($field), ['float', 'integer']))
@@ -54,14 +54,14 @@
                                         <td>{{ $product->$field }}</td>
                                     @endif
                                 @endforeach
-                                <td>{{ $product->seller->company }}</td>
-                                <td><a href="{{ route("seller_product.delete", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                                <td>{{ $product->supplier->company }}</td>
+                                <td><a href="{{ route("supplier_product.delete", ['product' => $product->product_id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                             </tr>
                         @endforeach
                         </table>
                     @else
                         No Products Found<br>
-                        <a href="{{ route("seller_product.create") }}" class=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> click here to add new product. </a>
+                        <a href="{{ route("supplier_product.create") }}" class=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> click here to add new product. </a>
                     @endif
 
                 </div>
@@ -73,12 +73,12 @@
         $(function(){
             $("#buyer").on("change", function(e) {
                 var buyer = $(this).val();
-                var url = "/seller_product/buyer/" + buyer;
+                var url = "/supplier_product/buyer/" + buyer;
                 if (buyer != "") {
                     window.location.href = url;
                 }
                 else {
-                    window.location.href = "/seller_product";
+                    window.location.href = "/supplier_product";
                 }
 
             });

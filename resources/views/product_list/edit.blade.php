@@ -28,18 +28,18 @@
                             </div>
                         @endforeach
 
-                        <div class="form-group{{ $errors->has('seller_id') ? ' has-error' : '' }} clearfix">
+                        <div class="form-group{{ $errors->has('supplier_id') ? ' has-error' : '' }} clearfix">
                             <label class="col-md-4 control-label">Supplier</label>
                             <div class="col-md-6">
-                                <select name="seller_id" id="seller_id" class="form-control">
+                                <select name="supplier_id" id="supplier_id" class="form-control">
                                     <option value="">No Supplier</option>
-                                    @foreach ($user->sellers as $s)
-                                        <option value="{{ $s->id }}" @if ($s->id == $product_list->seller_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
+                                    @foreach ($user->suppliers as $s)
+                                        <option value="{{ $s->id }}" @if ($s->id == $product_list->supplier_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('seller_id'))
+                                @if ($errors->has('supplier_id'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('seller_id') }}</strong>
+                                            <strong>{{ $errors->first('supplier_id') }}</strong>
                                         </span>
                                 @endif
                             </div>
@@ -74,7 +74,7 @@
                                             @foreach ($fields as $field=>$label)
                                                 <td>{{ $item->product->$field }}</td>
                                             @endforeach
-                                            <td>{{ $item->product->seller->company }}</td>
+                                            <td>{{ $item->product->supplier->company }}</td>
                                             <td><a href="{{ route("product_list.destroyItem", ['id' => $item->id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
                                         </tr>
                                     @endforeach

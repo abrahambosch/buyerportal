@@ -61,7 +61,7 @@ return [
         'rds' => [
             'driver'    => 'mysql',
             'host'      => env('RDS_HOSTNAME', 'localhost'),
-            'database'  => env('RDS_DB_NAME', 'buyerseller'),
+            'database'  => env('RDS_DB_NAME', 'buyersupplier'),
             'username'  => env('RDS_USERNAME', 'homestead'),
             'password'  => env('RDS_PASSWORD', 'secret'),
             'port'      => env('RDS_PORT', '3306'),
@@ -74,7 +74,7 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'buyerseller'),
+            'database'  => env('DB_DATABASE', 'buyersupplier'),
             'username'  => env('DB_USERNAME', 'homestead'),
             'password'  => env('DB_PASSWORD', 'secret'),
             'charset'   => 'utf8',

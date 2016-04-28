@@ -8,7 +8,7 @@
                 <div class="panel-heading">Supplier</div>
 
                 <div class="panel-body">
-                    <form action="{{ route("seller.update", ['user' => $user->id]) }}" method="POST" class="form-horizontal">
+                    <form action="{{ route("supplier.update", ['user' => $user->id]) }}" method="POST" class="form-horizontal">
                         {{ method_field('PUT') }}
                         {!! csrf_field() !!}
 

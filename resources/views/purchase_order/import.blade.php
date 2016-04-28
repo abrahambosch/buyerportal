@@ -16,10 +16,10 @@
                                 @if ($user->user_type == 'buyer')
                                     <label class="col-md-4 control-label">Supplier</label>
                                     <div class="col-md-6">
-                                        <select name="seller" id="seller" class="form-control">
+                                        <select name="supplier" id="supplier" class="form-control">
                                             <option value="">Show all suppliers</option>
-                                            @foreach ($user->sellers as $s)
-                                                <option value="{{ $s->id }}" @if ($s->id == $seller_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
+                                            @foreach ($user->suppliers as $s)
+                                                <option value="{{ $s->id }}" @if ($s->id == $supplier_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('buyer'))
@@ -30,18 +30,18 @@
                                     </div>
                                 @endif
 
-                                @if ($user->user_type == 'seller')
+                                @if ($user->user_type == 'supplier')
                                     <label class="col-md-4 control-label">Buyer</label>
                                     <div class="col-md-6">
                                         <select name="buyer" id="buyer" class="form-control">
                                             <option value="">Show all buyers</option>
-                                            @foreach ($seller->users as $s)
+                                            @foreach ($supplier->users as $s)
                                                 <option value="{{ $s->id }}" @if ($s->id == $buyer_id) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                             @endforeach
                                         </select>
-                                        @if ($errors->has('seller'))
+                                        @if ($errors->has('supplier'))
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('seller') }}</strong>
+                                                <strong>{{ $errors->first('supplier') }}</strong>
                                             </span>
                                         @endif
                                     </div>

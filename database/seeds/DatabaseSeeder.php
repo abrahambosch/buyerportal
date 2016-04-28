@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use App\BuyerSeller;
+use App\BuyerSupplier;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,16 +23,16 @@ class DatabaseSeeder extends Seeder
             'user_type' => 'buyer'
         ]);
 
-        $seller = User::create([
+        $supplier = User::create([
             'first_name' => 'Brittany',
             'last_name' => '',
             'email' => 'Brittany@Jiahome.us',
             'password' => bcrypt('welcome'),
             'company' => 'Jiahome',
-            'user_type' => 'seller'
+            'user_type' => 'supplier'
         ]);
 
-        BuyerSeller::create(['buyer_id' => $buyer->id, 'seller_id' => $seller->id]);
+        BuyerSupplier::create(['buyer_id' => $buyer->id, 'supplier_id' => $supplier->id]);
         
     }
 }

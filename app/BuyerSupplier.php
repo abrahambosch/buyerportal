@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class BuyerSeller extends Authenticatable
+class BuyerSupplier extends Authenticatable
 {
-    protected $table = 'buyer_seller';
+    protected $table = 'buyer_supplier';
 
     /**
      * The attributes that are mass assignable.
@@ -14,7 +14,7 @@ class BuyerSeller extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'buyer_id', 'seller_id'
+        'buyer_id', 'supplier_id'
     ];
 
     /**

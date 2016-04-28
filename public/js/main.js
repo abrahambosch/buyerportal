@@ -18,6 +18,6 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: '/seller_product_list/' + window.product_list_id + '/import_image_save'
+        url: '/supplier_product_list/' + window.product_list_id + '/import_image_save'
     });
 });

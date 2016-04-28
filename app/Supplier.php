@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Seller extends Authenticatable
+class Supplier extends Authenticatable
 {
 
     /**
@@ -35,11 +35,11 @@ class Seller extends Authenticatable
 
 
     /**
-     * The sellers that belong to the user.
+     * The suppliers that belong to the user.
      */
     public function users()
     {
-        return $this->belongsToMany('App\User', 'buyer_seller', 'seller_id', 'buyer_id');
+        return $this->belongsToMany('App\User', 'buyer_supplier', 'supplier_id', 'buyer_id');
     }
 
     /**
@@ -47,6 +47,6 @@ class Seller extends Authenticatable
      */
     public function products()
     {
-        return $this->hasMany('App\Product', 'seller_id');
+        return $this->hasMany('App\Product', 'supplier_id');
     }
 }

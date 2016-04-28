@@ -12,7 +12,7 @@ class MediaItem extends Model
      * @var array
      */
     protected $fillable = [
-        'filename', 'mime', 'original_filename', 'title', 'url', 'thumbnail', 'order_num', 'product_id', 'user_id', 'seller_id'
+        'filename', 'mime', 'original_filename', 'title', 'url', 'thumbnail', 'order_num', 'product_id', 'user_id', 'supplier_id'
     ];
 
     /**
@@ -24,11 +24,11 @@ class MediaItem extends Model
     }
 
     /**
-     * Get the seller that owns the product.
+     * Get the supplier that owns the product.
      */
-    public function seller()
+    public function supplier()
     {
-        return $this->belongsTo('App\Seller', 'seller_id', 'id');
+        return $this->belongsTo('App\Supplier', 'supplier_id', 'id');
     }
 
     /**

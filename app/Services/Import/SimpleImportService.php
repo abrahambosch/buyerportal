@@ -19,12 +19,12 @@ class SimpleImportService implements ImportServiceInterface
         $this->controller = $c;
     }
     
-    function importSave($filename, $user_id, $seller_id)
+    function importSave($filename, $user_id, $supplier_id)
     {
         $products = $this->csv_to_array($filename);
         foreach ($products as $product) {
             $product['user_id'] = $user_id;
-            $product['seller_id'] = $seller_id;
+            $product['supplier_id'] = $supplier_id;
             print_r($product); echo "<br>";
             $this->productService->createProductIfNotExists($product);
         }

@@ -19,15 +19,15 @@ class CreatePurchaseOrdersTable extends Migration
             $table->string('ethercalc_id', 60);
             $table->string('po_type', 10)->default("po");   // po or quote
             $table->string('buyer_notes')->nullable();
-            $table->string('seller_notes')->nullable();
+            $table->string('supplier_notes')->nullable();
             $table->integer('buyer_id')->unsigned()->index();
-            $table->integer('seller_id')->unsigned()->index();
+            $table->integer('supplier_id')->unsigned()->index();
             $table->timestamps();
         });
 
         Schema::table('purchase_orders', function ($table) {
             $table->foreign('buyer_id')->references('id')->on('users');
-            $table->foreign('seller_id')->references('id')->on('users');
+            $table->foreign('supplier_id')->references('id')->on('users');
         });
     }
 

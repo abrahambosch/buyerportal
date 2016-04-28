@@ -118,7 +118,7 @@ class PurchaseOrderService
     }
 
     /**
-     * list of all fields except user_id, seller_id, and id
+     * list of all fields except user_id, supplier_id, and id
      * @return array
      */
     public function getFields()
@@ -169,7 +169,7 @@ class PurchaseOrderService
 
     function createPurchaseOrderIfNotExists($purchaseOrderArr)
     {
-        $product = PurchaseOrder::where(['buyer_id' => $purchaseOrderArr['buyer_id'],'seller_id' => $purchaseOrderArr['seller_id'], 'style' => $purchaseOrderArr['style']])->first();
+        $product = PurchaseOrder::where(['buyer_id' => $purchaseOrderArr['buyer_id'],'supplier_id' => $purchaseOrderArr['supplier_id'], 'style' => $purchaseOrderArr['style']])->first();
         if (!$product) {
             $product = Product::create($purchaseOrderArr);
             return $product;
@@ -179,7 +179,7 @@ class PurchaseOrderService
 
     function createProductIfNotExists($productArr)
     {
-        $product = Product::where(['buyer_id' => $productArr['buyer_id'],'seller_id' => $productArr['seller_id'], 'style' => $productArr['style']])->first();
+        $product = Product::where(['buyer_id' => $productArr['buyer_id'],'supplier_id' => $productArr['supplier_id'], 'style' => $productArr['style']])->first();
         if (!$product) {
             $product = Product::create($productArr);
             return $product;

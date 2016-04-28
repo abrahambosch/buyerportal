@@ -11,17 +11,17 @@
                     <form action="{{ route("product.importSave") }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                         {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('seller') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('supplier') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Supplier</label>
                             <div class="col-md-6">
-                                <select name="seller" class="form-control">
-                                    @foreach ($user->sellers as $seller)
-                                        <option value="{{ $seller->id }}">{{ $seller->company }} - {{ $seller->first_name }} {{ $seller->last_name }}</option>
+                                <select name="supplier" class="form-control">
+                                    @foreach ($user->suppliers as $supplier)
+                                        <option value="{{ $supplier->id }}">{{ $supplier->company }} - {{ $supplier->first_name }} {{ $supplier->last_name }}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('seller'))
+                                @if ($errors->has('supplier'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('seller') }}</strong>
+                                        <strong>{{ $errors->first('supplier') }}</strong>
                                     </span>
                                 @endif
                             </div>

@@ -26,11 +26,11 @@ class User extends Authenticatable
 
 
     /**
-     * The sellers that belong to the user.
+     * The suppliers that belong to the user.
      */
-    public function sellers()
+    public function suppliers()
     {
-        return $this->belongsToMany('App\Seller', 'buyer_seller', 'buyer_id', 'seller_id');
+        return $this->belongsToMany('App\Supplier', 'buyer_supplier', 'buyer_id', 'supplier_id');
     }
 
     /**

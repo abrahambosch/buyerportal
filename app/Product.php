@@ -15,11 +15,11 @@ class Product extends Model
     protected $guarded = ['product_id'];
 
     /**
-     * Get the seller of this item
+     * Get the supplier of this item
      */
-    public function seller()
+    public function supplier()
     {
-        return $this->belongsTo('App\Seller', 'seller_id', 'id');
+        return $this->belongsTo('App\Supplier', 'supplier_id', 'id');
     }
 
     /**

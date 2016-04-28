@@ -12,7 +12,7 @@ class ProductList extends Model
      * @var array
      */
     protected $fillable = [
-        'list_name', 'user_id', 'seller_id'
+        'list_name', 'user_id', 'supplier_id'
     ];
 
     /**
@@ -24,11 +24,11 @@ class ProductList extends Model
     }
 
     /**
-     * Get the seller of the products in the list
+     * Get the supplier of the products in the list
      */
-    public function seller()
+    public function supplier()
     {
-        return $this->belongsTo('App\Seller', 'seller_id', 'id');
+        return $this->belongsTo('App\Supplier', 'supplier_id', 'id');
     }
 
     /**

@@ -27,7 +27,7 @@
                     </blockquote>
                     <br>
                     <!-- The file upload form used as target for the file upload widget -->
-                    <form id="fileupload" action="{{ route("seller_product.image_import_save") }}" method="POST" enctype="multipart/form-data">
+                    <form id="fileupload" action="{{ route("supplier_product.image_import_save") }}" method="POST" enctype="multipart/form-data">
                         {!! csrf_field() !!}
                                 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
                         <div class="row fileupload-buttonbar">
@@ -201,7 +201,7 @@
                             $('#fileupload').fileupload({
                                 // Uncomment the following to send cross-domain cookies:
                                 //xhrFields: {withCredentials: true},
-                                url: "{{ route("seller_product.image_import_save") }}"
+                                url: "{{ route("supplier_product.image_import_save") }}"
                             });
                         });
                     </script>

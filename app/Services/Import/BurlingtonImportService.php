@@ -21,7 +21,7 @@ class BurlingtonImportService implements ImportServiceInterface
         $this->controller = $c;
     }
 
-    function importSave($filename, $user_id, $seller_id, $create_offer=false)
+    function importSave($filename, $user_id, $supplier_id, $create_offer=false)
     {
         $this->create_offer = $create_offer;
         if(!file_exists($filename) || !is_readable($filename))
@@ -57,7 +57,7 @@ class BurlingtonImportService implements ImportServiceInterface
                         'po_num' => $po_num,
                         'order_date' => $order_date,
                         'buyer_id' => $user_id,
-                        'seller_id' => $seller_id
+                        'supplier_id' => $supplier_id
                     ];
                         echo "here1<br>";
                     $this->purchaseOrder = $this->productService->updateOrCreatePurchaseOrder($poArr);
@@ -73,7 +73,7 @@ class BurlingtonImportService implements ImportServiceInterface
 
             while (($row = fgetcsv($handle, 0, $delimiter, '"')) !== FALSE) {
                 if (!empty($row[$field_map['style']]) && !empty($row[$field_map['quantity']])) {
-                    $product = $this->makeProductFromRow($row, $user_id, $seller_id);
+                    $product = $this->makeProductFromRow($row, $user_id, $supplier_id);
                     if ($product) $last_product = $product;
                 }
                 else if (!empty($last_product) && !empty($row[3]) && !empty($row[4]) && !empty($row[5]) && !empty($row[6])) {   // dymentions for subitems
@@ -88,7 +88,7 @@ class BurlingtonImportService implements ImportServiceInterface
         }
     }
 
-    protected function makeProductFromRow($row, $user_id, $seller_id)
+    protected function makeProductFromRow($row, $user_id, $supplier_id)
     {
         $field_map = $this->getBurlingtonCsvFieldMap();
         $productArr = [];
@@ -98,7 +98,7 @@ class BurlingtonImportService implements ImportServiceInterface
             }
         }
         $productArr['user_id'] = $user_id;
-        $productArr['seller_id'] = $seller_id;
+        $productArr['supplier_id'] = $supplier_id;
         $productArr = $this->productService->sanatizeProductArr($productArr);
         //print "read product: " . print_r($productArr, true ) . "<br>";
         if ($this->isValidProductArray($productArr)) {
@@ -108,7 +108,7 @@ class BurlingtonImportService implements ImportServiceInterface
                 $productArr['purchase_order_id'] = $this->purchaseOrder->id;
                 $productArr['product_id'] = $product->product_id;
                 unset($productArr['user_id']);
-                unset($productArr['seller_id']);
+                unset($productArr['supplier_id']);
                 $purchaseOrderItem = $this->productService->updateOrCreatePurchaseOrderItem($productArr);
                 if (!$purchaseOrderItem) dd("failed to create item from product", $productArr);
             }

@@ -8,7 +8,7 @@
                 <div class="panel-heading">Import Products</div>
 
                 <div class="panel-body">
-                    <form action="{{ route("seller_product.importSave") }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                    <form action="{{ route("supplier_product.importSave") }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                         {!! csrf_field() !!}
 
 
@@ -17,7 +17,7 @@
                             <label class="col-md-4 control-label">Buyer</label>
                             <div class="col-md-6">
                                 <select name="buyer" class="form-control">
-                                    @foreach ($seller->users as $buyer)
+                                    @foreach ($supplier->users as $buyer)
                                         <option value="{{ $buyer->id }}">{{ $buyer->company }} - {{ $buyer->first_name }} {{ $buyer->last_name }}</option>
                                     @endforeach
                                 </select>

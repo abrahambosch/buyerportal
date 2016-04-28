@@ -108,7 +108,7 @@ class ProductService
     }
 
     /**
-     * list of all fields except user_id, seller_id, and id
+     * list of all fields except user_id, supplier_id, and id
      * @return array
      */
     public function getFields()
@@ -159,7 +159,7 @@ class ProductService
 
     function createProductIfNotExists($productArr)
     {
-        $product = Product::where(['user_id' => $productArr['user_id'],'seller_id' => $productArr['seller_id'], 'style' => $productArr['style']])->first();
+        $product = Product::where(['user_id' => $productArr['user_id'],'supplier_id' => $productArr['supplier_id'], 'style' => $productArr['style']])->first();
         if (!$product) {
             $product = Product::create($productArr);
             return $product;
@@ -169,7 +169,7 @@ class ProductService
 
     function updateOrCreateProduct($productArr)
     {
-        $product = Product::updateOrCreate(['user_id' => $productArr['user_id'],'seller_id' => $productArr['seller_id'], 'style' => $productArr['style']], $productArr);
+        $product = Product::updateOrCreate(['user_id' => $productArr['user_id'],'supplier_id' => $productArr['supplier_id'], 'style' => $productArr['style']], $productArr);
         return $product;
     }
 
@@ -192,7 +192,7 @@ class ProductService
 
     function updateOrCreatePurchaseOrder($poArr)
     {
-        $po = PurchaseOrder::updateOrCreate(['buyer_id' => $poArr['buyer_id'],'seller_id' => $poArr['seller_id'], 'po_num' => $poArr['po_num']], $poArr);
+        $po = PurchaseOrder::updateOrCreate(['buyer_id' => $poArr['buyer_id'],'supplier_id' => $poArr['supplier_id'], 'po_num' => $poArr['po_num']], $poArr);
         return $po;
     }
 

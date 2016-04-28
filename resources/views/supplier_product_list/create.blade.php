@@ -5,13 +5,14 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Create a Product</div>
+                <div class="panel-heading">Create Product List</div>
+                <p>To create a product list, first choose a supplier. </p>
 
                 <div class="panel-body">
-                    <form action="{{ route("seller_product.store") }}" method="POST" class="form-horizontal">
+                    <form action="{{ route("product_list.store") }}" method="POST" class="form-horizontal">
                         {!! csrf_field() !!}
 
-                        @foreach ($fields as $field=>$label)
+                        @foreach (['list_name' => 'List Name'] as $field => $label)
                             <div class="form-group{{ $errors->has($field) ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">{{ $label }}</label>
                                 <div class="col-md-6">
@@ -26,18 +27,17 @@
                             </div>
                         @endforeach
 
-                        <div class="form-group{{ $errors->has('seller_id') ? ' has-error' : '' }} clearfix">
+                        <div class="form-group{{ $errors->has('supplier_id') ? ' has-error' : '' }} clearfix">
                             <label class="col-md-4 control-label">Supplier</label>
                             <div class="col-md-6">
-                                <select name="seller_id" id="seller_id" class="form-control">
-                                    <option value="">No sellers</option>
-                                    @foreach ($user->sellers as $s)
-                                        <option value="{{ $s->id }}" @if ($s->id == old('seller_id')) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
+                                <select name="supplier_id" id="supplier_id" class="form-control">
+                                    @foreach ($user->suppliers as $s)
+                                        <option value="{{ $s->id }}" @if ($s->id == old('supplier_id')) selected @endif >{{ $s->company }} - {{ $s->first_name }} {{ $s->last_name }}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('seller_id'))
+                                @if ($errors->has('supplier_id'))
                                     <span class="help-block">
-                                            <strong>{{ $errors->first('seller_id') }}</strong>
+                                            <strong>{{ $errors->first('supplier_id') }}</strong>
                                         </span>
                                 @endif
                             </div>

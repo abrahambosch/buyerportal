@@ -6,11 +6,11 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">Suppliers
-                    <a href="{{ route("seller.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+                    <a href="{{ route("supplier.create") }}" class="pull-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
                 </div>
 
                 <div class="panel-body">
-                    @if (count($sellers))
+                    @if (count($suppliers))
                         <table class="table">
                             <thead>
                             <tr>
@@ -24,15 +24,15 @@
                             </tr>
                             </thead>
 
-                        @foreach ($sellers as $user)
+                        @foreach ($suppliers as $user)
                             <tr>
-                                <td><a href="{{ route("seller.edit", ['seller' => $user->id]) }}" class="pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+                                <td><a href="{{ route("supplier.edit", ['supplier' => $user->id]) }}" class="pull-right"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
                                 <td>{{ $user->company }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->first_name }}</td>
                                 <td>{{ $user->middle_name }}</td>
                                 <td>{{ $user->last_name }}</td>
-                                <td>{{--<a href="{{ route("seller.delete", ['seller' => $user->id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>--}}</td>
+                                <td>{{--<a href="{{ route("supplier.delete", ['supplier' => $user->id]) }}" class="pull-right"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>--}}</td>
 
                             </tr>
                         @endforeach

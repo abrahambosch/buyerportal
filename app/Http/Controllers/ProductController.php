@@ -21,7 +21,7 @@ class ProductController extends Controller
     {
         $fields = $productService->getBuyerListingFields();
         $products = Product::where('user_id', Auth::id())->get();
-        return view('product/index', ['productService' => $productService, 'user' => Auth::user() , 'products' => $products, 'seller_id' => '', 'fields' => $fields]);
+        return view('product/index', ['productService' => $productService, 'user' => Auth::user() , 'products' => $products, 'supplier_id' => '', 'fields' => $fields]);
     }
     
     
@@ -30,11 +30,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function productsbySeller(Request $request, ProductService $productService, $seller)
+    public function productsbySupplier(Request $request, ProductService $productService, $supplier)
     {
         $fields = $productService->getBuyerListingFields();
-        $products = Product::where(['user_id' => Auth::id(), 'seller_id' => $seller])->get();
-        return view('product/index', ['productService' => $productService, 'user' => Auth::user(), 'products' => $products, 'seller_id' => $seller, 'fields' => $fields]);
+        $products = Product::where(['user_id' => Auth::id(), 'supplier_id' => $supplier])->get();
+        return view('product/index', ['productService' => $productService, 'user' => Auth::user(), 'products' => $products, 'supplier_id' => $supplier, 'fields' => $fields]);
     }
 
 
@@ -150,12 +150,12 @@ class ProductController extends Controller
         }
         $fileObj = $request->file('importFile');
         //var_export($fileObj);
-        $seller_id = $request->get('seller');
+        $supplier_id = $request->get('supplier');
         $filename = $fileObj->getRealPath();
 
         $import_type = $request->get('import_type');
         $importService = ImportServiceFactory::create($import_type);
-        $importService->importSave($filename, Auth::id(), $seller_id);
+        $importService->importSave($filename, Auth::id(), $supplier_id);
 
         
         return redirect()->route('product.index')->with('status', 'Products Imported');
