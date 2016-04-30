@@ -10,15 +10,6 @@
                 <div class="panel-body">
                     You are logged in!
 
-                    <ul>
-                        <li>
-                            <a href="{{ route("supplier.index") }}">Suppliers</a>
-                        </li>
-                        <li>
-                            <a href="{{ route("product.index") }}">Products</a>
-                        </li>
-                    </ul>
-
                 </div>
             </div>
         </div>
