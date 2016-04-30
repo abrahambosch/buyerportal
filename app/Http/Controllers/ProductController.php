@@ -127,9 +127,13 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::where('product_id',"=",$id)->firstOrFail();
-        $product->delete();
-        return redirect()->route('product.index')->with('status', 'Product deleted');
+        try {
+            $product = Product::where('product_id',"=",$id)->firstOrFail();
+            $product->delete();
+            return redirect()->route('product.index')->with('status', 'Product deleted');
+        } catch (\Exception $e) {
+            return back()->with('status', 'Unable to delete product because it belongs to existing Purchase Orders or Offers. ');
+        }
     }
 
     public function import(Request $request)
