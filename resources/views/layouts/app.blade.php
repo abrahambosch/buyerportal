@@ -51,16 +51,16 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     @if (Auth::check() && Auth::user()->user_type == 'supplier')
-                        <li><a href="{{ url('/home') }}">Home</a></li>
-                        <li><a href="{{ route('supplier_product.index') }}">Products</a></li>
-                        <li><a href="{{ route('supplier_product_list.index') }}">Product Lists</a></li>
-                        <li><a href="{{ route('purchase_order.index') }}">Offers</a></li>
+                        <li @if (Request::is('home') || Request::is('home/*')) class="active" @endif><a href="{{ url('/home') }}">Home</a></li>
+                        <li @if (Request::is('supplier_product') || Request::is('supplier_product/*')) class="active" @endif><a href="{{ route('supplier_product.index') }}">Products</a></li>
+                        <li @if (Request::is('supplier_product_list') || Request::is('supplier_product_list/*')) class="active" @endif><a href="{{ route('supplier_product_list.index') }}">Product Lists</a></li>
+                        <li @if (Request::is('purchase_order') || Request::is('purchase_order/*')) class="active" @endif><a href="{{ route('purchase_order.index') }}">Offers</a></li>
                     @else
-                        <li><a href="{{ url('/home') }}">Home</a></li>
-                        <li><a href="{{ route('supplier.index') }}">Suppliers</a></li>
-                        <li><a href="{{ route('product.index') }}">Products</a></li>
-                        <li><a href="{{ route('product_list.index') }}">Product Lists</a></li>
-                        <li><a href="{{ route('purchase_order.index') }}">Offers</a></li>
+                        <li @if (Request::is('home') || Request::is('home/*')) class="active" @endif><a href="{{ url('/home') }}">Home</a></li>
+                        <li @if (Request::is('supplier') || Request::is('pupplier/*')) class="active" @endif><a href="{{ route('supplier.index') }}">Suppliers</a></li>
+                        <li @if (Request::is('product') || Request::is('product/*')) class="active" @endif><a href="{{ route('product.index') }}">Products</a></li>
+                        <li @if (Request::is('product_list') || Request::is('product_list/*')) class="active" @endif><a href="{{ route('product_list.index') }}">Product Lists</a></li>
+                        <li @if (Request::is('purchase_order') || Request::is('purchase_order/*')) class="active" @endif><a href="{{ route('purchase_order.index') }}">Offers</a></li>
                     @endif
                 </ul>
 
