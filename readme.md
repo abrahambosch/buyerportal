@@ -1,3 +1,20 @@
+# Buyer Portal Prototype
+
+This website is a prototype for a buyer portal for managing potential and actual purchase orders. 
+
+## Instalation Instructions
+
+1. Install Docker
+
+2. docker-compose up --build
+
+3. docker-compose app install.sh
+
+4. Open Web Browser and go to http://0.0.0.0:8888
+
+
+
+
 # Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)

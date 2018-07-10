@@ -16,19 +16,19 @@ class DatabaseSeeder extends Seeder
         // $this->call(UserTableSeeder::class);
         $buyer = User::create([
             'first_name' => 'Bob',
-            'last_name' => 'Boxter',
-            'email' => 'Bob@Burlington.com',
+            'last_name' => 'Barker',
+            'email' => 'BobBarker@Burlington.com',
             'password' => bcrypt('welcome'),
             'company' => 'Burlington',
             'user_type' => 'buyer'
         ]);
 
         $supplier = User::create([
-            'first_name' => 'Brittany',
-            'last_name' => '',
-            'email' => 'Brittany@Jiahome.us',
+            'first_name' => 'Joe',
+            'last_name' => 'Supplier',
+            'email' => 'sal@supplier-wholesale.com',
             'password' => bcrypt('welcome'),
-            'company' => 'Jiahome',
+            'company' => 'Joe Wholesale',
             'user_type' => 'supplier'
         ]);
 

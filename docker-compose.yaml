@@ -1,0 +1,53 @@
+# building app and required component for running the app
+version: '3.3'
+services:
+  database:
+    build: docker/mysql
+    ports:
+      - "33069:3306"
+    environment:
+      - "MYSQL_DATABASE=buyerportal"
+      - "MYSQL_USER=homestead"
+      - "MYSQL_PASSWORD=secret"
+      - "MYSQL_ROOT_PASSWORD=secret"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    networks:
+      - devnetwork
+  web:
+    image: laravel-nginx-1.0.3
+    build: docker/nginx
+    ports:
+      - "8888:80"
+    volumes:
+      - ./:/var/www/html
+    links:
+      - app
+    depends_on:
+      - app
+    networks:
+      - devnetwork
+  app:
+    image: laravel-phpfpm-1.0.3
+    build: docker/app
+    volumes:
+      - ./:/var/www/html
+    expose:
+      - "9000"
+    links:
+      - redis
+      - database
+    networks:
+      - devnetwork
+  redis:
+    image: redis:latest
+    volumes:
+      - redis_data:/data
+    networks:
+      - devnetwork
+volumes:
+  mysql_data:
+  redis_data:
+networks:
+  devnetwork:
