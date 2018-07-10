@@ -8,7 +8,7 @@ This website is a prototype for a buyer portal for managing potential and actual
 
 2. docker-compose up --build
 
-3. docker-compose app install.sh
+3. docker-compose exec app ./install.sh
 
 4. Open Web Browser and go to http://0.0.0.0:8888
 
